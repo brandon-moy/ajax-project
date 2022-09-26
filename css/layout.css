@@ -1,0 +1,27 @@
+.hidden {
+  display: none;
+}
+
+.container {
+  margin: 0 auto;
+}
+
+.column-full {
+  width: 100%;
+}
+
+.column-half {
+  width: 50%;
+}
+
+.column-third {
+  width: calc(100% / 3);
+}
+
+.column-quarter {
+  width: 25%;
+}
+
+.column-fifth {
+  width: 20%;
+}
