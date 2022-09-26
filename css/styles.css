@@ -100,6 +100,10 @@
   margin-left: 0.5rem;
 }
 
+.detailed-view {
+  padding-top: 4rem;
+}
+
 @media only screen and (width > 768px) {
   .header-background {
     padding-bottom: 0;
