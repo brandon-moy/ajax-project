@@ -1,5 +1,5 @@
 .header-background {
-  background-color: rgba(130, 0, 0, 1);
+  background-color: rgb(130, 0, 0);
   margin-top: 0;
   padding-bottom: 2rem;
 }
@@ -10,6 +10,42 @@
   color: white;
   font-family: "Fredoka One", sans-serif;
   letter-spacing: 1px;
+}
+
+.pokemon-card {
+  border: 2px solid rgb(210, 210, 210);
+  border-radius: 0.5rem;
+  background-color: rgb(244, 244, 244);
+  width: 90%;
+  height: 12.5rem;
+  margin: 2rem auto 0;
+  justify-content: center;
+  align-items: flex-start;
+  box-shadow: 0 3px rgb(179, 179, 179);
+}
+
+.pokeball {
+  background-image: url("/images/pokeball-blur-2.png");
+  background-size: contain;
+  background-position: center;
+  margin: 0.5rem auto 0.75rem;
+  background-repeat: no-repeat;
+}
+
+.pokemon {
+  width: 80%;
+  object-fit: contain;
+  margin: 0 auto;
+}
+
+h6,
+h5,
+h4,
+h3 {
+  margin: 0 0 0.25rem;
+  text-align: center;
+  font-family: Fredoka, sans-serif;
+  font-weight: 500;
 }
 
 @media only screen and (width > 768px) {
