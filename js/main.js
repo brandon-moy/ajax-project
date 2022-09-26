@@ -18,8 +18,8 @@ function renderCards(id, name) {
 
   $pokeball.setAttribute('src', '/images/pokeball-blur-2.png');
   $pokemonImg.setAttribute('src', '/images/kanto/' + id + '.png');
-  $pokemonNumber.textContent = id;
-  $pokemonName.textContent = name;
+  $pokemonNumber.textContent = displayId(id);
+  $pokemonName.textContent = capitalize(name);
 
   $columnFifth.appendChild($pokemonCard);
   $pokemonCard.appendChild($pokeball);
@@ -46,3 +46,20 @@ function generatePokemonCards() {
 }
 
 window.addEventListener('load', generatePokemonCards);
+
+function capitalize(string) {
+  var capitalized = '';
+  capitalized = string[0].toUpperCase();
+  capitalized += string.substring(1);
+  return capitalized;
+}
+
+function displayId(number) {
+  var display = number;
+  if (number < 10) {
+    display = '00' + number;
+  } else if (number < 100) {
+    display = '0' + number;
+  }
+  return display;
+}
