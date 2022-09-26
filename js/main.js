@@ -1,6 +1,6 @@
 /* global capitalize, displayId */
 
-var $cardRow = document.querySelector('.row');
+var $cardRow = document.querySelector('.cards-table');
 var kanto = [];
 
 function renderCards(id, name) {
