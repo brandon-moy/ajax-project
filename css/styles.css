@@ -1,0 +1,23 @@
+.header-background {
+  background-color: rgba(130, 0, 0, 1);
+  margin-top: 0;
+  padding-bottom: 2rem;
+}
+
+.title {
+  margin: 0;
+  padding: 1rem;
+  color: white;
+  font-family: "Fredoka One", sans-serif;
+  letter-spacing: 1px;
+}
+
+@media only screen and (width > 768px) {
+  .header-background {
+    padding-bottom: 0;
+  }
+
+  .title {
+    font-size: 3rem;
+  }
+}
