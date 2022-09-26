@@ -96,6 +96,10 @@
   margin-left: 0.5rem;
 }
 
+.side-spacer {
+  width: 100%;
+}
+
 .detailed-view {
   padding-top: 5rem;
   font-size: 1.25rem;
@@ -133,8 +137,6 @@
 .sp-attack-bar,
 .sp-defense-bar,
 .speed-bar {
-  /* background-color: rgb(226, 226, 226); */
-
   background: linear-gradient(to right, rgb(152, 219, 100) 20%, rgb(226, 226, 226) 20%);
   width: 95%;
   height: 1.25rem;
@@ -180,5 +182,39 @@
   .pokemon-name {
     padding-top: 0.5rem;
     font-size: 1.5rem;
+  }
+
+  .description {
+    padding-right: 2rem;
+    font-size: 1.5rem;
+  }
+
+  .detail-top-border {
+    height: 4rem;
+  }
+
+  .circle {
+    width: 15rem;
+    height: 15rem;
+    margin-left: 8rem;
+  }
+
+  .detail-img {
+    width: 15rem;
+    height: 15rem;
+  }
+
+  .detailed-view {
+    padding-top: 10rem;
+    padding-left: 4rem;
+    padding-right: 4rem;
+  }
+
+  .detail-number {
+    font-size: 1.75rem;
+  }
+
+  .detail-name {
+    font-size: 2.75rem;
   }
 }
