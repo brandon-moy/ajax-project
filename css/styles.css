@@ -1,0 +1,69 @@
+.header-background {
+  background-color: rgb(130, 0, 0);
+  padding-bottom: 2rem;
+}
+
+.title {
+  margin: 0;
+  padding: 1rem;
+  color: white;
+  font-family: "Fredoka One", sans-serif;
+  letter-spacing: 1px;
+}
+
+.pokemon-card {
+  border: 2px solid rgb(185, 185, 185);
+  border-radius: 0.5rem;
+  background-color: rgb(244, 244, 244);
+  width: 90%;
+  height: 30vh;
+  margin: 2rem auto 0;
+  box-shadow: 0 3px rgb(179, 179, 179);
+}
+
+.pokeball-background {
+  background-image: url("/images/pokeball-blur-2.png");
+  background-size: contain;
+  background-position: center;
+  margin: 0.5rem auto 0.75rem;
+  background-repeat: no-repeat;
+}
+
+.pokemon-img {
+  width: 80%;
+  object-fit: contain;
+  margin: 0 auto;
+}
+
+.pokemon-number,
+.pokemon-name {
+  margin: 0 0 0.25rem;
+  text-align: center;
+  font-family: Fredoka, sans-serif;
+  font-weight: 500;
+}
+
+@media only screen and (width > 768px) {
+  .header-background {
+    padding-bottom: 0;
+  }
+
+  .title {
+    font-size: 3rem;
+  }
+
+  .pokemon-card {
+    height: 42.5vh;
+    width: 85%;
+  }
+
+  .pokemon-number {
+    padding-top: 0.5rem;
+    font-size: 1.25rem;
+  }
+
+  .pokemon-name {
+    padding-top: 0.5rem;
+    font-size: 1.5rem;
+  }
+}
