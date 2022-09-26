@@ -37,7 +37,6 @@
 
 .pokemon-number,
 .pokemon-name {
-  margin: 0 0 0.25rem;
   text-align: center;
   font-family: Fredoka, sans-serif;
   font-weight: 500;
@@ -66,8 +65,7 @@
 }
 
 .detail-number {
-  padding-top: 1rem;
-  margin-bottom: 0;
+  padding-top: 2rem;
   font-family: Fredoka, sans-serif;
   font-size: 1.5rem;
   font-weight: 500;
@@ -75,8 +73,6 @@
 }
 
 .detail-name {
-  margin-top: 0;
-  margin-bottom: 0;
   font-family: Fredoka, sans-serif;
   font-size: 2rem;
   font-weight: 500;
@@ -101,7 +97,25 @@
 }
 
 .detailed-view {
-  padding-top: 4rem;
+  padding-top: 5rem;
+  font-size: 1.25rem;
+}
+
+.height {
+  padding-bottom: 1rem;
+}
+
+.weight {
+  padding-bottom: 2rem;
+}
+
+.flavor-text {
+  line-height: 1.25rem;
+  padding-bottom: 1.5rem;
+}
+
+.abilities {
+  padding-bottom: 1.25rem;
 }
 
 .item-header {
@@ -119,14 +133,29 @@
 .sp-attack-bar,
 .sp-defense-bar,
 .speed-bar {
-  background-color: rgb(226, 226, 226);
+  /* background-color: rgb(226, 226, 226); */
+
+  background: linear-gradient(to right, rgb(152, 219, 100) 20%, rgb(226, 226, 226) 20%);
   width: 95%;
   height: 1.25rem;
   border-radius: 0.25rem;
+  position: relative;
 }
 
 .bar-padding {
-  padding-top: 0.85rem;
+  padding-top: 1.25rem;
+}
+
+.evolutions {
+  padding-top: 1.25rem;
+}
+
+.evolution-image {
+  width: 100%;
+}
+
+.evolution-name {
+  text-align: center;
 }
 
 @media only screen and (width > 768px) {

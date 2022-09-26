@@ -13,12 +13,10 @@
   align-items: center;
 }
 
-.flex {
-  display: flex;
-}
-
 .stats-line {
+  display: flex;
   justify-content: space-between;
+  flex-wrap: wrap;
   width: 95%;
 }
 
@@ -42,12 +40,12 @@
   flex-basis: 50%;
 }
 
-.column-40 {
-  flex-basis: 40%;
+.column-45 {
+  flex-basis: 45%;
 }
 
-.column-60 {
-  flex-basis: 60%;
+.column-55 {
+  flex-basis: 55%;
 }
 
 @media only screen and (width > 768px) {
