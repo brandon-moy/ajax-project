@@ -10,10 +10,16 @@
 .row {
   display: flex;
   flex-wrap: wrap;
+  align-items: center;
 }
 
 .flex {
   display: flex;
+}
+
+.stats-line {
+  justify-content: space-between;
+  width: 95%;
 }
 
 .column-full {
@@ -34,6 +40,14 @@
 
 .column-fifth {
   flex-basis: 50%;
+}
+
+.column-40 {
+  flex-basis: 40%;
+}
+
+.column-60 {
+  flex-basis: 60%;
 }
 
 @media only screen and (width > 768px) {

@@ -104,6 +104,31 @@
   padding-top: 4rem;
 }
 
+.item-header {
+  font-family: Fredoka, sans-serif;
+  font-weight: 500;
+}
+
+.stats-line > p {
+  margin: 0.25rem 0;
+}
+
+.hp-bar,
+.attack-bar,
+.defense-bar,
+.sp-attack-bar,
+.sp-defense-bar,
+.speed-bar {
+  background-color: rgb(226, 226, 226);
+  width: 95%;
+  height: 1.25rem;
+  border-radius: 0.25rem;
+}
+
+.bar-padding {
+  padding-top: 0.85rem;
+}
+
 @media only screen and (width > 768px) {
   .header-background {
     padding-bottom: 0;
