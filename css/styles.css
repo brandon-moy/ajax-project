@@ -24,7 +24,7 @@
   box-shadow: 0 3px rgb(179, 179, 179);
 }
 
-.pokeball {
+.pokeball-background {
   background-image: url("/images/pokeball-blur-2.png");
   background-size: contain;
   background-position: center;
@@ -32,16 +32,14 @@
   background-repeat: no-repeat;
 }
 
-.pokemon {
+.pokemon-img {
   width: 80%;
   object-fit: contain;
   margin: 0 auto;
 }
 
-h6,
-h5,
-h4,
-h3 {
+.pokemon-number,
+.pokemon-name {
   margin: 0 0 0.25rem;
   text-align: center;
   font-family: Fredoka, sans-serif;
@@ -62,12 +60,12 @@ h3 {
     width: 85%;
   }
 
-  h4 {
+  .pokemon-number {
     padding-top: 0.5rem;
     font-size: 1.5rem;
   }
 
-  h5 {
+  .pokemon-name {
     padding-top: 0.5rem;
     font-size: 1.25rem;
   }
