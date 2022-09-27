@@ -57,11 +57,20 @@ var $header = document.querySelector('.header-background');
 var $cardView = document.querySelector('.cards-view');
 var $detailBackground = document.querySelector('.detail-background');
 var $detailView = document.querySelector('.detailed-view');
+var $xmark = document.querySelector('.xmark');
 
 $cards.addEventListener('click', function () {
   $header.classList.add('hidden');
   $cardView.classList.add('hidden');
   $detailBackground.classList.remove('hidden');
   $detailView.classList.remove('hidden');
+  window.scrollTo(0, 0);
+});
+
+$xmark.addEventListener('click', function () {
+  $header.classList.remove('hidden');
+  $cardView.classList.remove('hidden');
+  $detailBackground.classList.add('hidden');
+  $detailView.classList.add('hidden');
   window.scrollTo(0, 0);
 });
