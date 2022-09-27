@@ -162,8 +162,22 @@ function speciesDetail(id) {
       }
     }
     $flavorText.textContent = flavor;
+
+    getEvolutions(species.evolution_chain.url);
   });
   xhr2.send();
 }
 
 // next step : pull evolution chain
+
+function getEvolutions(url) {
+  var xhr3 = new XMLHttpRequest();
+  xhr3.open('GET', url);
+  xhr3.responseType = 'json';
+  xhr3.addEventListener('load', function () {
+    // var details = xhr3.response.chain;
+    // console.log(xhr3.response);
+    // console.log(details);
+  });
+  xhr3.send();
+}
