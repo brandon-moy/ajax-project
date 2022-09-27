@@ -59,6 +59,7 @@ var $detailBackground = document.querySelector('.detail-background');
 var $detailView = document.querySelector('.detailed-view');
 var $xmark = document.querySelector('.xmark');
 var $stats = document.querySelectorAll('.item-header + p');
+var $statsDisplay = document.querySelectorAll('.stats-display');
 var $detailName = document.querySelector('.detail-name');
 var $detailNumber = document.querySelector('.detail-number');
 var $detailImg = document.querySelector('.detail-img');
@@ -68,10 +69,12 @@ var $height = document.querySelector('.pokemon-height');
 var $weight = document.querySelector('.pokemon-weight');
 var $abilities = document.querySelector('.pokemon-abilities');
 var $flavorText = document.querySelector('.flavor-text');
+var maxStats = [250, 134, 180, 154, 154, 140];
 
 $cards.addEventListener('click', function () {
   var id = event.target.closest('.pokemon-card').id;
   detailedDisplay(id);
+  speciesDetail(id);
   $header.classList.add('hidden');
   $cardView.classList.add('hidden');
   $detailBackground.classList.remove('hidden');
@@ -84,6 +87,9 @@ $xmark.addEventListener('click', function () {
   $cardView.classList.remove('hidden');
   $detailBackground.classList.add('hidden');
   $detailView.classList.add('hidden');
+  for (var n = 0; n < $statsDisplay.length; n++) {
+    $statsDisplay[n].className = 'stats-display';
+  }
   window.scrollTo(0, 0);
 });
 
@@ -131,12 +137,14 @@ function detailedDisplay(id) {
       for (var l = 0; l < $stats.length; l++) {
         if (pokemon.stats[j].stat.name === $stats[l].className) {
           $stats[l].textContent = pokemon.stats[j].base_stat;
+          var statCalc = Math.floor((pokemon.stats[j].base_stat / maxStats[j]) * 100);
+          $statsDisplay[j].classList.add(type1);
+          $statsDisplay[j].style.width = statCalc + '%';
         }
       }
     }
   });
   xhr.send();
-  speciesDetail(id);
 }
 
 function speciesDetail(id) {
@@ -157,4 +165,5 @@ function speciesDetail(id) {
   });
   xhr2.send();
 }
+
 // next step : pull evolution chain, change stat bar % and color

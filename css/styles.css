@@ -133,17 +133,24 @@
   margin: 0.25rem 0;
 }
 
-.hp-bar,
-.attack-bar,
-.defense-bar,
-.sp-attack-bar,
-.sp-defense-bar,
-.speed-bar {
-  background: linear-gradient(to right, rgb(152, 219, 100) 20%, rgb(226, 226, 226) 20%);
+.stat-bar {
+  background-color: rgb(226, 226, 226);
   width: 95%;
   height: 1.25rem;
   border-radius: 0.25rem;
   position: relative;
+}
+
+.stats-display {
+  position: absolute;
+  border-radius: 0.25rem 0 0 0.25rem;
+  top: 0;
+  bottom: 0;
+  left: 0;
+}
+
+meter {
+  background: red;
 }
 
 .bar-padding {
