@@ -162,11 +162,12 @@ meter {
 }
 
 .evolution-image {
-  width: 100%;
+  width: 60%;
 }
 
 .evolution-name {
   text-align: center;
+  display: block;
 }
 
 .xmark {
@@ -238,5 +239,13 @@ meter {
     font-size: 2.5rem;
     padding-top: 1.25rem;
     padding-left: 1.25rem;
+  }
+
+  .evolution-image {
+    width: 35%;
+  }
+
+  .evolution-name {
+    font-size: 1.5rem;
   }
 }

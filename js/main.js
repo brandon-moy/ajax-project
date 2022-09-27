@@ -166,4 +166,4 @@ function speciesDetail(id) {
   xhr2.send();
 }
 
-// next step : pull evolution chain, change stat bar % and color
+// next step : pull evolution chain
