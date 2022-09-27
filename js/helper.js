@@ -30,17 +30,3 @@ function calcWeight(number) {
   var displayWeight = Math.round(weight * 10) / 10 + ' lbs';
   return displayWeight;
 }
-
-function statsDisplay(string) {
-  var statName = '';
-  if (string === 'hp') {
-    statName = 'HP';
-  } else if (string === 'special-attack') {
-    statName = 'Sp. Attack';
-  } else if (string === 'special-defense') {
-    statName = 'Sp. Defense';
-  } else {
-    statName = capitalize(string);
-  }
-  return statName;
-}

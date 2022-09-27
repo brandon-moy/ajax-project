@@ -1,4 +1,4 @@
-/* global capitalize, displayId, */
+/* global capitalize, displayId */
 
 var $cardRow = document.querySelector('.cards-table');
 var kanto = [];
@@ -58,6 +58,7 @@ var $cardView = document.querySelector('.cards-view');
 var $detailBackground = document.querySelector('.detail-background');
 var $detailView = document.querySelector('.detailed-view');
 var $xmark = document.querySelector('.xmark');
+// var $stats = document.querySelectorAll('.item-header + p');
 // var $detailName = document.querySelector('.detail-name');
 // var $detailNumber = document.querySelector('.detail-number');
 // var $type1 = document.querySelector('.type-1');
@@ -103,8 +104,11 @@ $xmark.addEventListener('click', function () {
 //     }
 
 //     for (var j = 0; j < pokemon.stats.length; j++) {
-//       console.log(pokemon.stats[j].base_stat);
-//       console.log(statsDisplay(pokemon.stats[j].stat.name));
+//       for (var l = 0; l < $stats.length; l++) {
+//         if (pokemon.stats[j].stat.name === $stats[l].className) {
+//           $stats[l].textContent = pokemon.stats[j].base_stat;
+//         }
+//       }
 //     }
 //   });
 //   xhr.send();
