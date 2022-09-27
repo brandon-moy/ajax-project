@@ -21,6 +21,10 @@
   box-shadow: 0 3px 4px rgb(179, 179, 179);
 }
 
+.pokemon-card:hover {
+  cursor: pointer;
+}
+
 .pokeball-background {
   background-image: url("/images/pokeball-blur-2.png");
   background-size: contain;
