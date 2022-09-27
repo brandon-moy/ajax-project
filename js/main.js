@@ -53,7 +53,15 @@ window.addEventListener('load', generatePokemonCards);
 // Code for opening detailed view display
 
 var $cards = document.querySelector('.cards-view');
+var $header = document.querySelector('.header-background');
+var $cardView = document.querySelector('.cards-view');
+var $detailBackground = document.querySelector('.detail-background');
+var $detailView = document.querySelector('.detailed-view');
 
 $cards.addEventListener('click', function () {
-  return event.target.closest('.pokemon-card');
+  $header.classList.add('hidden');
+  $cardView.classList.add('hidden');
+  $detailBackground.classList.remove('hidden');
+  $detailView.classList.remove('hidden');
+  window.scrollTo(0, 0);
 });
