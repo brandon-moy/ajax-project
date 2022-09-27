@@ -1,4 +1,4 @@
-/* global capitalize, displayId */
+/* global capitalize, displayId, calcHeight, calcWeight */
 
 var $cardRow = document.querySelector('.cards-table');
 var kanto = [];
@@ -58,13 +58,17 @@ var $cardView = document.querySelector('.cards-view');
 var $detailBackground = document.querySelector('.detail-background');
 var $detailView = document.querySelector('.detailed-view');
 var $xmark = document.querySelector('.xmark');
-// var $stats = document.querySelectorAll('.item-header + p');
-// var $detailName = document.querySelector('.detail-name');
-// var $detailNumber = document.querySelector('.detail-number');
+var $stats = document.querySelectorAll('.item-header + p');
+var $detailName = document.querySelector('.detail-name');
+var $detailNumber = document.querySelector('.detail-number');
 // var $type1 = document.querySelector('.type-1');
 // var $type2 = document.querySelector('.type-2');
+var $height = document.querySelector('.pokemon-height');
+var $weight = document.querySelector('.pokemon-weight');
+var $abilities = document.querySelector('.pokemon-abilities');
 
 $cards.addEventListener('click', function () {
+  detailedDisplay();
   $header.classList.add('hidden');
   $cardView.classList.add('hidden');
   $detailBackground.classList.remove('hidden');
@@ -80,36 +84,43 @@ $xmark.addEventListener('click', function () {
   window.scrollTo(0, 0);
 });
 
-// function detailedDisplay(id) {
-//   // var id = event.target.closest('.pokemon-card').id;
-//   var xhr = new XMLHttpRequest();
-//   xhr.open('GET', 'https://pokeapi.co/api/v2/pokemon/' + id);
-//   xhr.responseType = 'json';
-//   xhr.addEventListener('load', function () {
-//     var pokemon = xhr.response;
+function detailedDisplay(id) {
+  // var id = event.target.closest('.pokemon-card').id;
+  var xhr = new XMLHttpRequest();
+  xhr.open('GET', 'https://pokeapi.co/api/v2/pokemon/' + id);
+  xhr.responseType = 'json';
+  xhr.addEventListener('load', function () {
+    var pokemon = xhr.response;
 
-//     console.log(pokemon);
-//     console.log(capitalize(pokemon.name));
-//     console.log(displayId(pokemon.id));
+    $detailName.textContent = capitalize(pokemon.name);
+    $detailNumber.textContent = displayId(pokemon.id);
 
-//     for (var i = 0; i < pokemon.types.length; i++) {
-//       console.log(capitalize(pokemon.types[i].type.name));
-//     }
+    // for (var i = 0; i < pokemon.types.length; i++) {
+    //   console.log(capitalize(pokemon.types[i].type.name));
+    // }
 
-//     console.log(calcHeight(pokemon.height));
-//     console.log(calcWeight(pokemon.weight));
+    $height.textContent = calcHeight(pokemon.height);
+    $weight.textContent = calcWeight(pokemon.weight);
 
-//     for (var k = 0; k < pokemon.abilities.length; k++) {
-//       console.log(capitalize(pokemon.abilities[k].ability.name));
-//     }
+    var abilities = '';
 
-//     for (var j = 0; j < pokemon.stats.length; j++) {
-//       for (var l = 0; l < $stats.length; l++) {
-//         if (pokemon.stats[j].stat.name === $stats[l].className) {
-//           $stats[l].textContent = pokemon.stats[j].base_stat;
-//         }
-//       }
-//     }
-//   });
-//   xhr.send();
-// }
+    for (var k = 0; k < pokemon.abilities.length; k++) {
+      if (k === 0) {
+        abilities = capitalize(pokemon.abilities[k].ability.name);
+      } else {
+        abilities = abilities + ', ' + capitalize(pokemon.abilities[k].ability.name);
+      }
+    }
+
+    $abilities.textContent = abilities;
+
+    for (var j = 0; j < pokemon.stats.length; j++) {
+      for (var l = 0; l < $stats.length; l++) {
+        if (pokemon.stats[j].stat.name === $stats[l].className) {
+          $stats[l].textContent = pokemon.stats[j].base_stat;
+        }
+      }
+    }
+  });
+  xhr.send();
+}
