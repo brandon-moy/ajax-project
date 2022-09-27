@@ -5,6 +5,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>AJAX Project</title>
   <link rel="icon" href="images/favicon.ico">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+    integrity="sha512-9usAa10IRO0HhonpyAIVpjrylPvoDwiPUiKdWk5t3PyolY1cOd4DSE0Ga+ri4AuTroPR5aQvXU9xC6qOPnzFeg=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
   <link rel="stylesheet" href="css/reset.css">
   <link rel="stylesheet" href="css/layout.css">
   <link rel="stylesheet" href="css/styles.css">
@@ -17,11 +20,13 @@
 </head>
 <body>
   <header>
-    <div class="header-background">
+    <div class="header-background hidden">
       <h1 class="title">Pokédex: <span class="area-display">Kanto</span></h1>
     </div>
-    <div class="detail-background row grass hidden">
-      <div class="column-full detail-top-border"></div>
+    <div class="detail-background row grass">
+      <div class="column-full detail-top-border">
+        <i class="fa-regular fa-circle-xmark xmark"></i>
+      </div>
       <div class="column-quarter">
         <div class="circle">
           <img src="images/kanto/1.png" class="detail-img">
@@ -38,11 +43,11 @@
   </header>
   <main>
     <div class="container">
-      <div class="cards-view">
+      <div class="cards-view hidden">
         <div class="cards-table row">
         </div>
       </div>
-      <div class="detailed-view hidden">
+      <div class="detailed-view">
         <div class="row">
           <div class="column-half description">
             <p class="height">
