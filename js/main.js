@@ -13,7 +13,7 @@ function renderCards(id, name) {
 
   $columnFifth.className = 'column-fifth';
   $pokemonCard.className = 'pokemon-card';
-  $pokeball.className = 'pokeball-background flex';
+  $pokeball.className = 'pokeball-background row';
   $pokemonImg.className = 'pokemon-img';
   $pokemonNumber.className = 'pokemon-number';
   $pokemonName.className = 'pokemon-name';

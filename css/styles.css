@@ -31,8 +31,6 @@
 
 .pokemon-img {
   width: 80%;
-  object-fit: contain;
-  margin: 0 auto;
 }
 
 .pokemon-number,
