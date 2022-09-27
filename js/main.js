@@ -88,6 +88,8 @@ $xmark.addEventListener('click', function () {
 });
 
 function detailedDisplay(id) {
+  $detailImg.setAttribute('src', '/images/kanto/' + id + '.png');
+
   var xhr = new XMLHttpRequest();
   xhr.open('GET', 'https://pokeapi.co/api/v2/pokemon/' + id);
   xhr.responseType = 'json';
@@ -96,7 +98,6 @@ function detailedDisplay(id) {
 
     $detailName.textContent = capitalize(pokemon.name);
     $detailNumber.textContent = displayId(pokemon.id);
-    $detailImg.setAttribute('src', '/images/kanto/' + id + '.png');
 
     if (pokemon.types.length > 1) {
       var type2 = pokemon.types[1].type.name;
@@ -134,8 +135,8 @@ function detailedDisplay(id) {
       }
     }
   });
-  speciesDetail(id);
   xhr.send();
+  speciesDetail(id);
 }
 
 function speciesDetail(id) {
@@ -156,4 +157,4 @@ function speciesDetail(id) {
   });
   xhr2.send();
 }
-// next step : pull flavor text, pull evolution chain, change stat bar % and color
+// next step : pull evolution chain, change stat bar % and color
