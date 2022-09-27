@@ -61,8 +61,9 @@ var $xmark = document.querySelector('.xmark');
 var $stats = document.querySelectorAll('.item-header + p');
 var $detailName = document.querySelector('.detail-name');
 var $detailNumber = document.querySelector('.detail-number');
-// var $type1 = document.querySelector('.type-1');
-// var $type2 = document.querySelector('.type-2');
+var $detailImg = document.querySelector('.detail-img');
+var $type1 = document.querySelector('.type-1');
+var $type2 = document.querySelector('.type-2');
 var $height = document.querySelector('.pokemon-height');
 var $weight = document.querySelector('.pokemon-weight');
 var $abilities = document.querySelector('.pokemon-abilities');
@@ -94,10 +95,20 @@ function detailedDisplay(id) {
 
     $detailName.textContent = capitalize(pokemon.name);
     $detailNumber.textContent = displayId(pokemon.id);
+    $detailImg.setAttribute('src', '/images/kanto/' + id + '.png');
 
-    // for (var i = 0; i < pokemon.types.length; i++) {
-    //   console.log(capitalize(pokemon.types[i].type.name));
-    // }
+    if (pokemon.types.length > 1) {
+      var type2 = pokemon.types[1].type.name;
+      $type2.textContent = capitalize(type2);
+      $type2.className = 'type-2 ' + type2;
+    } else {
+      $type2.className = 'type-2 hidden';
+    }
+
+    var type1 = pokemon.types[0].type.name;
+    $type1.textContent = capitalize(type1);
+    $type1.className = 'type-1 ' + type1;
+    $detailBackground.className = 'detail-background row ' + type1;
 
     $height.textContent = calcHeight(pokemon.height);
     $weight.textContent = calcWeight(pokemon.weight);
