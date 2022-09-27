@@ -1,4 +1,4 @@
-/* global capitalize, displayId, calcHeight, calcWeight */
+/* global capitalize, displayId, calcHeight, calcWeight, flavorText */
 
 var $cardRow = document.querySelector('.cards-table');
 var kanto = [];
@@ -67,6 +67,7 @@ var $type2 = document.querySelector('.type-2');
 var $height = document.querySelector('.pokemon-height');
 var $weight = document.querySelector('.pokemon-weight');
 var $abilities = document.querySelector('.pokemon-abilities');
+var $flavorText = document.querySelector('.flavor-text');
 
 $cards.addEventListener('click', function () {
   var id = event.target.closest('.pokemon-card').id;
@@ -133,18 +134,26 @@ function detailedDisplay(id) {
       }
     }
   });
+  speciesDetail(id);
   xhr.send();
 }
 
-// function speciesDetail(id) {
-//   var xhr = new XMLHttpRequest();
-//   xhr.open('GET', 'https://pokeapi.co/api/v2/pokemon-species/' + id);
-//   xhr.responseType = 'json';
-//   xhr.addEventListener('load', function () {
-//     var species = xhr.response;
-//     console.log(species);
-//     console.log(species.flavor_text_entries[0]);
-//   });
-//   xhr.send();
-// }
+function speciesDetail(id) {
+  var xhr2 = new XMLHttpRequest();
+  xhr2.open('GET', 'https://pokeapi.co/api/v2/pokemon-species/' + id);
+  xhr2.responseType = 'json';
+  xhr2.addEventListener('load', function () {
+    var species = xhr2.response;
+    var entries = species.flavor_text_entries;
+    var flavor = '';
+    for (var m = 0; m < entries.length; m++) {
+      if (entries[m].language.name === 'en') {
+        flavor = flavorText(entries[m].flavor_text);
+        break;
+      }
+    }
+    $flavorText.textContent = flavor;
+  });
+  xhr2.send();
+}
 // next step : pull flavor text, pull evolution chain, change stat bar % and color

@@ -42,5 +42,6 @@ function flavorText(string) {
   var output = '';
   output = string.replaceAll('\n', ' ');
   output = output.replaceAll('\f', ' ');
+  output = output.replaceAll('POKéMON', 'Pokémon');
   return output;
 }
