@@ -1,4 +1,4 @@
-/* exported capitalize, displayId, calcWeight, calcHeight, statsDisplay */
+/* exported capitalize, displayId, calcWeight, calcHeight, statsDisplay, flavorText */
 
 function capitalize(string) {
   var capitalized = '';
@@ -36,4 +36,11 @@ function calcWeight(number) {
   var weight = number / 4.536;
   var displayWeight = Math.round(weight * 10) / 10 + ' lbs';
   return displayWeight;
+}
+
+function flavorText(string) {
+  var output = '';
+  output = string.replaceAll('\n', ' ');
+  output = output.replaceAll('\f', ' ');
+  return output;
 }

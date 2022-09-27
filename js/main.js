@@ -136,4 +136,15 @@ function detailedDisplay(id) {
   xhr.send();
 }
 
+// function speciesDetail(id) {
+//   var xhr = new XMLHttpRequest();
+//   xhr.open('GET', 'https://pokeapi.co/api/v2/pokemon-species/' + id);
+//   xhr.responseType = 'json';
+//   xhr.addEventListener('load', function () {
+//     var species = xhr.response;
+//     console.log(species);
+//     console.log(species.flavor_text_entries[0]);
+//   });
+//   xhr.send();
+// }
 // next step : pull flavor text, pull evolution chain, change stat bar % and color
