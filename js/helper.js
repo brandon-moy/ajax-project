@@ -1,4 +1,4 @@
-/* exported capitalize, displayId, calcWeight, calcHeight */
+/* exported capitalize, displayId, calcWeight, calcHeight, statsDisplay */
 
 function capitalize(string) {
   var capitalized = '';
@@ -29,4 +29,18 @@ function calcWeight(number) {
   var weight = number / 4.536;
   var displayWeight = Math.round(weight * 10) / 10 + ' lbs';
   return displayWeight;
+}
+
+function statsDisplay(string) {
+  var statName = '';
+  if (string === 'hp') {
+    statName = 'HP';
+  } else if (string === 'special-attack') {
+    statName = 'Sp. Attack';
+  } else if (string === 'special-defense') {
+    statName = 'Sp. Defense';
+  } else {
+    statName = capitalize(string);
+  }
+  return statName;
 }

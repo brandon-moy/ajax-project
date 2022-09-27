@@ -1,4 +1,4 @@
-/* global capitalize, displayId */
+/* global capitalize, displayId, */
 
 var $cardRow = document.querySelector('.cards-table');
 var kanto = [];
@@ -80,7 +80,7 @@ $xmark.addEventListener('click', function () {
 });
 
 // function detailedDisplay(id) {
-// var id = event.target.closest('.pokemon-card').id;
+//   // var id = event.target.closest('.pokemon-card').id;
 //   var xhr = new XMLHttpRequest();
 //   xhr.open('GET', 'https://pokeapi.co/api/v2/pokemon/' + id);
 //   xhr.responseType = 'json';
@@ -95,8 +95,8 @@ $xmark.addEventListener('click', function () {
 //       console.log(capitalize(pokemon.types[i].type.name));
 //     }
 
-//     console.log(pokemon.height);
-//     console.log(pokemon.weight);
+//     console.log(calcHeight(pokemon.height));
+//     console.log(calcWeight(pokemon.weight));
 
 //     for (var k = 0; k < pokemon.abilities.length; k++) {
 //       console.log(capitalize(pokemon.abilities[k].ability.name));
@@ -104,7 +104,7 @@ $xmark.addEventListener('click', function () {
 
 //     for (var j = 0; j < pokemon.stats.length; j++) {
 //       console.log(pokemon.stats[j].base_stat);
-//       console.log(pokemon.stats[j].stat.name);
+//       console.log(statsDisplay(pokemon.stats[j].stat.name));
 //     }
 //   });
 //   xhr.send();
