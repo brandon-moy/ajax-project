@@ -2,8 +2,15 @@
 
 function capitalize(string) {
   var capitalized = '';
-  capitalized = string[0].toUpperCase();
-  capitalized += string.substring(1);
+  if (string.includes('-')) {
+    var split = string.split('-');
+    var first = split[0].charAt(0).toUpperCase() + split[0].substring(1);
+    var second = split[1].charAt(0).toUpperCase() + split[1].substring(1);
+    capitalized = first + ' ' + second;
+  } else {
+    capitalized = string[0].toUpperCase();
+    capitalized += string.substring(1);
+  }
   return capitalized;
 }
 

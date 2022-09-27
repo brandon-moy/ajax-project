@@ -69,7 +69,8 @@ var $weight = document.querySelector('.pokemon-weight');
 var $abilities = document.querySelector('.pokemon-abilities');
 
 $cards.addEventListener('click', function () {
-  detailedDisplay();
+  var id = event.target.closest('.pokemon-card').id;
+  detailedDisplay(id);
   $header.classList.add('hidden');
   $cardView.classList.add('hidden');
   $detailBackground.classList.remove('hidden');
@@ -86,7 +87,6 @@ $xmark.addEventListener('click', function () {
 });
 
 function detailedDisplay(id) {
-  // var id = event.target.closest('.pokemon-card').id;
   var xhr = new XMLHttpRequest();
   xhr.open('GET', 'https://pokeapi.co/api/v2/pokemon/' + id);
   xhr.responseType = 'json';
@@ -135,3 +135,5 @@ function detailedDisplay(id) {
   });
   xhr.send();
 }
+
+// next step : pull flavor text, pull evolution chain, change stat bar % and color
