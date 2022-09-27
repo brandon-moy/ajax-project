@@ -1,4 +1,4 @@
-/* exported capitalize, displayId */
+/* exported capitalize, displayId, calcWeight */
 
 function capitalize(string) {
   var capitalized = '';
@@ -15,4 +15,17 @@ function displayId(number) {
     display = '0' + number;
   }
   return display;
+}
+
+// bulbasaur height: 7 should be displayed as 2'4"
+// bulbasaur weight: 69 should be displayed as 15.2lb
+
+// function calcHeight(number) {
+
+// }
+
+function calcWeight(number) {
+  var weight = number / 4.536;
+  var displayWeight = Math.round(weight * 10) / 10 + ' lbs';
+  return displayWeight;
 }
