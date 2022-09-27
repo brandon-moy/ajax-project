@@ -22,6 +22,7 @@ function renderCards(id, name) {
   $pokemonImg.setAttribute('src', '/images/kanto/' + id + '.png');
   $pokemonNumber.textContent = displayId(id);
   $pokemonName.textContent = capitalize(name);
+  $pokemonCard.setAttribute('id', id);
 
   $columnFifth.appendChild($pokemonCard);
   $pokemonCard.appendChild($pokeball);
@@ -48,3 +49,11 @@ function generatePokemonCards() {
 }
 
 window.addEventListener('load', generatePokemonCards);
+
+// Code for opening detailed view display
+
+var $cards = document.querySelector('.cards-view');
+
+$cards.addEventListener('click', function () {
+  return event.target.closest('.pokemon-card');
+});
