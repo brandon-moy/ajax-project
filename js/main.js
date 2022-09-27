@@ -58,6 +58,10 @@ var $cardView = document.querySelector('.cards-view');
 var $detailBackground = document.querySelector('.detail-background');
 var $detailView = document.querySelector('.detailed-view');
 var $xmark = document.querySelector('.xmark');
+// var $detailName = document.querySelector('.detail-name');
+// var $detailNumber = document.querySelector('.detail-number');
+// var $type1 = document.querySelector('.type-1');
+// var $type2 = document.querySelector('.type-2');
 
 $cards.addEventListener('click', function () {
   $header.classList.add('hidden');
@@ -74,3 +78,34 @@ $xmark.addEventListener('click', function () {
   $detailView.classList.add('hidden');
   window.scrollTo(0, 0);
 });
+
+// function detailedDisplay(id) {
+// var id = event.target.closest('.pokemon-card').id;
+//   var xhr = new XMLHttpRequest();
+//   xhr.open('GET', 'https://pokeapi.co/api/v2/pokemon/' + id);
+//   xhr.responseType = 'json';
+//   xhr.addEventListener('load', function () {
+//     var pokemon = xhr.response;
+
+//     console.log(pokemon);
+//     console.log(capitalize(pokemon.name));
+//     console.log(displayId(pokemon.id));
+
+//     for (var i = 0; i < pokemon.types.length; i++) {
+//       console.log(capitalize(pokemon.types[i].type.name));
+//     }
+
+//     console.log(pokemon.height);
+//     console.log(pokemon.weight);
+
+//     for (var k = 0; k < pokemon.abilities.length; k++) {
+//       console.log(capitalize(pokemon.abilities[k].ability.name));
+//     }
+
+//     for (var j = 0; j < pokemon.stats.length; j++) {
+//       console.log(pokemon.stats[j].base_stat);
+//       console.log(pokemon.stats[j].stat.name);
+//     }
+//   });
+//   xhr.send();
+// }
