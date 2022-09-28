@@ -185,8 +185,13 @@ meter {
   padding-right: 0.75rem;
 }
 
+.display-fav {
+  float: right;
+}
+
 .xmark:hover,
-.heart:hover {
+.heart:hover,
+.display-fav {
   cursor: pointer;
 }
 
