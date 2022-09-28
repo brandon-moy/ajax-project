@@ -1,4 +1,7 @@
-/* exported capitalize, displayId, calcWeight, calcHeight, statsDisplay, flavorText, resetPlaceholder */
+/* exported capitalize, displayId, calcWeight, calcHeight, statsDisplay, flavorText,
+resetPlaceholder, removeFavCard */
+
+/* global $favCardsRow */
 
 function capitalize(string) {
   var capitalized = '';
@@ -54,4 +57,9 @@ function resetPlaceholder(arr) {
       arr[i].setAttribute('src', '/images/placeholderleft.png');
     }
   }
+}
+
+function removeFavCard(position) {
+  var $favCardBlock = $favCardsRow.querySelectorAll('.column-fifth');
+  $favCardsRow.removeChild($favCardBlock[position]);
 }

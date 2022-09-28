@@ -1,4 +1,5 @@
-/* global capitalize, displayId, calcHeight, calcWeight, flavorText, resetPlaceholder */
+/* global capitalize, displayId, calcHeight, calcWeight, flavorText, resetPlaceholder,
+removeFavCard */
 
 var $cardRow = document.querySelector('.cards-table');
 var kanto = [];
@@ -239,11 +240,6 @@ function favourite(event) {
 
   if (event.target.className === 'fa-solid fa-heart heart') {
     event.target.className = 'fa-solid fa-heart heart fav';
-    for (var k = 0; k < data.pokemon.length; k++) {
-      if (id === data.pokemon[k].entry_number) {
-        data.pokemon[k].favourite = true;
-      }
-    }
     for (var i = 0; i < kanto.length; i++) {
       if (id === kanto[i].entry_number) {
         var fav = {
@@ -259,6 +255,7 @@ function favourite(event) {
     for (var j = 0; j < data.pokemon.length; j++) {
       if (id === data.pokemon[j].entry_number) {
         data.pokemon.splice(j, 1);
+        removeFavCard(j);
       }
     }
   }
@@ -295,3 +292,18 @@ function displayView() {
     }
   }
 }
+
+// if it is added - sort the fav array
+// if there is no card. create a card
+// append to the div in the location of where it is in the array
+// read more about .insertBefore(create the element, put it before the one one after it?);
+
+// function addFavCard() {
+
+// }
+
+// find the position of where that pokemon was in the array
+// find the child that is at that position
+// remove the element
+
+// need to figure out $favCardsRow and $favCardBlock. . . not saving?
