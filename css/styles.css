@@ -18,7 +18,11 @@
   width: 90%;
   height: 30vh;
   margin: 2rem auto 0;
-  box-shadow: 0 3px rgb(179, 179, 179);
+  box-shadow: 0 3px 4px rgb(179, 179, 179);
+}
+
+.pokemon-card:hover {
+  cursor: pointer;
 }
 
 .pokeball-background {
@@ -31,16 +35,146 @@
 
 .pokemon-img {
   width: 80%;
-  object-fit: contain;
-  margin: 0 auto;
 }
 
 .pokemon-number,
 .pokemon-name {
-  margin: 0 0 0.25rem;
   text-align: center;
   font-family: Fredoka, sans-serif;
   font-weight: 500;
+}
+
+.detail-background {
+  height: 25vh;
+}
+
+.detail-top-border {
+  height: 5.5rem;
+  width: 100%;
+}
+
+.circle {
+  background-color: white;
+  border-radius: 50%;
+  width: 10rem;
+  height: 10rem;
+  margin-left: 1.5rem;
+}
+
+.detail-img {
+  width: 10rem;
+  height: 10rem;
+}
+
+.detail-number {
+  padding-top: 2rem;
+  font-family: Fredoka, sans-serif;
+  font-size: 1.5rem;
+  font-weight: 500;
+  color: white;
+}
+
+.detail-name {
+  font-family: Fredoka, sans-serif;
+  font-size: 2rem;
+  font-weight: 500;
+}
+
+.type-1,
+.type-2 {
+  display: inline-block;
+  margin-top: 0;
+  font-family: Fredoka, sans-serif;
+  font-size: 0.75rem;
+  width: 3.5rem;
+  padding-top: 0.35rem;
+  padding-bottom: 0.35rem;
+  border-radius: 0.35rem;
+  text-align: center;
+  box-shadow: 0 3px 4px rgb(179, 179, 179);
+}
+
+.type-2 {
+  margin-left: 0.5rem;
+}
+
+.side-spacer {
+  width: 100%;
+}
+
+.detailed-view {
+  padding-top: 5rem;
+  font-size: 1.25rem;
+}
+
+.height {
+  padding-bottom: 1rem;
+}
+
+.weight {
+  padding-bottom: 2rem;
+}
+
+.flavor-text {
+  line-height: 1.25rem;
+  padding-bottom: 1.5rem;
+}
+
+.abilities {
+  padding-bottom: 1.25rem;
+}
+
+.item-header {
+  font-family: Fredoka, sans-serif;
+  font-weight: 500;
+}
+
+.stats-line > p {
+  margin: 0.25rem 0;
+}
+
+.stat-bar {
+  background-color: rgb(226, 226, 226);
+  width: 95%;
+  height: 1.25rem;
+  border-radius: 0.25rem;
+  position: relative;
+}
+
+.stats-display {
+  position: absolute;
+  border-radius: 0.25rem 0 0 0.25rem;
+  top: 0;
+  bottom: 0;
+  left: 0;
+}
+
+meter {
+  background: red;
+}
+
+.bar-padding {
+  padding-top: 1.25rem;
+}
+
+.evolutions {
+  padding-top: 1.25rem;
+}
+
+.evolution-image {
+  width: 60%;
+}
+
+.evolution-name {
+  text-align: center;
+  display: block;
+}
+
+.xmark {
+  font-size: 1.5rem;
+  color: white;
+  padding-top: 0.75rem;
+  padding-left: 0.75rem;
 }
 
 @media only screen and (width > 768px) {
@@ -53,7 +187,7 @@
   }
 
   .pokemon-card {
-    height: 42.5vh;
+    height: 20rem;
     width: 85%;
   }
 
@@ -64,6 +198,54 @@
 
   .pokemon-name {
     padding-top: 0.5rem;
+    font-size: 1.5rem;
+  }
+
+  .description {
+    padding-right: 2rem;
+    font-size: 1.5rem;
+  }
+
+  .detail-top-border {
+    height: 4rem;
+  }
+
+  .circle {
+    width: 15rem;
+    height: 15rem;
+    margin-left: 8rem;
+  }
+
+  .detail-img {
+    width: 15rem;
+    height: 15rem;
+  }
+
+  .detailed-view {
+    padding-top: 10rem;
+    padding-left: 4rem;
+    padding-right: 4rem;
+  }
+
+  .detail-number {
+    font-size: 1.75rem;
+  }
+
+  .detail-name {
+    font-size: 2.75rem;
+  }
+
+  .xmark {
+    font-size: 2.5rem;
+    padding-top: 1.25rem;
+    padding-left: 1.25rem;
+  }
+
+  .evolution-image {
+    width: 35%;
+  }
+
+  .evolution-name {
     font-size: 1.5rem;
   }
 }

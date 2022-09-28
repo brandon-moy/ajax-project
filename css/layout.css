@@ -1,19 +1,30 @@
 .hidden {
-  display: none;
+  display: none !important;
 }
 
 .container {
-  max-width: 90%;
-  margin: 0 auto 2rem;
+  width: 90%;
+  margin-bottom: 2rem;
 }
 
 .row {
   display: flex;
   flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
 }
 
-.flex {
+.column {
   display: flex;
+  flex-wrap: wrap;
+  flex-direction: column;
+}
+
+.stats-line {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  width: 95%;
 }
 
 .column-full {
@@ -29,11 +40,19 @@
 }
 
 .column-quarter {
-  flex-basis: 25%;
+  flex-basis: 50%;
 }
 
 .column-fifth {
   flex-basis: 50%;
+}
+
+.column-45 {
+  flex-basis: 45%;
+}
+
+.column-55 {
+  flex-basis: 55%;
 }
 
 @media only screen and (width > 768px) {

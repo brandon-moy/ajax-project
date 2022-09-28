@@ -5,9 +5,13 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>AJAX Project</title>
   <link rel="icon" href="images/favicon.ico">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+    integrity="sha512-9usAa10IRO0HhonpyAIVpjrylPvoDwiPUiKdWk5t3PyolY1cOd4DSE0Ga+ri4AuTroPR5aQvXU9xC6qOPnzFeg=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
   <link rel="stylesheet" href="css/reset.css">
   <link rel="stylesheet" href="css/layout.css">
   <link rel="stylesheet" href="css/styles.css">
+  <link rel="stylesheet" href="css/colors.css">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link
@@ -19,16 +23,150 @@
     <div class="header-background">
       <h1 class="title">Pokédex: <span class="area-display">Kanto</span></h1>
     </div>
+    <div class="detail-background row hidden">
+      <div class="column-full detail-top-border">
+        <i class="fa-regular fa-circle-xmark xmark"></i>
+      </div>
+      <div class="column-quarter">
+        <div class="circle">
+          <img src="images/kanto/1.png" class="detail-img">
+        </div>
+      </div>
+      <div class="column-quarter">
+        <h4 class="detail-number"></h4>
+        <h3 class="detail-name"></h3>
+        <p class="type-1"></p>
+        <p class="type-2"></p>
+      </div>
+      <div class="column-half side-spacer"></div>
+    </div>
   </header>
   <main>
     <div class="container">
       <div class="cards-view">
+        <div class="cards-table row">
+        </div>
+      </div>
+      <div class="detailed-view hidden">
         <div class="row">
+          <div class="column-half description">
+            <p class="height">
+              <span class="item-header">Height:</span>
+              <span class="pokemon-height"></span>
+            </p>
+            <p class="weight">
+              <span class="item-header">Weight:</span>
+              <span class="pokemon-weight"></span>
+            </p>
+            <p class="flavor-text">
+            </p>
+            <p class="abilities">
+              <span class="item-header">Abilities:</span>
+              <span class="pokemon-abilities"></span>
+            </p>
+          </div>
+          <div class="column-half">
+            <div class="row">
+              <div class="column-45">
+                <div class="stats-line">
+                  <p class="item-header">HP</p>
+                  <p class="hp"></p>
+                </div>
+                <div class="stats-line">
+                  <p class="item-header">Attack</p>
+                  <p class="attack"></p>
+                </div>
+                <div class="stats-line">
+                  <p class="item-header">Defense</p>
+                  <p class="defense"></p>
+                </div>
+                <div class="stats-line">
+                  <p class="item-header">Sp. Attack</p>
+                  <p class="special-attack"></p>
+                </div>
+                <div class="stats-line">
+                  <p class="item-header">Sp. Defense</p>
+                  <p class="special-defense"></p>
+                </div>
+                <div class="stats-line">
+                  <p class="item-header">Speed</p>
+                  <p class="speed"></p>
+                </div>
+              </div>
+              <div class="column-55">
+                <div class="stat-bar">
+                  <div class="stats-display"></div>
+                </div>
+                <div class="bar-padding"></div>
+                <div class="stat-bar">
+                  <div class="stats-display"></div>
+                </div>
+                <div class="bar-padding"></div>
+                <div class="stat-bar">
+                  <div class="stats-display"></div>
+                </div>
+                <div class="bar-padding"></div>
+                <div class="stat-bar">
+                  <div class="stats-display"></div>
+                </div>
+                <div class="bar-padding"></div>
+                <div class="stat-bar">
+                  <div class="stats-display"></div>
+                </div>
+                <div class="bar-padding"></div>
+                <div class="stat-bar">
+                  <div class="stats-display"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="column-full evolution">
+            <h2 class="evolutions">Evolutions:</h2>
+            <div class="row">
+              <div class="column-quarter column evo-div">
+                <img src="images/placeholderleft.png" class="evolution-image">
+                <h5 class="evolution-name"></h5>
+              </div>
+              <div class="column-quarter column evo-div">
+                <img src="images/placeholderright.png" class="evolution-image">
+                <h5 class="evolution-name"></h5>
+              </div>
+              <div class="column-quarter column evo-div">
+                <img src="images/placeholderleft.png" class="evolution-image">
+                <h5 class="evolution-name"></h5>
+              </div>
+              <div class="column-quarter column evo-div hidden">
+                <img src="images/placeholderright.png" class="evolution-image">
+                <h5 class="evolution-name"></h5>
+              </div>
+              <div class="column-quarter column evo-div hidden">
+                <img src="images/placeholderleft.png" class="evolution-image">
+                <h5 class="evolution-name"></h5>
+              </div>
+              <div class="column-quarter column evo-div hidden">
+                <img src="images/placeholderright.png" class="evolution-image">
+                <h5 class="evolution-name"></h5>
+              </div>
+              <div class="column-quarter column evo-div hidden">
+                <img src="images/placeholderleft.png" class="evolution-image">
+                <h5 class="evolution-name"></h5>
+              </div>
+              <div class="column-quarter column evo-div hidden">
+                <img src="images/placeholderright.png" class="evolution-image">
+                <h5 class="evolution-name"></h5>
+              </div>
+              <div class="column-quarter column evo-div hidden">
+                <img src="images/placeholderleft.png" class="evolution-image">
+                <h5 class="evolution-name"></h5>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
   </main>
   <script src="js/data.js"></script>
   <script src="js/main.js"></script>
+  <script src="js/helper.js"></script>
 </body>
 </html>
