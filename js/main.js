@@ -33,11 +33,12 @@ function renderCards(object) {
   $pokemonCard.appendChild($pokemonNumber);
   $pokemonCard.appendChild($pokemonName);
 
-  if (object.favourite === undefined) {
-    $cardRow.appendChild($columnFifth);
-  } else {
-    $favCardsRow.appendChild($columnFifth);
-  }
+  // if (object.favourite === undefined) {
+  //   $cardRow.appendChild($columnFifth);
+  // } else {
+  //   $favCardsRow.appendChild($columnFifth);
+  // }
+  return $columnFifth;
 }
 
 function generatePokemonCards() {
@@ -47,12 +48,12 @@ function generatePokemonCards() {
   xhr.addEventListener('load', function () {
     kanto = xhr.response.pokemon_entries;
     for (var i = 0; i < kanto.length; i++) {
-      renderCards(kanto[i]);
+      $cardRow.appendChild(renderCards(kanto[i])); // this is a test, renderCards part was prior to text
     }
   });
   xhr.send();
   for (var j = 0; j < data.pokemon.length; j++) {
-    renderCards(data.pokemon[j]);
+    $favCardsRow.appendChild(renderCards(data.pokemon[j])); // this is a test renderCards was ehre before test
   }
 }
 
@@ -300,9 +301,6 @@ function displayView() {
 
 // if it is added - sort the fav array
 // if there is no card. create a card
+// use create card function of the fav variable created
 // append to the div in the location of where it is in the array
 // read more about .insertBefore(create the element, put it before the one one after it?);
-
-// function addFavCard() {
-
-// }
