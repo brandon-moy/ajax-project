@@ -177,6 +177,19 @@ meter {
   padding-left: 0.75rem;
 }
 
+.heart {
+  font-size: 1.5rem;
+  color: white;
+  float: right;
+  padding-top: 0.75rem;
+  padding-right: 0.75rem;
+}
+
+.xmark:hover,
+.heart:hover {
+  cursor: pointer;
+}
+
 @media only screen and (width > 768px) {
   .header-background {
     padding-bottom: 0;
@@ -236,6 +249,12 @@ meter {
   }
 
   .xmark {
+    font-size: 2.5rem;
+    padding-top: 1.25rem;
+    padding-left: 1.25rem;
+  }
+
+  .heart {
     font-size: 2.5rem;
     padding-top: 1.25rem;
     padding-left: 1.25rem;
