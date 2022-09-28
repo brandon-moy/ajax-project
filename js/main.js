@@ -205,10 +205,11 @@ function renderEvolutionImg(arr) {
     for (var q = 0; q < kanto.length; q++) {
       if (species[p] === kanto[q].pokemon_species.name) {
         var id = kanto[q].entry_number;
-        $evoDiv[p].classList.remove('hidden');
         $evoImg[p].setAttribute('src', '/images/kanto/' + id + '.png');
         $evoName[p].textContent = capitalize(species[p]);
       }
     }
+    $evoDiv[p].classList.remove('hidden');
+    $evoName[p].textContent = capitalize(species[p]);
   }
 }
