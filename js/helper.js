@@ -1,4 +1,4 @@
-/* exported capitalize, displayId, calcWeight, calcHeight, statsDisplay, flavorText */
+/* exported capitalize, displayId, calcWeight, calcHeight, statsDisplay, flavorText, resetPlaceholder */
 
 function capitalize(string) {
   var capitalized = '';
@@ -44,4 +44,14 @@ function flavorText(string) {
   output = output.replaceAll('\f', ' ');
   output = output.replaceAll('POKéMON', 'Pokémon');
   return output;
+}
+
+function resetPlaceholder(arr) {
+  for (var i = 0; i < arr.length; i++) {
+    if (i % 2) {
+      arr[i].setAttribute('src', '/images/placeholderright.png');
+    } else {
+      arr[i].setAttribute('src', '/images/placeholderleft.png');
+    }
+  }
 }

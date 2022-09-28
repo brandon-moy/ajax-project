@@ -1,4 +1,4 @@
-/* global capitalize, displayId, calcHeight, calcWeight, flavorText */
+/* global capitalize, displayId, calcHeight, calcWeight, flavorText, resetPlaceholder */
 
 var $cardRow = document.querySelector('.cards-table');
 var kanto = [];
@@ -94,6 +94,7 @@ $xmark.addEventListener('click', function () {
   for (var r = 0; r < $evoDiv.length; r++) {
     $evoDiv[r].classList.add('hidden');
   }
+  resetPlaceholder($evoImg);
 });
 
 function detailedDisplay(id) {
@@ -171,45 +172,39 @@ function speciesDetail(id) {
   xhr2.send();
 }
 
-var species = [];
-
 function getEvolutions(url) {
   var xhr3 = new XMLHttpRequest();
   xhr3.open('GET', url);
   xhr3.responseType = 'json';
   xhr3.addEventListener('load', function () {
-    var details = xhr3.response.chain;
-    listEvolutions([details]);
-    species.unshift(details.species.name);
-    renderEvolutionImg(species);
+    var currentPokemon = xhr3.response.chain;
+    var allEvolutions = listEvolutions(currentPokemon.evolves_to);
+    renderEvolutionImg(allEvolutions);
   });
   xhr3.send();
-  species = [];
 }
 
 function listEvolutions(arr) {
-  for (var o = 0; o < arr[0].evolves_to.length; o++) {
-    if (arr[0].evolves_to.length === 1) {
-      species.unshift(listEvolutions(arr[0].evolves_to));
-    } else if (arr[0].evolves_to.length > 1) {
-      species.push(arr[0].evolves_to[o].species.name);
-    } else {
-      species.unshift(arr[0].species.name);
+  var output = [];
+  for (var i = 0; i < arr.length; i++) {
+    output.push(arr[i].species.name);
+    if (arr[i].evolves_to.length > 0) {
+      output = output.concat(listEvolutions(arr[i].evolves_to));
     }
   }
-  return arr[0].species.name;
+  return output;
 }
 
 function renderEvolutionImg(arr) {
-  for (var p = 0; p < species.length; p++) {
+  for (var p = 0; p < arr.length; p++) {
     for (var q = 0; q < kanto.length; q++) {
-      if (species[p] === kanto[q].pokemon_species.name) {
+      if (arr[p] === kanto[q].pokemon_species.name) {
         var id = kanto[q].entry_number;
         $evoImg[p].setAttribute('src', '/images/kanto/' + id + '.png');
-        $evoName[p].textContent = capitalize(species[p]);
+        $evoName[p].textContent = capitalize(arr[p]);
       }
     }
     $evoDiv[p].classList.remove('hidden');
-    $evoName[p].textContent = capitalize(species[p]);
+    $evoName[p].textContent = capitalize(arr[p]);
   }
 }
