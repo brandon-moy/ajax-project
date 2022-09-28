@@ -217,10 +217,12 @@ function renderEvolutionImg(arr) {
 
 var $heart = document.querySelector('.heart');
 
-$heart.addEventListener('click', function () {
-  if ($heart.classList.includes('fav')) {
-    $heart.classList.add('fav');
+$heart.addEventListener('click', favourite);
+
+function favourite(event) {
+  if (event.target.className === 'fa-solid fa-heart heart') {
+    event.target.className = 'fa-solid fa-heart heart fav';
   } else {
-    $heart.classList.remove('fav');
+    event.target.className = 'fa-solid fa-heart heart';
   }
-});
+}
