@@ -257,9 +257,32 @@ function favourite(event) {
 }
 
 var $displayFav = document.querySelector('.display-fav');
+// var $favCardsRow = document.querySelector('.fav-cards-table');
+var $view = document.querySelectorAll('.view');
+var $location = document.querySelector('.area-display');
 
 $displayFav.addEventListener('click', displayFavs);
 
 function displayFavs() {
+  data.pokemon.sort((a, b) => (Number(a.entry_number > Number(b.entry_number)) ? 1 : -1));
+  if (data.view !== 'fav') {
+    data.view = 'fav';
+    $location.textContent = 'Favourites';
+    displayView();
+  } else {
+    data.view = 'cards';
+    $location.textContent = 'Kanto';
+    displayView();
+  }
+}
 
+function displayView() {
+  for (var i = 0; i < $view.length; i++) {
+    var view = $view[i].getAttribute('data-view');
+    if (view === data.view) {
+      $view[i].classList.remove('hidden');
+    } else {
+      $view[i].classList.add('hidden');
+    }
+  }
 }
