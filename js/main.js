@@ -50,8 +50,6 @@ function generatePokemonCards() {
 
 window.addEventListener('load', generatePokemonCards);
 
-// Code for opening detailed view display
-
 var $cards = document.querySelector('.cards-view');
 var $header = document.querySelector('.header-background');
 var $cardView = document.querySelector('.cards-view');
