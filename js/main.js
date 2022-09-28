@@ -169,15 +169,35 @@ function speciesDetail(id) {
 }
 
 // next step : pull evolution chain
+var species = [];
 
 function getEvolutions(url) {
   var xhr3 = new XMLHttpRequest();
   xhr3.open('GET', url);
   xhr3.responseType = 'json';
   xhr3.addEventListener('load', function () {
-    // var details = xhr3.response.chain;
-    // console.log(xhr3.response);
+    var details = xhr3.response.chain;
     // console.log(details);
+    listEvolutions([details]);
+    // console.log(details.species.name);
+    // console.log(details.evolves_to[0].species.name);
+    // console.log(details.evolves_to[0].evolves_to[0].species.name);
+    species.unshift(details.species.name);
+    // console.log(species);
   });
   xhr3.send();
+  species = [];
+}
+
+function listEvolutions(arr) {
+  for (var o = 0; o < arr[0].evolves_to.length; o++) {
+    if (arr[0].evolves_to.length > 0) {
+      species.unshift(listEvolutions(arr[0].evolves_to));
+    } else if (arr[0].evolves_to.length > 1) {
+      species.push(arr[o].evolves_to.species.name);
+    } else {
+      species.unshift(arr[0].species.name);
+    }
+  }
+  return arr[0].species.name;
 }
