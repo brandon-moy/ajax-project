@@ -229,15 +229,17 @@ var $heart = document.querySelector('.heart');
 $heart.addEventListener('click', favourite);
 
 function favourite(event) {
+  var id = Number($detailNumber.textContent);
+
   if (event.target.className === 'fa-solid fa-heart heart') {
     event.target.className = 'fa-solid fa-heart heart fav';
     for (var k = 0; k < data.pokemon.length; k++) {
-      if (Number($detailNumber.textContent) === data.pokemon[k].entry_number) {
+      if (id === data.pokemon[k].entry_number) {
         data.pokemon[k].favourite = true;
       }
     }
     for (var i = 0; i < kanto.length; i++) {
-      if (Number($detailNumber.textContent) === kanto[i].entry_number) {
+      if (id === kanto[i].entry_number) {
         var fav = {
           entry_number: kanto[i].entry_number,
           pokemon_species: kanto[i].pokemon_species,
@@ -249,7 +251,7 @@ function favourite(event) {
   } else {
     event.target.className = 'fa-solid fa-heart heart';
     for (var j = 0; j < data.pokemon.length; j++) {
-      if (Number($detailNumber.textContent) === data.pokemon[j].entry_number) {
+      if (id === data.pokemon[j].entry_number) {
         data.pokemon.splice(j, 1);
       }
     }
