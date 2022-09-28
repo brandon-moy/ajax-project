@@ -98,6 +98,7 @@ $xmark.addEventListener('click', function () {
     $evoDiv[r].classList.add('hidden');
   }
   resetPlaceholder($evoImg);
+  $heart.className = 'fa-solid fa-heart heart';
 });
 
 function detailedDisplay(id) {
@@ -111,6 +112,14 @@ function detailedDisplay(id) {
 
     $detailName.textContent = capitalize(pokemon.name);
     $detailNumber.textContent = displayId(pokemon.id);
+
+    for (var i = 0; i < data.pokemon.length; i++) {
+      if (Number(id) === data.pokemon[i].entry_number) {
+        if (data.pokemon[i].favourite === true) {
+          $heart.className = 'fa-solid fa-heart heart fav';
+        }
+      }
+    }
 
     if (pokemon.types.length > 1) {
       var type2 = pokemon.types[1].type.name;
@@ -210,5 +219,41 @@ function renderEvolutionImg(arr) {
     }
     $evoDiv[p].classList.remove('hidden');
     $evoName[p].textContent = capitalize(arr[p]);
+  }
+}
+
+// fav a pokemon
+
+var $heart = document.querySelector('.heart');
+
+$heart.addEventListener('click', favourite);
+
+function favourite(event) {
+  var id = Number($detailNumber.textContent);
+
+  if (event.target.className === 'fa-solid fa-heart heart') {
+    event.target.className = 'fa-solid fa-heart heart fav';
+    for (var k = 0; k < data.pokemon.length; k++) {
+      if (id === data.pokemon[k].entry_number) {
+        data.pokemon[k].favourite = true;
+      }
+    }
+    for (var i = 0; i < kanto.length; i++) {
+      if (id === kanto[i].entry_number) {
+        var fav = {
+          entry_number: kanto[i].entry_number,
+          pokemon_species: kanto[i].pokemon_species,
+          favourite: true
+        };
+        data.pokemon.push(fav);
+      }
+    }
+  } else {
+    event.target.className = 'fa-solid fa-heart heart';
+    for (var j = 0; j < data.pokemon.length; j++) {
+      if (id === data.pokemon[j].entry_number) {
+        data.pokemon.splice(j, 1);
+      }
+    }
   }
 }
