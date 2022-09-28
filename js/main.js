@@ -96,7 +96,6 @@ $xmark.addEventListener('click', function () {
   for (var r = 0; r < $evoDiv.length; r++) {
     $evoDiv[r].classList.add('hidden');
   }
-  window.scrollTo(0, 0);
 });
 
 function detailedDisplay(id) {
