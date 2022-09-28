@@ -222,8 +222,6 @@ function renderEvolutionImg(arr) {
   }
 }
 
-// fav a pokemon
-
 var $heart = document.querySelector('.heart');
 
 $heart.addEventListener('click', favourite);
@@ -256,4 +254,12 @@ function favourite(event) {
       }
     }
   }
+}
+
+var $displayFav = document.querySelector('.display-fav');
+
+$displayFav.addEventListener('click', displayFavs);
+
+function displayFavs() {
+
 }
