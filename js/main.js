@@ -3,13 +3,15 @@
 var $cardRow = document.querySelector('.cards-table');
 var kanto = [];
 
-function renderCards(id, name) {
+function renderCards(object) {
   var $columnFifth = document.createElement('div');
   var $pokemonCard = document.createElement('div');
   var $pokeball = document.createElement('div');
   var $pokemonImg = document.createElement('img');
   var $pokemonNumber = document.createElement('h5');
   var $pokemonName = document.createElement('h4');
+  var id = object.entry_number;
+  var name = object.pokemon_species.name;
 
   $columnFifth.className = 'column-fifth';
   $pokemonCard.className = 'pokemon-card';
@@ -30,7 +32,11 @@ function renderCards(id, name) {
   $pokemonCard.appendChild($pokemonNumber);
   $pokemonCard.appendChild($pokemonName);
 
-  $cardRow.appendChild($columnFifth);
+  if (object.favourite === undefined) {
+    $cardRow.appendChild($columnFifth);
+  } else {
+    $favCardsRow.appendChild($columnFifth);
+  }
 }
 
 function generatePokemonCards() {
@@ -40,12 +46,13 @@ function generatePokemonCards() {
   xhr.addEventListener('load', function () {
     kanto = xhr.response.pokemon_entries;
     for (var i = 0; i < kanto.length; i++) {
-      var pokemonId = kanto[i].entry_number;
-      var pokemonName = kanto[i].pokemon_species.name;
-      renderCards(pokemonId, pokemonName);
+      renderCards(kanto[i]);
     }
   });
   xhr.send();
+  for (var j = 0; j < data.pokemon.length; j++) {
+    renderCards(data.pokemon[j]);
+  }
 }
 
 window.addEventListener('load', generatePokemonCards);
@@ -94,6 +101,9 @@ $xmark.addEventListener('click', function () {
   displayView();
   for (var r = 0; r < $evoDiv.length; r++) {
     $evoDiv[r].classList.add('hidden');
+  }
+  for (var n = 0; n < $statsDisplay.length; n++) {
+    $statsDisplay[n].className = 'stats-display';
   }
   resetPlaceholder($evoImg);
   $heart.className = 'fa-solid fa-heart heart';
@@ -255,7 +265,7 @@ function favourite(event) {
 }
 
 var $displayFav = document.querySelector('.display-fav');
-// var $favCardsRow = document.querySelector('.fav-cards-table');
+var $favCardsRow = document.querySelector('.fav-cards-table');
 var $view = document.querySelectorAll('.view');
 var $location = document.querySelector('.area-display');
 
