@@ -112,6 +112,14 @@ function detailedDisplay(id) {
     $detailName.textContent = capitalize(pokemon.name);
     $detailNumber.textContent = displayId(pokemon.id);
 
+    for (var i = 0; i < data.pokemon.length; i++) {
+      if (Number(id) === data.pokemon[i].entry_number) {
+        if (data.pokemon[i].favourite === true) {
+          $heart.className = 'fa-solid fa-heart heart fav';
+        }
+      }
+    }
+
     if (pokemon.types.length > 1) {
       var type2 = pokemon.types[1].type.name;
       $type2.textContent = capitalize(type2);
@@ -222,7 +230,27 @@ $heart.addEventListener('click', favourite);
 function favourite(event) {
   if (event.target.className === 'fa-solid fa-heart heart') {
     event.target.className = 'fa-solid fa-heart heart fav';
+    for (var k = 0; k < data.pokemon.length; k++) {
+      if ($detailName.textContent.toLowerCase() === data.pokemon[k].pokemon_species.name) {
+        data.pokemon[k].favourite = true;
+      }
+    }
+    for (var i = 0; i < kanto.length; i++) {
+      if ($detailName.textContent.toLowerCase() === kanto[i].pokemon_species.name) {
+        var fav = {
+          entry_number: kanto[i].entry_number,
+          pokemon_species: kanto[i].pokemon_species,
+          favourite: true
+        };
+        data.pokemon.push(fav);
+      }
+    }
   } else {
     event.target.className = 'fa-solid fa-heart heart';
+    for (var j = 0; j < data.pokemon.length; j++) {
+      if ($detailName.textContent.toLowerCase() === data.pokemon[j].pokemon_species.name) {
+        data.pokemon[j].favourite = false;
+      }
+    }
   }
 }
