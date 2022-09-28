@@ -2,7 +2,7 @@
 
 var data = {
   pokemon: [],
-  view: 'cards'
+  view: 'Kanto'
 };
 
 var previousDataJSON = localStorage.getItem('favPokemon');

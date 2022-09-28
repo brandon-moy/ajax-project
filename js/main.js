@@ -91,9 +91,7 @@ $xmark.addEventListener('click', function () {
   $cardView.classList.remove('hidden');
   $detailBackground.classList.add('hidden');
   $detailView.classList.add('hidden');
-  for (var n = 0; n < $statsDisplay.length; n++) {
-    $statsDisplay[n].className = 'stats-display';
-  }
+  displayView();
   for (var r = 0; r < $evoDiv.length; r++) {
     $evoDiv[r].classList.add('hidden');
   }
@@ -265,13 +263,13 @@ $displayFav.addEventListener('click', displayFavs);
 
 function displayFavs() {
   data.pokemon.sort((a, b) => (Number(a.entry_number > Number(b.entry_number)) ? 1 : -1));
-  if (data.view !== 'fav') {
-    data.view = 'fav';
-    $location.textContent = 'Favourites';
+  if (data.view !== 'Favourites') {
+    data.view = 'Favourites';
+    $location.textContent = data.view;
     displayView();
   } else {
-    data.view = 'cards';
-    $location.textContent = 'Kanto';
+    data.view = 'Kanto';
+    $location.textContent = data.view;
     displayView();
   }
 }
@@ -281,6 +279,7 @@ function displayView() {
     var view = $view[i].getAttribute('data-view');
     if (view === data.view) {
       $view[i].classList.remove('hidden');
+      $location.textContent = data.view;
     } else {
       $view[i].classList.add('hidden');
     }
