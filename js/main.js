@@ -179,6 +179,7 @@ function getEvolutions(url) {
   xhr3.addEventListener('load', function () {
     var currentPokemon = xhr3.response.chain;
     var allEvolutions = listEvolutions(currentPokemon.evolves_to);
+    allEvolutions.unshift(currentPokemon.species.name);
     renderEvolutionImg(allEvolutions);
   });
   xhr3.send();
