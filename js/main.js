@@ -177,13 +177,8 @@ function getEvolutions(url) {
   xhr3.responseType = 'json';
   xhr3.addEventListener('load', function () {
     var details = xhr3.response.chain;
-    // console.log(details);
     listEvolutions([details]);
-    // console.log(details.species.name);
-    // console.log(details.evolves_to[0].species.name);
-    // console.log(details.evolves_to[0].evolves_to[0].species.name);
     species.unshift(details.species.name);
-    // console.log(species);
   });
   xhr3.send();
   species = [];
@@ -191,10 +186,10 @@ function getEvolutions(url) {
 
 function listEvolutions(arr) {
   for (var o = 0; o < arr[0].evolves_to.length; o++) {
-    if (arr[0].evolves_to.length > 0) {
+    if (arr[0].evolves_to.length === 1) {
       species.unshift(listEvolutions(arr[0].evolves_to));
     } else if (arr[0].evolves_to.length > 1) {
-      species.push(arr[o].evolves_to.species.name);
+      species.push(arr[0].evolves_to[o].species.name);
     } else {
       species.unshift(arr[0].species.name);
     }
