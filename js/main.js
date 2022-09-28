@@ -218,5 +218,9 @@ function renderEvolutionImg(arr) {
 var $heart = document.querySelector('.heart');
 
 $heart.addEventListener('click', function () {
-
+  if ($heart.classList.includes('fav')) {
+    $heart.classList.add('fav');
+  } else {
+    $heart.classList.remove('fav');
+  }
 });
