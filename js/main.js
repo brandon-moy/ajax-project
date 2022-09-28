@@ -69,6 +69,9 @@ var $height = document.querySelector('.pokemon-height');
 var $weight = document.querySelector('.pokemon-weight');
 var $abilities = document.querySelector('.pokemon-abilities');
 var $flavorText = document.querySelector('.flavor-text');
+var $evoDiv = document.querySelectorAll('.evo-div');
+var $evoImg = document.querySelectorAll('.evolution-image');
+var $evoName = document.querySelectorAll('.evolution-name');
 var maxStats = [250, 134, 180, 154, 154, 140];
 
 $cards.addEventListener('click', function () {
@@ -89,6 +92,9 @@ $xmark.addEventListener('click', function () {
   $detailView.classList.add('hidden');
   for (var n = 0; n < $statsDisplay.length; n++) {
     $statsDisplay[n].className = 'stats-display';
+  }
+  for (var r = 0; r < $evoDiv.length; r++) {
+    $evoDiv[r].classList.add('hidden');
   }
   window.scrollTo(0, 0);
 });
@@ -168,7 +174,6 @@ function speciesDetail(id) {
   xhr2.send();
 }
 
-// next step : pull evolution chain
 var species = [];
 
 function getEvolutions(url) {
@@ -179,6 +184,7 @@ function getEvolutions(url) {
     var details = xhr3.response.chain;
     listEvolutions([details]);
     species.unshift(details.species.name);
+    renderEvolutionImg(species);
   });
   xhr3.send();
   species = [];
@@ -195,4 +201,17 @@ function listEvolutions(arr) {
     }
   }
   return arr[0].species.name;
+}
+
+function renderEvolutionImg(arr) {
+  for (var p = 0; p < species.length; p++) {
+    for (var q = 0; q < kanto.length; q++) {
+      if (species[p] === kanto[q].pokemon_species.name) {
+        var id = kanto[q].entry_number;
+        $evoDiv[p].classList.remove('hidden');
+        $evoImg[p].setAttribute('src', '/images/kanto/' + id + '.png');
+        $evoName[p].textContent = capitalize(species[p]);
+      }
+    }
+  }
 }
