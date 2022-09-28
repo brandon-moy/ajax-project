@@ -50,7 +50,7 @@ function generatePokemonCards() {
 
 window.addEventListener('load', generatePokemonCards);
 
-var $cards = document.querySelector('.cards-view');
+var $cards = document.querySelector('.cards-table');
 var $header = document.querySelector('.header-background');
 var $cardView = document.querySelector('.cards-view');
 var $detailBackground = document.querySelector('.detail-background');
@@ -73,6 +73,9 @@ var $evoName = document.querySelectorAll('.evolution-name');
 var maxStats = [250, 134, 180, 154, 154, 140];
 
 $cards.addEventListener('click', function () {
+  if (event.target.className === 'column-fifth') {
+    return;
+  }
   var id = event.target.closest('.pokemon-card').id;
   detailedDisplay(id);
   speciesDetail(id);
