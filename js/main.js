@@ -212,3 +212,11 @@ function renderEvolutionImg(arr) {
     $evoName[p].textContent = capitalize(arr[p]);
   }
 }
+
+// fav a pokemon
+
+var $heart = document.querySelector('.heart');
+
+$heart.addEventListener('click', function () {
+
+});
