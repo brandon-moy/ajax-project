@@ -98,6 +98,7 @@ $xmark.addEventListener('click', function () {
     $evoDiv[r].classList.add('hidden');
   }
   resetPlaceholder($evoImg);
+  $heart.className = 'fa-solid fa-heart heart';
 });
 
 function detailedDisplay(id) {
@@ -231,12 +232,12 @@ function favourite(event) {
   if (event.target.className === 'fa-solid fa-heart heart') {
     event.target.className = 'fa-solid fa-heart heart fav';
     for (var k = 0; k < data.pokemon.length; k++) {
-      if ($detailName.textContent.toLowerCase() === data.pokemon[k].pokemon_species.name) {
+      if (Number($detailNumber.textContent) === data.pokemon[k].entry_number) {
         data.pokemon[k].favourite = true;
       }
     }
     for (var i = 0; i < kanto.length; i++) {
-      if ($detailName.textContent.toLowerCase() === kanto[i].pokemon_species.name) {
+      if (Number($detailNumber.textContent) === kanto[i].entry_number) {
         var fav = {
           entry_number: kanto[i].entry_number,
           pokemon_species: kanto[i].pokemon_species,
@@ -248,8 +249,8 @@ function favourite(event) {
   } else {
     event.target.className = 'fa-solid fa-heart heart';
     for (var j = 0; j < data.pokemon.length; j++) {
-      if ($detailName.textContent.toLowerCase() === data.pokemon[j].pokemon_species.name) {
-        data.pokemon[j].favourite = false;
+      if (Number($detailNumber.textContent) === data.pokemon[j].entry_number) {
+        data.pokemon.splice(j, 1);
       }
     }
   }
