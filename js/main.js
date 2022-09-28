@@ -80,19 +80,7 @@ var $evoImg = document.querySelectorAll('.evolution-image');
 var $evoName = document.querySelectorAll('.evolution-name');
 var maxStats = [250, 134, 180, 154, 154, 140];
 
-$cards.addEventListener('click', function () {
-  if (event.target.className === 'column-fifth') {
-    return;
-  }
-  var id = event.target.closest('.pokemon-card').id;
-  detailedDisplay(id);
-  speciesDetail(id);
-  $header.classList.add('hidden');
-  $cardView.classList.add('hidden');
-  $detailBackground.classList.remove('hidden');
-  $detailView.classList.remove('hidden');
-  window.scrollTo(0, 0);
-});
+$cards.addEventListener('click', displayDetails);
 
 $xmark.addEventListener('click', function () {
   $header.classList.remove('hidden');
@@ -109,6 +97,21 @@ $xmark.addEventListener('click', function () {
   resetPlaceholder($evoImg);
   $heart.className = 'fa-solid fa-heart heart';
 });
+
+function displayDetails() {
+  if (event.target.className === 'column-fifth') {
+    return;
+  }
+  var id = event.target.closest('.pokemon-card').id;
+  detailedDisplay(id);
+  speciesDetail(id);
+  $header.classList.add('hidden');
+  $cardView.classList.add('hidden');
+  $favView.classList.add('hidden');
+  $detailBackground.classList.remove('hidden');
+  $detailView.classList.remove('hidden');
+  window.scrollTo(0, 0);
+}
 
 function detailedDisplay(id) {
   $detailImg.setAttribute('src', '/images/kanto/' + id + '.png');
@@ -262,11 +265,13 @@ function favourite(event) {
 }
 
 var $displayFav = document.querySelector('.display-fav');
+var $favView = document.querySelector('.fav-view');
 var $favCardsRow = document.querySelector('.fav-cards-table');
 var $view = document.querySelectorAll('.view');
 var $location = document.querySelector('.area-display');
 
 $displayFav.addEventListener('click', displayFavs);
+$favCardsRow.addEventListener('click', displayDetails);
 
 function displayFavs() {
   data.pokemon.sort((a, b) => (Number(a.entry_number > Number(b.entry_number)) ? 1 : -1));
@@ -301,9 +306,3 @@ function displayView() {
 // function addFavCard() {
 
 // }
-
-// find the position of where that pokemon was in the array
-// find the child that is at that position
-// remove the element
-
-// need to figure out $favCardsRow and $favCardBlock. . . not saving?
