@@ -1,4 +1,7 @@
-/* exported capitalize, displayId, calcWeight, calcHeight, statsDisplay, flavorText, resetPlaceholder */
+/* exported capitalize, displayId, calcWeight, calcHeight, statsDisplay, flavorText,
+resetPlaceholder, removeFavCard, addFavCard */
+
+/* global $favCardsRow */
 
 function capitalize(string) {
   var capitalized = '';
@@ -54,4 +57,15 @@ function resetPlaceholder(arr) {
       arr[i].setAttribute('src', '/images/placeholderleft.png');
     }
   }
+}
+
+function removeFavCard(position) {
+  var $favCardBlock = $favCardsRow.querySelectorAll('.column-fifth');
+  $favCardsRow.removeChild($favCardBlock[position]);
+}
+
+function addFavCard(DOM, position) {
+  var nodes = document.querySelector('.fav-cards-table').childNodes;
+  var location = nodes[position];
+  location.after(DOM);
 }

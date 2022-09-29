@@ -1,15 +1,18 @@
-/* global capitalize, displayId, calcHeight, calcWeight, flavorText, resetPlaceholder */
+/* global capitalize, displayId, calcHeight, calcWeight, flavorText, resetPlaceholder,
+removeFavCard, addFavCard */
 
 var $cardRow = document.querySelector('.cards-table');
 var kanto = [];
 
-function renderCards(id, name) {
+function renderCards(object) {
   var $columnFifth = document.createElement('div');
   var $pokemonCard = document.createElement('div');
   var $pokeball = document.createElement('div');
   var $pokemonImg = document.createElement('img');
   var $pokemonNumber = document.createElement('h5');
   var $pokemonName = document.createElement('h4');
+  var id = object.entry_number;
+  var name = object.pokemon_species.name;
 
   $columnFifth.className = 'column-fifth';
   $pokemonCard.className = 'pokemon-card';
@@ -30,7 +33,7 @@ function renderCards(id, name) {
   $pokemonCard.appendChild($pokemonNumber);
   $pokemonCard.appendChild($pokemonName);
 
-  $cardRow.appendChild($columnFifth);
+  return $columnFifth;
 }
 
 function generatePokemonCards() {
@@ -40,15 +43,19 @@ function generatePokemonCards() {
   xhr.addEventListener('load', function () {
     kanto = xhr.response.pokemon_entries;
     for (var i = 0; i < kanto.length; i++) {
-      var pokemonId = kanto[i].entry_number;
-      var pokemonName = kanto[i].pokemon_species.name;
-      renderCards(pokemonId, pokemonName);
+      $cardRow.appendChild(renderCards(kanto[i]));
     }
   });
   xhr.send();
+  for (var j = 0; j < data.pokemon.length; j++) {
+    $favCardsRow.appendChild(renderCards(data.pokemon[j]));
+  }
 }
 
-window.addEventListener('load', generatePokemonCards);
+window.addEventListener('load', function () {
+  displayView();
+  generatePokemonCards();
+});
 
 var $cards = document.querySelector('.cards-table');
 var $header = document.querySelector('.header-background');
@@ -72,7 +79,25 @@ var $evoImg = document.querySelectorAll('.evolution-image');
 var $evoName = document.querySelectorAll('.evolution-name');
 var maxStats = [250, 134, 180, 154, 154, 140];
 
-$cards.addEventListener('click', function () {
+$cards.addEventListener('click', displayDetails);
+
+$xmark.addEventListener('click', function () {
+  $header.classList.remove('hidden');
+  $cardView.classList.remove('hidden');
+  $detailBackground.classList.add('hidden');
+  $detailView.classList.add('hidden');
+  displayView();
+  for (var r = 0; r < $evoDiv.length; r++) {
+    $evoDiv[r].classList.add('hidden');
+  }
+  for (var n = 0; n < $statsDisplay.length; n++) {
+    $statsDisplay[n].className = 'stats-display';
+  }
+  resetPlaceholder($evoImg);
+  $heart.className = 'fa-solid fa-heart heart';
+});
+
+function displayDetails() {
   if (event.target.className === 'column-fifth') {
     return;
   }
@@ -81,25 +106,11 @@ $cards.addEventListener('click', function () {
   speciesDetail(id);
   $header.classList.add('hidden');
   $cardView.classList.add('hidden');
+  $favView.classList.add('hidden');
   $detailBackground.classList.remove('hidden');
   $detailView.classList.remove('hidden');
   window.scrollTo(0, 0);
-});
-
-$xmark.addEventListener('click', function () {
-  $header.classList.remove('hidden');
-  $cardView.classList.remove('hidden');
-  $detailBackground.classList.add('hidden');
-  $detailView.classList.add('hidden');
-  for (var n = 0; n < $statsDisplay.length; n++) {
-    $statsDisplay[n].className = 'stats-display';
-  }
-  for (var r = 0; r < $evoDiv.length; r++) {
-    $evoDiv[r].classList.add('hidden');
-  }
-  resetPlaceholder($evoImg);
-  $heart.className = 'fa-solid fa-heart heart';
-});
+}
 
 function detailedDisplay(id) {
   $detailImg.setAttribute('src', '/images/kanto/' + id + '.png');
@@ -222,9 +233,12 @@ function renderEvolutionImg(arr) {
   }
 }
 
-// fav a pokemon
-
 var $heart = document.querySelector('.heart');
+var $displayFav = document.querySelector('.display-fav');
+var $favView = document.querySelector('.fav-view');
+var $favCardsRow = document.querySelector('.fav-cards-table');
+var $view = document.querySelectorAll('.view');
+var $location = document.querySelector('.area-display');
 
 $heart.addEventListener('click', favourite);
 
@@ -233,11 +247,6 @@ function favourite(event) {
 
   if (event.target.className === 'fa-solid fa-heart heart') {
     event.target.className = 'fa-solid fa-heart heart fav';
-    for (var k = 0; k < data.pokemon.length; k++) {
-      if (id === data.pokemon[k].entry_number) {
-        data.pokemon[k].favourite = true;
-      }
-    }
     for (var i = 0; i < kanto.length; i++) {
       if (id === kanto[i].entry_number) {
         var fav = {
@@ -246,6 +255,15 @@ function favourite(event) {
           favourite: true
         };
         data.pokemon.push(fav);
+        data.pokemon.sort((a, b) => (Number(a.entry_number > Number(b.entry_number)) ? 1 : -1));
+        var card = renderCards(fav);
+        var position = 0;
+        for (var k = 0; k < data.pokemon.length; k++) {
+          if (fav === data.pokemon[k]) {
+            position = k;
+          }
+        }
+        addFavCard(card, position);
       }
     }
   } else {
@@ -253,7 +271,35 @@ function favourite(event) {
     for (var j = 0; j < data.pokemon.length; j++) {
       if (id === data.pokemon[j].entry_number) {
         data.pokemon.splice(j, 1);
+        removeFavCard(j);
       }
+    }
+  }
+}
+
+$displayFav.addEventListener('click', displayFavs);
+$favCardsRow.addEventListener('click', displayDetails);
+
+function displayFavs() {
+  if (data.view !== 'Favourites') {
+    data.view = 'Favourites';
+    $location.textContent = data.view;
+    displayView();
+  } else {
+    data.view = 'Kanto';
+    $location.textContent = data.view;
+    displayView();
+  }
+}
+
+function displayView() {
+  for (var i = 0; i < $view.length; i++) {
+    var view = $view[i].getAttribute('data-view');
+    if (view === data.view) {
+      $view[i].classList.remove('hidden');
+      $location.textContent = data.view;
+    } else {
+      $view[i].classList.add('hidden');
     }
   }
 }

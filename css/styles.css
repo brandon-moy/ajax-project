@@ -8,6 +8,7 @@
   padding: 1rem;
   color: white;
   font-family: "Fredoka One", sans-serif;
+  font-size: 1.75rem;
   letter-spacing: 1px;
 }
 
@@ -185,8 +186,13 @@ meter {
   padding-right: 0.75rem;
 }
 
+.display-fav {
+  float: right;
+}
+
 .xmark:hover,
-.heart:hover {
+.heart:hover,
+.display-fav {
   cursor: pointer;
 }
 
