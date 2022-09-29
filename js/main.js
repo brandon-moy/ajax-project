@@ -3,6 +3,7 @@ removeFavCard, addFavCard, checkView */
 
 var $cardRow = document.querySelector('.cards-table');
 var kanto = [];
+var $loading = document.querySelector('.loading-modal');
 
 function renderCards(object) {
   var $columnFifth = document.createElement('div');
@@ -21,7 +22,7 @@ function renderCards(object) {
   $pokemonNumber.className = 'pokemon-number';
   $pokemonName.className = 'pokemon-name';
 
-  $pokeball.setAttribute('src', '/images/pokeball-blur.png');
+  $pokeball.setAttribute('src', '/images/pokeball-blur.webp');
   $pokemonImg.setAttribute('src', '/images/kanto/' + id + '.png');
   $pokemonNumber.textContent = displayId(id);
   $pokemonName.textContent = capitalize(name);
@@ -52,9 +53,10 @@ function generatePokemonCards() {
   }
 }
 
-window.addEventListener('load', function () {
+window.addEventListener('DOMContentLoaded', function () {
   displayView();
   generatePokemonCards();
+  $loading.classList.add('hidden');
 });
 
 var $cards = document.querySelector('.cards-table');
@@ -101,7 +103,6 @@ function displayDetails() {
 
 function detailedDisplay(id) {
   $detailImg.setAttribute('src', '/images/kanto/' + id + '.png');
-
   var xhr = new XMLHttpRequest();
   xhr.open('GET', 'https://pokeapi.co/api/v2/pokemon/' + id);
   xhr.responseType = 'json';
