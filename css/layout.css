@@ -16,14 +16,12 @@
 
 .column {
   display: flex;
-  flex-wrap: wrap;
   flex-direction: column;
 }
 
 .stats-line {
   display: flex;
   justify-content: space-between;
-  flex-wrap: wrap;
   width: 95%;
 }
 
@@ -33,10 +31,6 @@
 
 .column-half {
   flex-basis: 100%;
-}
-
-.column-third {
-  flex-basis: calc(100% / 3);
 }
 
 .column-quarter {
@@ -62,10 +56,6 @@
 
   .column-half {
     flex-basis: 50%;
-  }
-
-  .column-third {
-    flex-basis: calc(100% / 3);
   }
 
   .column-quarter {
