@@ -295,13 +295,9 @@ function displayView() {
       $searchResults[i].classList.add('hidden');
     }
   }
-  if ($searchInfo.textContent !== '') {
-    $searchResults.classList.remove('hidden');
-  }
 }
 
 var $searchBar = document.querySelector('.search-bar');
-var $searchInfo = document.querySelector('.search-info');
 var $searchResults = document.querySelectorAll('.search-header');
 
 $searchBar.addEventListener('input', searchCards);
