@@ -216,6 +216,19 @@ meter {
   color: red;
 }
 
+.search-header {
+  font-size: 1.25rem;
+  padding-left: 1rem;
+  padding-top: 0.5rem;
+}
+
+.search-info {
+  font-family: Fredoka, sans-serif;
+  font-size: 1.5rem;
+  font-weight: 500;
+  color: rgb(130, 0, 0);
+}
+
 @media only screen and (width > 768px) {
   .header-background {
     padding-bottom: 1rem;
@@ -301,6 +314,10 @@ meter {
   }
 
   .evolution-name {
+    font-size: 1.5rem;
+  }
+
+  .search-header {
     font-size: 1.5rem;
   }
 }

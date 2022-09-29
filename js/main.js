@@ -81,26 +81,11 @@ var maxStats = [250, 134, 180, 154, 154, 140];
 
 $cards.addEventListener('click', displayDetails);
 
-$xmark.addEventListener('click', function () {
-  $header.classList.remove('hidden');
-  $cardView.classList.remove('hidden');
-  $detailBackground.classList.add('hidden');
-  $detailView.classList.add('hidden');
-  displayView();
-  for (var r = 0; r < $evoDiv.length; r++) {
-    $evoDiv[r].classList.add('hidden');
-  }
-  for (var n = 0; n < $statsDisplay.length; n++) {
-    $statsDisplay[n].className = 'stats-display';
-  }
-  resetPlaceholder($evoImg);
-  $heart.className = 'fa-solid fa-heart heart';
-});
-
 function displayDetails() {
   if (event.target.className === 'column-fifth') {
     return;
   }
+  $searchResults.classList.add('hidden');
   var id = event.target.closest('.pokemon-card').id;
   detailedDisplay(id);
   speciesDetail(id);
@@ -302,14 +287,25 @@ function displayView() {
       $view[i].classList.add('hidden');
     }
   }
+  if ($searchInfo.textContent !== '') {
+    $searchResults.classList.remove('hidden');
+  }
 }
 
 var $searchBar = document.querySelector('.search-bar');
+var $searchInfo = document.querySelector('.search-info');
+var $searchResults = document.querySelector('.search-header');
 
 $searchBar.addEventListener('input', searchCards);
 
 function searchCards(event) {
   var search = event.target.value.toLowerCase();
+  $searchInfo.textContent = event.target.value;
+  if ($searchBar.value !== '') {
+    $searchResults.classList.remove('hidden');
+  } else {
+    $searchResults.classList.add('hidden');
+  }
   var view = checkView();
   var $searchArea = view.querySelectorAll('.column-fifth');
   for (var i = 0; i < $searchArea.length; i++) {
@@ -322,3 +318,20 @@ function searchCards(event) {
     }
   }
 }
+
+$xmark.addEventListener('click', function () {
+  $searchBar.value = '';
+  $header.classList.remove('hidden');
+  $cardView.classList.remove('hidden');
+  $detailBackground.classList.add('hidden');
+  $detailView.classList.add('hidden');
+  displayView();
+  for (var r = 0; r < $evoDiv.length; r++) {
+    $evoDiv[r].classList.add('hidden');
+  }
+  for (var n = 0; n < $statsDisplay.length; n++) {
+    $statsDisplay[n].className = 'stats-display';
+  }
+  resetPlaceholder($evoImg);
+  $heart.className = 'fa-solid fa-heart heart';
+});
