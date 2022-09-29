@@ -303,3 +303,24 @@ function displayView() {
     }
   }
 }
+
+// search bar functions
+
+var $searchBar = document.querySelector('.search-bar');
+
+$searchBar.addEventListener('input', searchCards);
+
+function searchCards(event) {
+  var search = event.target.value.toLowerCase();
+  var $searchArea = $cardView.querySelectorAll('.column-fifth');
+  for (var i = 0; i < $searchArea.length; i++) {
+    var $name = $searchArea[i].querySelector('h4').textContent.toLowerCase();
+    var $number = $searchArea[i].querySelector('h5').textContent;
+    if ($name.includes(search) || $number.includes(search)) {
+      $searchArea[i].classList.remove('hidden');
+    } else {
+      $searchArea[i].classList.add('hidden');
+    }
+  }
+
+}
