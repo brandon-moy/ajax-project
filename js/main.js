@@ -1,5 +1,5 @@
 /* global capitalize, displayId, calcHeight, calcWeight, flavorText, resetPlaceholder,
-removeFavCard */
+removeFavCard, addFavCard */
 
 var $cardRow = document.querySelector('.cards-table');
 var kanto = [];
@@ -33,11 +33,6 @@ function renderCards(object) {
   $pokemonCard.appendChild($pokemonNumber);
   $pokemonCard.appendChild($pokemonName);
 
-  // if (object.favourite === undefined) {
-  //   $cardRow.appendChild($columnFifth);
-  // } else {
-  //   $favCardsRow.appendChild($columnFifth);
-  // }
   return $columnFifth;
 }
 
@@ -48,12 +43,12 @@ function generatePokemonCards() {
   xhr.addEventListener('load', function () {
     kanto = xhr.response.pokemon_entries;
     for (var i = 0; i < kanto.length; i++) {
-      $cardRow.appendChild(renderCards(kanto[i])); // this is a test, renderCards part was prior to text
+      $cardRow.appendChild(renderCards(kanto[i]));
     }
   });
   xhr.send();
   for (var j = 0; j < data.pokemon.length; j++) {
-    $favCardsRow.appendChild(renderCards(data.pokemon[j])); // this is a test renderCards was ehre before test
+    $favCardsRow.appendChild(renderCards(data.pokemon[j]));
   }
 }
 
@@ -236,6 +231,11 @@ function renderEvolutionImg(arr) {
 }
 
 var $heart = document.querySelector('.heart');
+var $displayFav = document.querySelector('.display-fav');
+var $favView = document.querySelector('.fav-view');
+var $favCardsRow = document.querySelector('.fav-cards-table');
+var $view = document.querySelectorAll('.view');
+var $location = document.querySelector('.area-display');
 
 $heart.addEventListener('click', favourite);
 
@@ -252,6 +252,15 @@ function favourite(event) {
           favourite: true
         };
         data.pokemon.push(fav);
+        data.pokemon.sort((a, b) => (Number(a.entry_number > Number(b.entry_number)) ? 1 : -1));
+        var card = renderCards(fav);
+        var position = 0;
+        for (var k = 0; k < data.pokemon.length; k++) {
+          if (fav === data.pokemon[k]) {
+            position = k;
+          }
+        }
+        addFavCard(card, position);
       }
     }
   } else {
@@ -265,17 +274,10 @@ function favourite(event) {
   }
 }
 
-var $displayFav = document.querySelector('.display-fav');
-var $favView = document.querySelector('.fav-view');
-var $favCardsRow = document.querySelector('.fav-cards-table');
-var $view = document.querySelectorAll('.view');
-var $location = document.querySelector('.area-display');
-
 $displayFav.addEventListener('click', displayFavs);
 $favCardsRow.addEventListener('click', displayDetails);
 
 function displayFavs() {
-  data.pokemon.sort((a, b) => (Number(a.entry_number > Number(b.entry_number)) ? 1 : -1));
   if (data.view !== 'Favourites') {
     data.view = 'Favourites';
     $location.textContent = data.view;
@@ -299,7 +301,6 @@ function displayView() {
   }
 }
 
-// if it is added - sort the fav array
 // if there is no card. create a card
 // use create card function of the fav variable created
 // append to the div in the location of where it is in the array

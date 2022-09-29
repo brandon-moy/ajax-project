@@ -1,5 +1,5 @@
 /* exported capitalize, displayId, calcWeight, calcHeight, statsDisplay, flavorText,
-resetPlaceholder, removeFavCard */
+resetPlaceholder, removeFavCard, addFavCard */
 
 /* global $favCardsRow */
 
@@ -62,4 +62,10 @@ function resetPlaceholder(arr) {
 function removeFavCard(position) {
   var $favCardBlock = $favCardsRow.querySelectorAll('.column-fifth');
   $favCardsRow.removeChild($favCardBlock[position]);
+}
+
+function addFavCard(DOM, position) {
+  var nodes = document.querySelector('.fav-cards-table').childNodes;
+  var location = nodes[position];
+  location.after(DOM);
 }
