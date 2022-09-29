@@ -66,6 +66,6 @@ function removeFavCard(position) {
 
 function addFavCard(DOM, position) {
   var nodes = document.querySelector('.fav-cards-table').childNodes;
-  var location = nodes[position];
-  location.after(DOM);
+  var addDom = nodes[position];
+  addDom.after(DOM);
 }
