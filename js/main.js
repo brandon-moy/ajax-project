@@ -268,13 +268,13 @@ $displayFav.addEventListener('click', displayFavs);
 $favCardsRow.addEventListener('click', displayDetails);
 
 function displayFavs() {
-  if (data.view !== 'Favourites') {
-    data.view = 'Favourites';
-    $location.textContent = data.view;
+  if (data.view !== 'favourites') {
+    data.view = 'favourites';
+    $location.textContent = capitalize(data.view);
     displayView();
   } else {
-    data.view = 'Kanto';
-    $location.textContent = data.view;
+    data.view = 'kanto';
+    $location.textContent = capitalize(data.view);
     displayView();
   }
 }
@@ -285,7 +285,7 @@ function displayView() {
     var view = $view[i].getAttribute('data-view');
     if (view === data.view) {
       $view[i].classList.remove('hidden');
-      $location.textContent = data.view;
+      $location.textContent = capitalize(data.view);
       var search = $searchResults[i].querySelector('.search-info');
       if (search.textContent !== '') {
         $searchResults[i].classList.remove('hidden');
