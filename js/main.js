@@ -1,5 +1,5 @@
 /* global capitalize, displayId, calcHeight, calcWeight, flavorText, resetPlaceholder,
-removeFavCard, addFavCard */
+removeFavCard, addFavCard, checkView */
 
 var $cardRow = document.querySelector('.cards-table');
 var kanto = [];
@@ -81,26 +81,13 @@ var maxStats = [250, 134, 180, 154, 154, 140];
 
 $cards.addEventListener('click', displayDetails);
 
-$xmark.addEventListener('click', function () {
-  $header.classList.remove('hidden');
-  $cardView.classList.remove('hidden');
-  $detailBackground.classList.add('hidden');
-  $detailView.classList.add('hidden');
-  displayView();
-  for (var r = 0; r < $evoDiv.length; r++) {
-    $evoDiv[r].classList.add('hidden');
-  }
-  for (var n = 0; n < $statsDisplay.length; n++) {
-    $statsDisplay[n].className = 'stats-display';
-  }
-  resetPlaceholder($evoImg);
-  $heart.className = 'fa-solid fa-heart heart';
-});
-
 function displayDetails() {
   if (event.target.className === 'column-fifth') {
     return;
   }
+  var view = checkView();
+  var search = viewSearch(view);
+  search.classList.add('hidden');
   var id = event.target.closest('.pokemon-card').id;
   detailedDisplay(id);
   speciesDetail(id);
@@ -293,13 +280,73 @@ function displayFavs() {
 }
 
 function displayView() {
+  $searchBar.value = '';
   for (var i = 0; i < $view.length; i++) {
     var view = $view[i].getAttribute('data-view');
     if (view === data.view) {
       $view[i].classList.remove('hidden');
       $location.textContent = data.view;
+      var search = $searchResults[i].querySelector('.search-info');
+      if (search.textContent !== '') {
+        $searchResults[i].classList.remove('hidden');
+      }
     } else {
       $view[i].classList.add('hidden');
+      $searchResults[i].classList.add('hidden');
     }
   }
 }
+
+var $searchBar = document.querySelector('.search-bar');
+var $searchResults = document.querySelectorAll('.search-header');
+
+$searchBar.addEventListener('input', searchCards);
+
+function searchCards(event) {
+  var search = event.target.value.toLowerCase();
+  var view = checkView();
+  var header = viewSearch(view);
+  var $resultText = header.querySelector('.search-info');
+  $resultText.textContent = event.target.value;
+  if ($searchBar.value !== '') {
+    header.classList.remove('hidden');
+  } else {
+    header.classList.add('hidden');
+  }
+  var $searchArea = view.querySelectorAll('.column-fifth');
+  for (var i = 0; i < $searchArea.length; i++) {
+    var $name = $searchArea[i].querySelector('h4').textContent.toLowerCase();
+    var $number = $searchArea[i].querySelector('h5').textContent;
+    if ($name.includes(search) || $number.includes(search)) {
+      $searchArea[i].classList.remove('hidden');
+    } else {
+      $searchArea[i].classList.add('hidden');
+    }
+  }
+}
+
+function viewSearch(element) {
+  for (var i = 0; i < $searchResults.length; i++) {
+    var display = $searchResults[i].getAttribute('data-view');
+    if (element.getAttribute('data-view') === display) {
+      return $searchResults[i];
+    }
+  }
+}
+
+$xmark.addEventListener('click', function () {
+  $searchBar.value = '';
+  $header.classList.remove('hidden');
+  $cardView.classList.remove('hidden');
+  $detailBackground.classList.add('hidden');
+  $detailView.classList.add('hidden');
+  displayView();
+  for (var r = 0; r < $evoDiv.length; r++) {
+    $evoDiv[r].classList.add('hidden');
+  }
+  for (var n = 0; n < $statsDisplay.length; n++) {
+    $statsDisplay[n].className = 'stats-display';
+  }
+  resetPlaceholder($evoImg);
+  $heart.className = 'fa-solid fa-heart heart';
+});

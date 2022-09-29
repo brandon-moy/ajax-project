@@ -24,6 +24,10 @@
       <h1 class="title">Pokédex: <span class="area-display">Kanto</span>
         <i class="fa-solid fa-heart display-fav"></i>
       </h1>
+      <input type="text" class="search-bar" placeholder="Search by Name or #. . ." id="search-bar">
+      <label for="search-bar">
+        <i class="fa-solid fa-magnifying-glass search-icon"></i>
+      </label>
     </div>
     <div class="detail-background row hidden">
       <div class="column-full detail-top-border">
@@ -43,6 +47,8 @@
       </div>
       <div class="column-half side-spacer"></div>
     </div>
+    <h3 class="search-header hidden" data-view="Kanto">Search results for &ldquo;<span class="search-info"></span>&rdquo;</h3>
+    <h3 class="search-header hidden" data-view="Favourites">Search results for &ldquo;<span class="search-info"></span>&rdquo;</h3>
   </header>
   <main>
     <div class="container">
@@ -130,15 +136,15 @@
           <div class="column-full evolution">
             <h2 class="evolutions">Evolutions:</h2>
             <div class="row">
-              <div class="column-quarter column evo-div">
+              <div class="column-quarter column evo-div hidden">
                 <img src="images/placeholderleft.png" class="evolution-image">
                 <h5 class="evolution-name"></h5>
               </div>
-              <div class="column-quarter column evo-div">
+              <div class="column-quarter column evo-div hidden">
                 <img src="images/placeholderright.png" class="evolution-image">
                 <h5 class="evolution-name"></h5>
               </div>
-              <div class="column-quarter column evo-div">
+              <div class="column-quarter column evo-div hidden">
                 <img src="images/placeholderleft.png" class="evolution-image">
                 <h5 class="evolution-name"></h5>
               </div>

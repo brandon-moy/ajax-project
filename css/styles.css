@@ -1,6 +1,6 @@
 .header-background {
   background-color: rgb(130, 0, 0);
-  padding-bottom: 2rem;
+  padding-bottom: 1rem;
 }
 
 .title {
@@ -181,18 +181,34 @@ meter {
 .heart {
   font-size: 1.5rem;
   color: white;
-  float: right;
   padding-top: 0.75rem;
   padding-right: 0.75rem;
 }
 
-.display-fav {
+.search-bar {
+  width: 80%;
+  margin-left: 1rem;
+  height: 2rem;
+  padding-left: 0.5rem;
+}
+
+.search-icon {
+  font-size: 1.5rem;
+  color: white;
+  padding-right: 1rem;
+  border-radius: 0.25rem;
+}
+
+.heart,
+.display-fav,
+.search-icon {
   float: right;
 }
 
 .xmark:hover,
 .heart:hover,
-.display-fav {
+.display-fav,
+.search-icon {
   cursor: pointer;
 }
 
@@ -200,9 +216,22 @@ meter {
   color: red;
 }
 
+.search-header {
+  font-size: 1.25rem;
+  padding-left: 1rem;
+  padding-top: 0.5rem;
+}
+
+.search-info {
+  font-family: Fredoka, sans-serif;
+  font-size: 1.5rem;
+  font-weight: 500;
+  color: rgb(130, 0, 0);
+}
+
 @media only screen and (width > 768px) {
   .header-background {
-    padding-bottom: 0;
+    padding-bottom: 1rem;
   }
 
   .title {
@@ -270,11 +299,25 @@ meter {
     padding-left: 1.25rem;
   }
 
+  .search-bar {
+    height: 2.5rem;
+    width: 90%;
+  }
+
+  .search-icon {
+    font-size: 2.5rem;
+    padding-right: 1.25rem;
+  }
+
   .evolution-image {
     width: 35%;
   }
 
   .evolution-name {
+    font-size: 1.5rem;
+  }
+
+  .search-header {
     font-size: 1.5rem;
   }
 }
