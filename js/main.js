@@ -52,7 +52,10 @@ function generatePokemonCards() {
   }
 }
 
-window.addEventListener('load', generatePokemonCards);
+window.addEventListener('load', function () {
+  displayView();
+  generatePokemonCards();
+});
 
 var $cards = document.querySelector('.cards-table');
 var $header = document.querySelector('.header-background');
