@@ -52,9 +52,9 @@ function flavorText(string) {
 function resetPlaceholder(arr) {
   for (var i = 0; i < arr.length; i++) {
     if (i % 2) {
-      arr[i].setAttribute('src', '/images/placeholderright.png');
+      arr[i].setAttribute('src', '/images/placeholder-right.png');
     } else {
-      arr[i].setAttribute('src', '/images/placeholderleft.png');
+      arr[i].setAttribute('src', '/images/placeholder-left.png');
     }
   }
 }

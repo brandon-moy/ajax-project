@@ -21,7 +21,7 @@ function renderCards(object) {
   $pokemonNumber.className = 'pokemon-number';
   $pokemonName.className = 'pokemon-name';
 
-  $pokeball.setAttribute('src', '/images/pokeball-blur-2.png');
+  $pokeball.setAttribute('src', '/images/pokeball-blur.png');
   $pokemonImg.setAttribute('src', '/images/kanto/' + id + '.png');
   $pokemonNumber.textContent = displayId(id);
   $pokemonName.textContent = capitalize(name);

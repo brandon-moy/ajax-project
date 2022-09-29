@@ -27,7 +27,7 @@
 }
 
 .pokeball-background {
-  background-image: url("/images/pokeball-blur-2.png");
+  background-image: url("/images/pokeball-blur.png");
   background-size: contain;
   background-position: center;
   margin: 0.5rem auto 0.75rem;
