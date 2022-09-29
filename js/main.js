@@ -322,5 +322,4 @@ function searchCards(event) {
       $searchArea[i].classList.add('hidden');
     }
   }
-
 }
