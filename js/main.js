@@ -303,8 +303,3 @@ function displayView() {
     }
   }
 }
-
-// if there is no card. create a card
-// use create card function of the fav variable created
-// append to the div in the location of where it is in the array
-// read more about .insertBefore(create the element, put it before the one one after it?);
