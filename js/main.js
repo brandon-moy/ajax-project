@@ -85,7 +85,9 @@ function displayDetails() {
   if (event.target.className === 'column-fifth') {
     return;
   }
-  $searchResults.classList.add('hidden');
+  var view = checkView();
+  var search = viewSearch(view);
+  search.classList.add('hidden');
   var id = event.target.closest('.pokemon-card').id;
   detailedDisplay(id);
   speciesDetail(id);
@@ -278,13 +280,19 @@ function displayFavs() {
 }
 
 function displayView() {
+  $searchBar.value = '';
   for (var i = 0; i < $view.length; i++) {
     var view = $view[i].getAttribute('data-view');
     if (view === data.view) {
       $view[i].classList.remove('hidden');
       $location.textContent = data.view;
+      var search = $searchResults[i].querySelector('.search-info');
+      if (search.textContent !== '') {
+        $searchResults[i].classList.remove('hidden');
+      }
     } else {
       $view[i].classList.add('hidden');
+      $searchResults[i].classList.add('hidden');
     }
   }
   if ($searchInfo.textContent !== '') {
@@ -294,19 +302,21 @@ function displayView() {
 
 var $searchBar = document.querySelector('.search-bar');
 var $searchInfo = document.querySelector('.search-info');
-var $searchResults = document.querySelector('.search-header');
+var $searchResults = document.querySelectorAll('.search-header');
 
 $searchBar.addEventListener('input', searchCards);
 
 function searchCards(event) {
   var search = event.target.value.toLowerCase();
-  $searchInfo.textContent = event.target.value;
-  if ($searchBar.value !== '') {
-    $searchResults.classList.remove('hidden');
-  } else {
-    $searchResults.classList.add('hidden');
-  }
   var view = checkView();
+  var header = viewSearch(view);
+  var $resultText = header.querySelector('.search-info');
+  $resultText.textContent = event.target.value;
+  if ($searchBar.value !== '') {
+    header.classList.remove('hidden');
+  } else {
+    header.classList.add('hidden');
+  }
   var $searchArea = view.querySelectorAll('.column-fifth');
   for (var i = 0; i < $searchArea.length; i++) {
     var $name = $searchArea[i].querySelector('h4').textContent.toLowerCase();
@@ -315,6 +325,15 @@ function searchCards(event) {
       $searchArea[i].classList.remove('hidden');
     } else {
       $searchArea[i].classList.add('hidden');
+    }
+  }
+}
+
+function viewSearch(element) {
+  for (var i = 0; i < $searchResults.length; i++) {
+    var display = $searchResults[i].getAttribute('data-view');
+    if (element.getAttribute('data-view') === display) {
+      return $searchResults[i];
     }
   }
 }
