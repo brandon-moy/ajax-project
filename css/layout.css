@@ -54,13 +54,17 @@
   flex-basis: 55%;
 }
 
+.no-margin {
+  margin: 0;
+}
+
 @media only screen and (min-width: 568px) {
   .column-full {
     flex-basis: 100%;
   }
 
   .column-half {
-    flex-basis: 50%;
+    flex-basis: 100%;
   }
 
   .column-quarter {
@@ -73,6 +77,24 @@
 }
 
 @media only screen and (min-width: 768px) {
+  .column-full {
+    flex-basis: 100%;
+  }
+
+  .column-half {
+    flex-basis: 100%;
+  }
+
+  .column-quarter {
+    flex-basis: 25%;
+  }
+
+  .column-fifth {
+    flex-basis: 20%;
+  }
+}
+
+@media only screen and (min-width: 1200px) {
   .column-full {
     flex-basis: 100%;
   }

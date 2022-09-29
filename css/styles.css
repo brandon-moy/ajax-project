@@ -7,7 +7,7 @@
   padding: 1rem;
   color: white;
   font-family: "Fredoka One", sans-serif;
-  font-size: 8vw;
+  font-size: 6vw;
   letter-spacing: 1px;
 }
 
@@ -60,7 +60,7 @@
   background-color: white;
   border-radius: 50%;
   height: 10rem;
-  max-width: 160px;
+  aspect-ratio: 1;
 }
 
 .side-spacer {
@@ -167,7 +167,6 @@
 }
 
 .heart {
-  font-size: 1.5rem;
   color: white;
   padding-top: 0.75rem;
   padding-right: 0.75rem;
@@ -230,9 +229,111 @@
   .pokemon-number {
     font-size: 2.5vw;
   }
+
+  .detail-top-border {
+    height: 4rem;
+  }
+
+  .circle {
+    height: 12.5rem;
+  }
+
+  .detail-img {
+    width: 12.5rem;
+  }
+
+  .detail-number {
+    padding-top: 4rem;
+    font-size: 1.5rem;
+  }
+
+  .detail-name {
+    font-size: 1.75rem;
+  }
+
+  .height {
+    padding-top: 2rem;
+  }
+
+  .xmark {
+    font-size: 2rem;
+    padding-top: 1rem;
+    padding-left: 1rem;
+  }
+
+  .heart {
+    font-size: 2rem;
+    padding-top: 1rem;
+    padding-left: 1rem;
+  }
 }
 
 @media only screen and (min-width: 768px) {
+  .pokemon-number {
+    font-size: 1.75vw;
+  }
+
+  .pokemon-name {
+    font-size: 2vw;
+  }
+
+  .detail-top-border {
+    height: 3.5rem;
+  }
+
+  .detailed-view {
+    padding-left: 4rem;
+    padding-right: 4rem;
+  }
+
+  .detail-number {
+    padding-top: 4.25rem;
+  }
+
+  .detail-name {
+    font-size: 2.25rem;
+  }
+
+  .xmark {
+    font-size: 2.25rem;
+    padding-top: 1rem;
+    padding-left: 1rem;
+  }
+
+  .heart {
+    font-size: 2.25rem;
+    padding-top: 1rem;
+    padding-left: 1rem;
+  }
+
+  .search-bar {
+    height: 2.5rem;
+    width: 85%;
+  }
+
+  .flavor-text {
+    line-height: 1.5rem;
+  }
+
+  .search-icon {
+    font-size: 2.5rem;
+    padding-right: 1.25rem;
+  }
+
+  .evolution-image {
+    width: 75%;
+  }
+
+  .evolution-name {
+    font-size: 1.25rem;
+  }
+
+  .search-header {
+    font-size: 1.5rem;
+  }
+}
+
+@media only screen and (min-width: 1280px) {
   .title {
     font-size: 3rem;
   }
@@ -328,7 +429,6 @@
 
   .circle {
     height: 20rem;
-    max-width: 320px;
   }
 
   .detail-number {
