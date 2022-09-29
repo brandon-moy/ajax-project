@@ -4,7 +4,6 @@
 }
 
 .title {
-  margin: 0;
   padding: 1rem;
   color: white;
   font-family: "Fredoka One", sans-serif;
@@ -17,17 +16,13 @@
   border-radius: 0.5rem;
   background-color: rgb(244, 244, 244);
   width: 90%;
-  height: 30vh;
+  aspect-ratio: 0.75;
   margin: 2rem auto 0;
   box-shadow: 0 3px 4px rgb(179, 179, 179);
 }
 
-.pokemon-card:hover {
-  cursor: pointer;
-}
-
 .pokeball-background {
-  background-image: url("/images/pokeball-blur-2.png");
+  background-image: url("/images/pokeball-blur.png");
   background-size: contain;
   background-position: center;
   margin: 0.5rem auto 0.75rem;
@@ -51,20 +46,17 @@
 
 .detail-top-border {
   height: 5.5rem;
-  width: 100%;
 }
 
 .circle {
   background-color: white;
   border-radius: 50%;
-  width: 10rem;
   height: 10rem;
   margin-left: 1.5rem;
 }
 
 .detail-img {
   width: 10rem;
-  height: 10rem;
 }
 
 .detail-number {
@@ -73,18 +65,19 @@
   font-size: 1.5rem;
   font-weight: 500;
   color: white;
+  padding-left: 0.25rem;
 }
 
 .detail-name {
   font-family: Fredoka, sans-serif;
   font-size: 2rem;
   font-weight: 500;
+  padding-left: 0.25rem;
 }
 
 .type-1,
 .type-2 {
   display: inline-block;
-  margin-top: 0;
   font-family: Fredoka, sans-serif;
   font-size: 0.75rem;
   width: 3.5rem;
@@ -93,14 +86,7 @@
   border-radius: 0.35rem;
   text-align: center;
   box-shadow: 0 3px 4px rgb(179, 179, 179);
-}
-
-.type-2 {
-  margin-left: 0.5rem;
-}
-
-.side-spacer {
-  width: 100%;
+  margin-left: 0.25rem;
 }
 
 .detailed-view {
@@ -147,11 +133,6 @@
   border-radius: 0.25rem 0 0 0.25rem;
   top: 0;
   bottom: 0;
-  left: 0;
-}
-
-meter {
-  background: red;
 }
 
 .bar-padding {
@@ -164,11 +145,6 @@ meter {
 
 .evolution-image {
   width: 60%;
-}
-
-.evolution-name {
-  text-align: center;
-  display: block;
 }
 
 .xmark {
@@ -205,6 +181,7 @@ meter {
   float: right;
 }
 
+.pokemon-card:hover,
 .xmark:hover,
 .heart:hover,
 .display-fav,
@@ -230,16 +207,11 @@ meter {
 }
 
 @media only screen and (width > 768px) {
-  .header-background {
-    padding-bottom: 1rem;
-  }
-
   .title {
     font-size: 3rem;
   }
 
   .pokemon-card {
-    height: 20rem;
     width: 85%;
   }
 
@@ -254,7 +226,6 @@ meter {
   }
 
   .description {
-    padding-right: 2rem;
     font-size: 1.5rem;
   }
 
@@ -263,14 +234,12 @@ meter {
   }
 
   .circle {
-    width: 15rem;
     height: 15rem;
     margin-left: 8rem;
   }
 
   .detail-img {
     width: 15rem;
-    height: 15rem;
   }
 
   .detailed-view {
@@ -302,6 +271,10 @@ meter {
   .search-bar {
     height: 2.5rem;
     width: 90%;
+  }
+
+  .flavor-text {
+    line-height: 1.5rem;
   }
 
   .search-icon {

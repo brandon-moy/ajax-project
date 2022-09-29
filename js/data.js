@@ -2,7 +2,7 @@
 
 var data = {
   pokemon: [],
-  view: 'Kanto'
+  view: 'kanto'
 };
 
 var previousDataJSON = localStorage.getItem('favPokemon');
@@ -12,6 +12,7 @@ if (previousDataJSON !== null) {
 }
 
 window.addEventListener('beforeunload', beforeUnload);
+window.addEventListener('pagehide', beforeUnload);
 
 function beforeUnload(event) {
   var dataJSON = JSON.stringify(data);
