@@ -181,12 +181,16 @@
   float: right;
 }
 
-.pokemon-card:hover,
 .xmark:hover,
 .heart:hover,
-.display-fav,
-.search-icon {
+.display-fav:hover,
+.search-icon:hover {
   cursor: pointer;
+}
+
+.pokemon-card:hover {
+  cursor: pointer;
+  transform: rotateZ(2deg);
 }
 
 .fav {
