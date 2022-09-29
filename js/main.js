@@ -1,5 +1,5 @@
 /* global capitalize, displayId, calcHeight, calcWeight, flavorText, resetPlaceholder,
-removeFavCard, addFavCard */
+removeFavCard, addFavCard, checkView */
 
 var $cardRow = document.querySelector('.cards-table');
 var kanto = [];
@@ -304,15 +304,14 @@ function displayView() {
   }
 }
 
-// search bar functions
-
 var $searchBar = document.querySelector('.search-bar');
 
 $searchBar.addEventListener('input', searchCards);
 
 function searchCards(event) {
   var search = event.target.value.toLowerCase();
-  var $searchArea = $cardView.querySelectorAll('.column-fifth');
+  var view = checkView();
+  var $searchArea = view.querySelectorAll('.column-fifth');
   for (var i = 0; i < $searchArea.length; i++) {
     var $name = $searchArea[i].querySelector('h4').textContent.toLowerCase();
     var $number = $searchArea[i].querySelector('h5').textContent;
