@@ -222,7 +222,8 @@
   color: rgb(130, 0, 0);
 }
 
-.loading-modal {
+.loading-modal,
+.error-modal {
   position: fixed;
   width: 100%;
   height: 100%;
@@ -230,6 +231,11 @@
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+.error-message {
+  width: 80%;
+  color: white;
 }
 
 @media only screen and (min-width: 568px) {
