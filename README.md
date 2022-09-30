@@ -1,3 +1,3 @@
-# Pokédex
+# ajax-project
 
-A web application for Pokemon trainers who want to research and save their favourite Pokemon.
+A dynamic HTML, CSS, and JavaScript solo project
