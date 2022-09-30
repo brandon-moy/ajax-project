@@ -324,6 +324,21 @@ function searchCards(event) {
       $searchArea[i].classList.add('hidden');
     }
   }
+  var count = [];
+  for (var j = 0; j < $searchArea.length; j++) {
+    if (!$searchArea[j].classList.contains('hidden')) {
+      count.push($searchArea[j]);
+    }
+  }
+  var $searchTitle = header.querySelector('.search-title');
+  var $noResultTitle = header.querySelector('.no-results-title');
+  if (count.length === 0) {
+    $searchTitle.classList.add('hidden');
+    $noResultTitle.classList.remove('hidden');
+  } else {
+    $searchTitle.classList.remove('hidden');
+    $noResultTitle.classList.add('hidden');
+  }
 }
 
 function viewSearch(element) {
