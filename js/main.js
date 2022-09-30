@@ -38,6 +38,7 @@ function renderCards(object) {
 }
 
 function generatePokemonCards() {
+  $loading.classList.remove('hidden');
   var xhr = new XMLHttpRequest();
   xhr.open('GET', 'https://pokeapi.co/api/v2/pokedex/kanto');
   xhr.responseType = 'json';
@@ -46,6 +47,7 @@ function generatePokemonCards() {
     for (var i = 0; i < kanto.length; i++) {
       $cardRow.appendChild(renderCards(kanto[i]));
     }
+    $loading.classList.add('hidden');
   });
   xhr.send();
   for (var j = 0; j < data.pokemon.length; j++) {
@@ -56,7 +58,6 @@ function generatePokemonCards() {
 window.addEventListener('DOMContentLoaded', function () {
   displayView();
   generatePokemonCards();
-  $loading.classList.add('hidden');
 });
 
 var $cards = document.querySelector('.cards-table');
@@ -102,6 +103,7 @@ function displayDetails() {
 }
 
 function detailedDisplay(id) {
+  $loading.classList.remove('hidden');
   $detailImg.setAttribute('src', '/images/kanto/' + id + '.png');
   var xhr = new XMLHttpRequest();
   xhr.open('GET', 'https://pokeapi.co/api/v2/pokemon/' + id);
@@ -158,11 +160,13 @@ function detailedDisplay(id) {
         }
       }
     }
+    $loading.classList.add('hidden');
   });
   xhr.send();
 }
 
 function speciesDetail(id) {
+  $loading.classList.remove('hidden');
   var xhr2 = new XMLHttpRequest();
   xhr2.open('GET', 'https://pokeapi.co/api/v2/pokemon-species/' + id);
   xhr2.responseType = 'json';
@@ -179,11 +183,13 @@ function speciesDetail(id) {
     $flavorText.textContent = flavor;
 
     getEvolutions(species.evolution_chain.url);
+    $loading.classList.add('hidden');
   });
   xhr2.send();
 }
 
 function getEvolutions(url) {
+  $loading.classList.remove('hidden');
   var xhr3 = new XMLHttpRequest();
   xhr3.open('GET', url);
   xhr3.responseType = 'json';
@@ -192,6 +198,7 @@ function getEvolutions(url) {
     var allEvolutions = listEvolutions(currentPokemon.evolves_to);
     allEvolutions.unshift(currentPokemon.species.name);
     renderEvolutionImg(allEvolutions);
+    $loading.classList.add('hidden');
   });
   xhr3.send();
 }
