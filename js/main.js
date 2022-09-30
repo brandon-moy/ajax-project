@@ -3,6 +3,8 @@ removeFavCard, addFavCard, checkView */
 
 var $cardRow = document.querySelector('.cards-table');
 var kanto = [];
+var $loading = document.querySelector('.loading-modal');
+var $error = document.querySelector('.error-modal');
 
 function renderCards(object) {
   var $columnFifth = document.createElement('div');
@@ -21,7 +23,7 @@ function renderCards(object) {
   $pokemonNumber.className = 'pokemon-number';
   $pokemonName.className = 'pokemon-name';
 
-  $pokeball.setAttribute('src', '/images/pokeball-blur.png');
+  $pokeball.setAttribute('src', '/images/pokeball-blur.webp');
   $pokemonImg.setAttribute('src', '/images/kanto/' + id + '.png');
   $pokemonNumber.textContent = displayId(id);
   $pokemonName.textContent = capitalize(name);
@@ -37,13 +39,24 @@ function renderCards(object) {
 }
 
 function generatePokemonCards() {
+  $loading.classList.remove('hidden');
   var xhr = new XMLHttpRequest();
   xhr.open('GET', 'https://pokeapi.co/api/v2/pokedex/kanto');
   xhr.responseType = 'json';
+  xhr.addEventListener('error', function () {
+    $loading.classList.add('hidden');
+    $error.classList.remove('hidden');
+  });
   xhr.addEventListener('load', function () {
-    kanto = xhr.response.pokemon_entries;
-    for (var i = 0; i < kanto.length; i++) {
-      $cardRow.appendChild(renderCards(kanto[i]));
+    if (xhr.status > 399) {
+      $loading.classList.add('hidden');
+      $error.classList.remove('hidden');
+    } else {
+      kanto = xhr.response.pokemon_entries;
+      for (var i = 0; i < kanto.length; i++) {
+        $cardRow.appendChild(renderCards(kanto[i]));
+      }
+      $loading.classList.add('hidden');
     }
   });
   xhr.send();
@@ -52,7 +65,7 @@ function generatePokemonCards() {
   }
 }
 
-window.addEventListener('load', function () {
+window.addEventListener('DOMContentLoaded', function () {
   displayView();
   generatePokemonCards();
 });
@@ -100,97 +113,129 @@ function displayDetails() {
 }
 
 function detailedDisplay(id) {
+  $loading.classList.remove('hidden');
   $detailImg.setAttribute('src', '/images/kanto/' + id + '.png');
-
   var xhr = new XMLHttpRequest();
   xhr.open('GET', 'https://pokeapi.co/api/v2/pokemon/' + id);
   xhr.responseType = 'json';
+  xhr.addEventListener('error', function () {
+    $loading.classList.add('hidden');
+    $error.classList.remove('hidden');
+  });
   xhr.addEventListener('load', function () {
-    var pokemon = xhr.response;
-
-    $detailName.textContent = capitalize(pokemon.name);
-    $detailNumber.textContent = displayId(pokemon.id);
-
-    for (var i = 0; i < data.pokemon.length; i++) {
-      if (Number(id) === data.pokemon[i].entry_number) {
-        if (data.pokemon[i].favourite === true) {
-          $heart.className = 'fa-solid fa-heart heart fav';
-        }
-      }
-    }
-
-    if (pokemon.types.length > 1) {
-      var type2 = pokemon.types[1].type.name;
-      $type2.textContent = capitalize(type2);
-      $type2.className = 'type-2 ' + type2;
+    if (xhr.status > 399) {
+      $loading.classList.add('hidden');
+      $error.classList.remove('hidden');
     } else {
-      $type2.className = 'type-2 hidden';
-    }
+      var pokemon = xhr.response;
 
-    var type1 = pokemon.types[0].type.name;
-    $type1.textContent = capitalize(type1);
-    $type1.className = 'type-1 ' + type1;
-    $detailBackground.className = 'detail-background row ' + type1;
+      $detailName.textContent = capitalize(pokemon.name);
+      $detailNumber.textContent = displayId(pokemon.id);
 
-    $height.textContent = calcHeight(pokemon.height);
-    $weight.textContent = calcWeight(pokemon.weight);
-
-    var abilities = '';
-
-    for (var k = 0; k < pokemon.abilities.length; k++) {
-      if (k === 0) {
-        abilities = capitalize(pokemon.abilities[k].ability.name);
-      } else {
-        abilities = abilities + ', ' + capitalize(pokemon.abilities[k].ability.name);
-      }
-    }
-
-    $abilities.textContent = abilities;
-
-    for (var j = 0; j < pokemon.stats.length; j++) {
-      for (var l = 0; l < $stats.length; l++) {
-        if (pokemon.stats[j].stat.name === $stats[l].className) {
-          $stats[l].textContent = pokemon.stats[j].base_stat;
-          var statCalc = Math.floor((pokemon.stats[j].base_stat / maxStats[j]) * 100);
-          $statsDisplay[j].classList.add(type1);
-          $statsDisplay[j].style.width = statCalc + '%';
+      for (var i = 0; i < data.pokemon.length; i++) {
+        if (Number(id) === data.pokemon[i].entry_number) {
+          if (data.pokemon[i].favourite === true) {
+            $heart.className = 'fa-solid fa-heart heart fav';
+          }
         }
       }
+
+      if (pokemon.types.length > 1) {
+        var type2 = pokemon.types[1].type.name;
+        $type2.textContent = capitalize(type2);
+        $type2.className = 'type-2 ' + type2;
+      } else {
+        $type2.className = 'type-2 hidden';
+      }
+
+      var type1 = pokemon.types[0].type.name;
+      $type1.textContent = capitalize(type1);
+      $type1.className = 'type-1 ' + type1;
+      $detailBackground.className = 'detail-background row ' + type1;
+
+      $height.textContent = calcHeight(pokemon.height);
+      $weight.textContent = calcWeight(pokemon.weight);
+
+      var abilities = '';
+
+      for (var k = 0; k < pokemon.abilities.length; k++) {
+        if (k === 0) {
+          abilities = capitalize(pokemon.abilities[k].ability.name);
+        } else {
+          abilities = abilities + ', ' + capitalize(pokemon.abilities[k].ability.name);
+        }
+      }
+
+      $abilities.textContent = abilities;
+
+      for (var j = 0; j < pokemon.stats.length; j++) {
+        for (var l = 0; l < $stats.length; l++) {
+          if (pokemon.stats[j].stat.name === $stats[l].className) {
+            $stats[l].textContent = pokemon.stats[j].base_stat;
+            var statCalc = Math.floor((pokemon.stats[j].base_stat / maxStats[j]) * 100);
+            $statsDisplay[j].classList.add(type1);
+            $statsDisplay[j].style.width = statCalc + '%';
+          }
+        }
+      }
+      $loading.classList.add('hidden');
     }
   });
   xhr.send();
 }
 
 function speciesDetail(id) {
+  $loading.classList.remove('hidden');
   var xhr2 = new XMLHttpRequest();
+  xhr2.addEventListener('error', function () {
+    $loading.classList.add('hidden');
+    $error.classList.remove('hidden');
+  });
   xhr2.open('GET', 'https://pokeapi.co/api/v2/pokemon-species/' + id);
   xhr2.responseType = 'json';
   xhr2.addEventListener('load', function () {
-    var species = xhr2.response;
-    var entries = species.flavor_text_entries;
-    var flavor = '';
-    for (var m = 0; m < entries.length; m++) {
-      if (entries[m].language.name === 'en') {
-        flavor = flavorText(entries[m].flavor_text);
-        break;
+    if (xhr2.status > 399) {
+      $loading.classList.add('hidden');
+      $error.classList.remove('hidden');
+    } else {
+      var species = xhr2.response;
+      var entries = species.flavor_text_entries;
+      var flavor = '';
+      for (var m = 0; m < entries.length; m++) {
+        if (entries[m].language.name === 'en') {
+          flavor = flavorText(entries[m].flavor_text);
+          break;
+        }
       }
-    }
-    $flavorText.textContent = flavor;
+      $flavorText.textContent = flavor;
 
-    getEvolutions(species.evolution_chain.url);
+      getEvolutions(species.evolution_chain.url);
+      $loading.classList.add('hidden');
+    }
   });
   xhr2.send();
 }
 
 function getEvolutions(url) {
+  $loading.classList.remove('hidden');
   var xhr3 = new XMLHttpRequest();
   xhr3.open('GET', url);
   xhr3.responseType = 'json';
+  xhr3.addEventListener('error', function () {
+    $loading.classList.add('hidden');
+    $error.classList.remove('hidden');
+  });
   xhr3.addEventListener('load', function () {
-    var currentPokemon = xhr3.response.chain;
-    var allEvolutions = listEvolutions(currentPokemon.evolves_to);
-    allEvolutions.unshift(currentPokemon.species.name);
-    renderEvolutionImg(allEvolutions);
+    if (xhr3.status > 399) {
+      $loading.classList.add('hidden');
+      $error.classList.remove('hidden');
+    } else {
+      var currentPokemon = xhr3.response.chain;
+      var allEvolutions = listEvolutions(currentPokemon.evolves_to);
+      allEvolutions.unshift(currentPokemon.species.name);
+      renderEvolutionImg(allEvolutions);
+      $loading.classList.add('hidden');
+    }
   });
   xhr3.send();
 }
@@ -322,6 +367,21 @@ function searchCards(event) {
     } else {
       $searchArea[i].classList.add('hidden');
     }
+  }
+  var count = [];
+  for (var j = 0; j < $searchArea.length; j++) {
+    if (!$searchArea[j].classList.contains('hidden')) {
+      count.push($searchArea[j]);
+    }
+  }
+  var $searchTitle = header.querySelector('.search-title');
+  var $noResultTitle = header.querySelector('.no-results-title');
+  if (count.length === 0) {
+    $searchTitle.classList.add('hidden');
+    $noResultTitle.classList.remove('hidden');
+  } else {
+    $searchTitle.classList.remove('hidden');
+    $noResultTitle.classList.add('hidden');
   }
 }
 
