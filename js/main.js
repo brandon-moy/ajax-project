@@ -23,8 +23,8 @@ function renderCards(object) {
   $pokemonNumber.className = 'pokemon-number';
   $pokemonName.className = 'pokemon-name';
 
-  $pokeball.setAttribute('src', './images/pokeball-blur.webp');
-  $pokemonImg.setAttribute('src', './images/kanto/' + id + '.png');
+  $pokeball.setAttribute('src', '../../images/pokeball-blur.webp');
+  $pokemonImg.setAttribute('src', '../../images/kanto/' + id + '.png');
   $pokemonNumber.textContent = displayId(id);
   $pokemonName.textContent = capitalize(name);
   $pokemonCard.setAttribute('id', id);
@@ -114,7 +114,7 @@ function displayDetails() {
 
 function detailedDisplay(id) {
   $loading.classList.remove('hidden');
-  $detailImg.setAttribute('src', './images/kanto/' + id + '.png');
+  $detailImg.setAttribute('src', '../../images/kanto/' + id + '.png');
   var xhr = new XMLHttpRequest();
   xhr.open('GET', 'https://pokeapi.co/api/v2/pokemon/' + id);
   xhr.responseType = 'json';
@@ -256,7 +256,7 @@ function renderEvolutionImg(arr) {
     for (var q = 0; q < kanto.length; q++) {
       if (arr[p] === kanto[q].pokemon_species.name) {
         var id = kanto[q].entry_number;
-        $evoImg[p].setAttribute('src', './images/kanto/' + id + '.png');
+        $evoImg[p].setAttribute('src', '../../images/kanto/' + id + '.png');
         $evoName[p].textContent = capitalize(arr[p]);
       }
     }
