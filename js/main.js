@@ -156,7 +156,7 @@ function detailedInfo(response) {
 function speciesDetail(response) {
   var entries = response.flavor_text_entries;
   var flavor = '';
-  for (var m = 0; m < entries.lengthl; m++) {
+  for (var m = 0; m < entries.length; m++) {
     if (entries[m].language.name === 'en') {
       flavor = flavorText(entries[m].flavor_text);
       break;
