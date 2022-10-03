@@ -1,5 +1,5 @@
 /* global capitalize, displayId, calcHeight, calcWeight, flavorText, resetPlaceholder,
-removeFavCard, addFavCard, checkView */
+removeFavCard, addFavCard, checkView, httpReq */
 
 var $cardRow = document.querySelector('.cards-table');
 var kanto = [];
@@ -38,28 +38,42 @@ function renderCards(object) {
   return $columnFifth;
 }
 
+// function generatePokemonCards() {
+//   $loading.classList.remove('hidden');
+//   var xhr = new XMLHttpRequest();
+//   xhr.open('GET', 'https://pokeapi.co/api/v2/pokedex/kanto');
+//   xhr.responseType = 'json';
+//   xhr.addEventListener('error', function () {
+//     $loading.classList.add('hidden');
+//     $error.classList.remove('hidden');
+//   });
+//   xhr.addEventListener('load', function () {
+//     if (xhr.status > 399) {
+//       $loading.classList.add('hidden');
+//       $error.classList.remove('hidden');
+//     } else {
+//       kanto = xhr.response.pokemon_entries;
+//       for (var i = 0; i < kanto.length; i++) {
+//         $cardRow.appendChild(renderCards(kanto[i]));
+//       }
+//       $loading.classList.add('hidden');
+//     }
+//   });
+//   xhr.send();
+//   for (var j = 0; j < data.pokemon.length; j++) {
+//     $favCardsRow.appendChild(renderCards(data.pokemon[j]));
+//   }
+// }
+
 function generatePokemonCards() {
-  $loading.classList.remove('hidden');
-  var xhr = new XMLHttpRequest();
-  xhr.open('GET', 'https://pokeapi.co/api/v2/pokedex/kanto');
-  xhr.responseType = 'json';
-  xhr.addEventListener('error', function () {
-    $loading.classList.add('hidden');
-    $error.classList.remove('hidden');
-  });
-  xhr.addEventListener('load', function () {
-    if (xhr.status > 399) {
-      $loading.classList.add('hidden');
-      $error.classList.remove('hidden');
-    } else {
-      kanto = xhr.response.pokemon_entries;
-      for (var i = 0; i < kanto.length; i++) {
-        $cardRow.appendChild(renderCards(kanto[i]));
-      }
-      $loading.classList.add('hidden');
-    }
-  });
-  xhr.send();
+  httpReq('https://pokeapi.co/api/v2/pokedex/kanto', appendCards);
+}
+
+function appendCards(response) {
+  kanto = response.pokemon_entries;
+  for (var i = 0; i < kanto.length; i++) {
+    $cardRow.appendChild(renderCards(kanto[i]));
+  }
   for (var j = 0; j < data.pokemon.length; j++) {
     $favCardsRow.appendChild(renderCards(data.pokemon[j]));
   }

@@ -93,8 +93,10 @@ function httpReq(url, action) {
       $loading.classList.add('hidden');
       $error.classList.remove('hidden');
     } else {
-      action();
+      var response = xhr.response;
+      action(response);
       $loading.classList.add('hidden');
     }
   });
+  xhr.send();
 }
