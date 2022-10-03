@@ -89,7 +89,7 @@ function displayDetails() {
   var search = viewSearch(view);
   search.classList.add('hidden');
   var id = event.target.closest('.pokemon-card').id;
-  detailedDisplay(id);
+  httpReq('https://pokeapi.co/api/v2/pokemon/' + id, detailedInfo);
   speciesDetail(id);
   $header.classList.add('hidden');
   $cardView.classList.add('hidden');
@@ -97,10 +97,6 @@ function displayDetails() {
   $detailBackground.classList.remove('hidden');
   $detailView.classList.remove('hidden');
   window.scrollTo(0, 0);
-}
-
-function detailedDisplay(id) {
-  httpReq('https://pokeapi.co/api/v2/pokemon/' + id, detailedInfo);
 }
 
 function detailedInfo(response) {
