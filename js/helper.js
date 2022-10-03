@@ -1,7 +1,7 @@
 /* exported capitalize, displayId, calcWeight, calcHeight, statsDisplay, flavorText,
-resetPlaceholder, removeFavCard, addFavCard, checkView */
+resetPlaceholder, removeFavCard, addFavCard, checkView, httpReq */
 
-/* global $favCardsRow, $view, data */
+/* global $favCardsRow, $view, data, $loading, $error */
 
 function capitalize(string) {
   var capitalized = '';
@@ -77,4 +77,24 @@ function checkView() {
       return $view[i];
     }
   }
+}
+
+function httpReq(url, action) {
+  $loading.classList.remove('hidden');
+  var xhr = new XMLHttpRequest();
+  xhr.open('GET', url);
+  xhr.responseType = 'json';
+  xhr.addEventListener('error', function () {
+    $loading.classList.add('hidden');
+    $error.classList.remove('hidden');
+  });
+  xhr.addEventListener('load', function () {
+    if (xhr.status > 399) {
+      $loading.classList.add('hidden');
+      $error.classList.remove('hidden');
+    } else {
+      action();
+      $loading.classList.add('hidden');
+    }
+  });
 }
