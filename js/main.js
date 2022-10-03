@@ -1,5 +1,7 @@
 /* global capitalize, displayId, calcHeight, calcWeight, flavorText, resetPlaceholder,
-removeFavCard, addFavCard, checkView */
+removeFavCard, addFavCard, checkView, httpReq */
+
+/* exported $loading, $error */
 
 var $cardRow = document.querySelector('.cards-table');
 var kanto = [];
@@ -39,27 +41,14 @@ function renderCards(object) {
 }
 
 function generatePokemonCards() {
-  $loading.classList.remove('hidden');
-  var xhr = new XMLHttpRequest();
-  xhr.open('GET', 'https://pokeapi.co/api/v2/pokedex/kanto');
-  xhr.responseType = 'json';
-  xhr.addEventListener('error', function () {
-    $loading.classList.add('hidden');
-    $error.classList.remove('hidden');
-  });
-  xhr.addEventListener('load', function () {
-    if (xhr.status > 399) {
-      $loading.classList.add('hidden');
-      $error.classList.remove('hidden');
-    } else {
-      kanto = xhr.response.pokemon_entries;
-      for (var i = 0; i < kanto.length; i++) {
-        $cardRow.appendChild(renderCards(kanto[i]));
-      }
-      $loading.classList.add('hidden');
-    }
-  });
-  xhr.send();
+  httpReq('https://pokeapi.co/api/v2/pokedex/kanto', appendCards);
+}
+
+function appendCards(response) {
+  kanto = response.pokemon_entries;
+  for (var i = 0; i < kanto.length; i++) {
+    $cardRow.appendChild(renderCards(kanto[i]));
+  }
   for (var j = 0; j < data.pokemon.length; j++) {
     $favCardsRow.appendChild(renderCards(data.pokemon[j]));
   }
@@ -102,8 +91,8 @@ function displayDetails() {
   var search = viewSearch(view);
   search.classList.add('hidden');
   var id = event.target.closest('.pokemon-card').id;
-  detailedDisplay(id);
-  speciesDetail(id);
+  httpReq('https://pokeapi.co/api/v2/pokemon/' + id, detailedInfo);
+  httpReq('https://pokeapi.co/api/v2/pokemon-species/' + id, speciesDetail);
   $header.classList.add('hidden');
   $cardView.classList.add('hidden');
   $favView.classList.add('hidden');
@@ -112,132 +101,77 @@ function displayDetails() {
   window.scrollTo(0, 0);
 }
 
-function detailedDisplay(id) {
-  $loading.classList.remove('hidden');
-  $detailImg.setAttribute('src', 'images/kanto/' + id + '.png');
-  var xhr = new XMLHttpRequest();
-  xhr.open('GET', 'https://pokeapi.co/api/v2/pokemon/' + id);
-  xhr.responseType = 'json';
-  xhr.addEventListener('error', function () {
-    $loading.classList.add('hidden');
-    $error.classList.remove('hidden');
-  });
-  xhr.addEventListener('load', function () {
-    if (xhr.status > 399) {
-      $loading.classList.add('hidden');
-      $error.classList.remove('hidden');
-    } else {
-      var pokemon = xhr.response;
+function detailedInfo(response) {
+  $detailImg.setAttribute('src', 'images/kanto/' + response.id + '.png');
+  $detailName.textContent = capitalize(response.name);
+  $detailNumber.textContent = displayId(response.id);
 
-      $detailName.textContent = capitalize(pokemon.name);
-      $detailNumber.textContent = displayId(pokemon.id);
-
-      for (var i = 0; i < data.pokemon.length; i++) {
-        if (Number(id) === data.pokemon[i].entry_number) {
-          if (data.pokemon[i].favourite === true) {
-            $heart.className = 'fa-solid fa-heart heart fav';
-          }
-        }
+  for (var i = 0; i < data.pokemon.length; i++) {
+    if (response.id === data.pokemon[i].entry_number) {
+      if (data.pokemon[i].favourite === true) {
+        $heart.className = 'fa-solid fa-heart heart fav';
       }
-
-      if (pokemon.types.length > 1) {
-        var type2 = pokemon.types[1].type.name;
-        $type2.textContent = capitalize(type2);
-        $type2.className = 'type-2 ' + type2;
-      } else {
-        $type2.className = 'type-2 hidden';
-      }
-
-      var type1 = pokemon.types[0].type.name;
-      $type1.textContent = capitalize(type1);
-      $type1.className = 'type-1 ' + type1;
-      $detailBackground.className = 'detail-background row ' + type1;
-
-      $height.textContent = calcHeight(pokemon.height);
-      $weight.textContent = calcWeight(pokemon.weight);
-
-      var abilities = '';
-
-      for (var k = 0; k < pokemon.abilities.length; k++) {
-        if (k === 0) {
-          abilities = capitalize(pokemon.abilities[k].ability.name);
-        } else {
-          abilities = abilities + ', ' + capitalize(pokemon.abilities[k].ability.name);
-        }
-      }
-
-      $abilities.textContent = abilities;
-
-      for (var j = 0; j < pokemon.stats.length; j++) {
-        for (var l = 0; l < $stats.length; l++) {
-          if (pokemon.stats[j].stat.name === $stats[l].className) {
-            $stats[l].textContent = pokemon.stats[j].base_stat;
-            var statCalc = Math.floor((pokemon.stats[j].base_stat / maxStats[j]) * 100);
-            $statsDisplay[j].classList.add(type1);
-            $statsDisplay[j].style.width = statCalc + '%';
-          }
-        }
-      }
-      $loading.classList.add('hidden');
     }
-  });
-  xhr.send();
+  }
+
+  if (response.types.length > 1) {
+    var type2 = response.types[1].type.name;
+    $type2.textContent = capitalize(type2);
+    $type2.className = 'type-2 ' + type2;
+  } else {
+    $type2.className = 'type-2 hidden';
+  }
+
+  var type1 = response.types[0].type.name;
+  $type1.textContent = capitalize(type1);
+  $type1.className = 'type-1 ' + type1;
+  $detailBackground.className = 'detail-background row ' + type1;
+
+  $height.textContent = calcHeight(response.height);
+  $weight.textContent = calcWeight(response.weight);
+  var abilities = '';
+
+  for (var k = 0; k < response.abilities.length; k++) {
+    if (k === 0) {
+      abilities = capitalize(response.abilities[k].ability.name);
+    } else {
+      abilities = abilities + ', ' + capitalize(response.abilities[k].ability.name);
+    }
+  }
+
+  $abilities.textContent = abilities;
+
+  for (var j = 0; j < response.stats.length; j++) {
+    for (var l = 0; l < $stats.length; l++) {
+      if (response.stats[j].stat.name === $stats[l].className) {
+        $stats[l].textContent = response.stats[j].base_stat;
+        var statCalc = Math.floor((response.stats[j].base_stat / maxStats[j]) * 100);
+        $statsDisplay[j].classList.add(type1);
+        $statsDisplay[j].style.width = statCalc + '%';
+      }
+    }
+  }
 }
 
-function speciesDetail(id) {
-  $loading.classList.remove('hidden');
-  var xhr2 = new XMLHttpRequest();
-  xhr2.addEventListener('error', function () {
-    $loading.classList.add('hidden');
-    $error.classList.remove('hidden');
-  });
-  xhr2.open('GET', 'https://pokeapi.co/api/v2/pokemon-species/' + id);
-  xhr2.responseType = 'json';
-  xhr2.addEventListener('load', function () {
-    if (xhr2.status > 399) {
-      $loading.classList.add('hidden');
-      $error.classList.remove('hidden');
-    } else {
-      var species = xhr2.response;
-      var entries = species.flavor_text_entries;
-      var flavor = '';
-      for (var m = 0; m < entries.length; m++) {
-        if (entries[m].language.name === 'en') {
-          flavor = flavorText(entries[m].flavor_text);
-          break;
-        }
-      }
-      $flavorText.textContent = flavor;
-
-      getEvolutions(species.evolution_chain.url);
-      $loading.classList.add('hidden');
+function speciesDetail(response) {
+  var entries = response.flavor_text_entries;
+  var flavor = '';
+  for (var m = 0; m < entries.length; m++) {
+    if (entries[m].language.name === 'en') {
+      flavor = flavorText(entries[m].flavor_text);
+      break;
     }
-  });
-  xhr2.send();
+  }
+  $flavorText.textContent = flavor;
+
+  httpReq(response.evolution_chain.url, getEvolutions);
 }
 
-function getEvolutions(url) {
-  $loading.classList.remove('hidden');
-  var xhr3 = new XMLHttpRequest();
-  xhr3.open('GET', url);
-  xhr3.responseType = 'json';
-  xhr3.addEventListener('error', function () {
-    $loading.classList.add('hidden');
-    $error.classList.remove('hidden');
-  });
-  xhr3.addEventListener('load', function () {
-    if (xhr3.status > 399) {
-      $loading.classList.add('hidden');
-      $error.classList.remove('hidden');
-    } else {
-      var currentPokemon = xhr3.response.chain;
-      var allEvolutions = listEvolutions(currentPokemon.evolves_to);
-      allEvolutions.unshift(currentPokemon.species.name);
-      renderEvolutionImg(allEvolutions);
-      $loading.classList.add('hidden');
-    }
-  });
-  xhr3.send();
+function getEvolutions(response) {
+  var currentPokemon = response.chain;
+  var allEvolutions = listEvolutions(currentPokemon.evolves_to);
+  allEvolutions.unshift(currentPokemon.species.name);
+  renderEvolutionImg(allEvolutions);
 }
 
 function listEvolutions(arr) {
