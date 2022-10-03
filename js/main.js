@@ -1,6 +1,8 @@
 /* global capitalize, displayId, calcHeight, calcWeight, flavorText, resetPlaceholder,
 removeFavCard, addFavCard, checkView, httpReq */
 
+/* exported $loading, $error */
+
 var $cardRow = document.querySelector('.cards-table');
 var kanto = [];
 var $loading = document.querySelector('.loading-modal');
@@ -90,7 +92,7 @@ function displayDetails() {
   search.classList.add('hidden');
   var id = event.target.closest('.pokemon-card').id;
   httpReq('https://pokeapi.co/api/v2/pokemon/' + id, detailedInfo);
-  speciesDetail(id);
+  httpReq('https://pokeapi.co/api/v2/pokemon-species/' + id, speciesDetail);
   $header.classList.add('hidden');
   $cardView.classList.add('hidden');
   $favView.classList.add('hidden');
@@ -151,60 +153,25 @@ function detailedInfo(response) {
   }
 }
 
-function speciesDetail(id) {
-  $loading.classList.remove('hidden');
-  var xhr2 = new XMLHttpRequest();
-  xhr2.addEventListener('error', function () {
-    $loading.classList.add('hidden');
-    $error.classList.remove('hidden');
-  });
-  xhr2.open('GET', 'https://pokeapi.co/api/v2/pokemon-species/' + id);
-  xhr2.responseType = 'json';
-  xhr2.addEventListener('load', function () {
-    if (xhr2.status > 399) {
-      $loading.classList.add('hidden');
-      $error.classList.remove('hidden');
-    } else {
-      var species = xhr2.response;
-      var entries = species.flavor_text_entries;
-      var flavor = '';
-      for (var m = 0; m < entries.length; m++) {
-        if (entries[m].language.name === 'en') {
-          flavor = flavorText(entries[m].flavor_text);
-          break;
-        }
-      }
-      $flavorText.textContent = flavor;
-
-      getEvolutions(species.evolution_chain.url);
-      $loading.classList.add('hidden');
+function speciesDetail(response) {
+  var entries = response.flavor_text_entries;
+  var flavor = '';
+  for (var m = 0; m < entries.lengthl; m++) {
+    if (entries[m].language.name === 'en') {
+      flavor = flavorText(entries[m].flavor_text);
+      break;
     }
-  });
-  xhr2.send();
+  }
+  $flavorText.textContent = flavor;
+
+  httpReq(response.evolution_chain.url, getEvolutions);
 }
 
-function getEvolutions(url) {
-  $loading.classList.remove('hidden');
-  var xhr3 = new XMLHttpRequest();
-  xhr3.open('GET', url);
-  xhr3.responseType = 'json';
-  xhr3.addEventListener('error', function () {
-    $loading.classList.add('hidden');
-    $error.classList.remove('hidden');
-  });
-  xhr3.addEventListener('load', function () {
-    if (xhr3.status > 399) {
-      $loading.classList.add('hidden');
-      $error.classList.remove('hidden');
-    } else {
-      var currentPokemon = xhr3.response.chain;
-      var allEvolutions = listEvolutions(currentPokemon.evolves_to);
-      allEvolutions.unshift(currentPokemon.species.name);
-      renderEvolutionImg(allEvolutions);
-      $loading.classList.add('hidden');
-    }
-  });
-  xhr3.send();
+function getEvolutions(response) {
+  var currentPokemon = response.chain;
+  var allEvolutions = listEvolutions(currentPokemon.evolves_to);
+  allEvolutions.unshift(currentPokemon.species.name);
+  renderEvolutionImg(allEvolutions);
 }
 
 function listEvolutions(arr) {
