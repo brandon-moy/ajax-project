@@ -280,6 +280,8 @@ function displayView() {
       $view[i].classList.remove('hidden');
       if (data.view === 'favourites') {
         $location.textContent = ': ' + capitalize(data.view);
+      } else {
+        $location.textContent = '';
       }
       var search = $searchResults[i].querySelector('.search-info');
       if (search.textContent !== '') {
