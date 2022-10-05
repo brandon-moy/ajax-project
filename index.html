@@ -30,43 +30,47 @@
     <h2 class="error-message">Sorry, there was an error connecting to the network! Please try again later.</h2>
   </div>
   <header>
-    <div class="header-background">
-      <h1 class="title">Pokédex: <span class="area-display">Kanto</span>
-        <i class="fa-solid fa-heart display-fav"></i>
-      </h1>
-      <div class="region-links flex">
-        <div class="column-eighth">
-          <a>Kanto</a>
-        </div>
-        <div class="column-eighth">
-          <a>Johto</a>
-        </div>
-        <div class="column-eighth">
-          <a>Hoenn</a>
-        </div>
-        <div class="column-eighth">
-          <a>Sinnoh</a>
-        </div>
-        <div class="column-eighth">
-          <a>Unova</a>
-        </div>
-        <div class="column-eighth">
-          <a>Kalos</a>
-        </div>
-        <div class="column-eighth">
-          <a>Alola</a>
-        </div>
-        <div class="column-eighth">
-          <a>Galar</a>
+    <div class="header">
+      <div class="header-background">
+        <h1 class="title">Pokédex<span class="area-display"></span>
+          <i class="fa-solid fa-heart display-fav"></i>
+        </h1>
+        <div class="region-links container flex">
+          <div class="column-eighth">
+            <a class="region-name selected" data-view="kanto">Kanto</a>
+          </div>
+          <div class="column-eighth">
+            <a class="region-name" data-view="johto">Johto</a>
+          </div>
+          <div class="column-eighth">
+            <a class="region-name" data-view="hoenn">Hoenn</a>
+          </div>
+          <div class="column-eighth">
+            <a class="region-name" data-view="sinnoh">Sinnoh</a>
+          </div>
+          <div class="column-eighth">
+            <a class="region-name" data-view="unova">Unova</a>
+          </div>
+          <div class="column-eighth">
+            <a class="region-name" data-view="kalos">Kalos</a>
+          </div>
+          <div class="column-eighth">
+            <a class="region-name" data-view="alola">Alola</a>
+          </div>
+          <div class="column-eighth">
+            <a class="region-name" data-view="galar">Galar</a>
+          </div>
         </div>
       </div>
+      <div class="background-white">
+        <form class="search-form">
+          <input type="text" class="search-bar" placeholder="Search by Name or #. . ." id="search-bar">
+          <label for="search-bar">
+            <i class="fa-solid fa-magnifying-glass search-icon"></i>
+          </label>
+        </form>
+      </div>
     </div>
-    <form class="search-form">
-      <input type="text" class="search-bar" placeholder="Search by Name or #. . ." id="search-bar">
-      <label for="search-bar">
-        <i class="fa-solid fa-magnifying-glass search-icon"></i>
-      </label>
-    </form>
     <div class="detail-background row hidden">
       <div class="column-full detail-top-border">
         <i class="fa-regular fa-circle-xmark xmark"></i>

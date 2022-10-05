@@ -60,7 +60,7 @@ window.addEventListener('DOMContentLoaded', function () {
 });
 
 var $cards = document.querySelector('.cards-table');
-var $header = document.querySelector('.header-background');
+var $header = document.querySelector('.header');
 var $cardView = document.querySelector('.cards-view');
 var $detailBackground = document.querySelector('.detail-background');
 var $detailView = document.querySelector('.detailed-view');
@@ -249,11 +249,11 @@ $favCardsRow.addEventListener('click', displayDetails);
 function displayFavs() {
   if (data.view !== 'favourites') {
     data.view = 'favourites';
-    $location.textContent = capitalize(data.view);
+    $location.textContent = ': ' + capitalize(data.view);
     displayView();
   } else {
     data.view = 'kanto';
-    $location.textContent = capitalize(data.view);
+    $location.textContent = '';
     displayView();
   }
 }
@@ -264,7 +264,9 @@ function displayView() {
     var view = $view[i].getAttribute('data-view');
     if (view === data.view) {
       $view[i].classList.remove('hidden');
-      $location.textContent = capitalize(data.view);
+      if (data.view === 'favourites') {
+        $location.textContent = ': ' + capitalize(data.view);
+      }
       var search = $searchResults[i].querySelector('.search-info');
       if (search.textContent !== '') {
         $searchResults[i].classList.remove('hidden');

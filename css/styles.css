@@ -1,6 +1,9 @@
 .header-background {
   background-color: rgb(130, 0, 0);
-  padding-bottom: 2rem;
+}
+
+.background-white {
+  background-color: white;
 }
 
 .title {
@@ -196,10 +199,26 @@
   float: right;
 }
 
+.region-links {
+  margin-bottom: 0;
+  padding-bottom: 1rem;
+}
+
+.region-name {
+  color: #bababa;
+  font-family: "Fredoka One", sans-serif;
+  letter-spacing: 1px;
+}
+
+.selected {
+  color: white;
+}
+
 .xmark:hover,
 .heart:hover,
 .display-fav:hover,
-.search-icon:hover {
+.search-icon:hover,
+.region-name:hover {
   cursor: pointer;
 }
 
