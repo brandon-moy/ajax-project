@@ -294,10 +294,6 @@
     font-size: 2vw;
   }
 
-  .detail-top-border {
-    height: 4rem;
-  }
-
   .detailed-view {
     padding-left: 4rem;
     padding-right: 4rem;
@@ -372,7 +368,7 @@
   }
 
   .detail-top-border {
-    height: 4rem;
+    height: 3.5rem;
   }
 
   .circle {
@@ -441,7 +437,7 @@
 
 @media only screen and (min-width: 1920px) {
   .detail-top-border {
-    height: 4.75rem;
+    height: 0.75rem;
   }
 
   .circle {
