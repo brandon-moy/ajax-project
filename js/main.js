@@ -4,7 +4,7 @@ removeFavCard, addFavCard, checkView, httpReq */
 /* exported $loading, $error */
 
 var $cardRow = document.querySelector('.cards-table');
-var kanto = [];
+var nationalDex = [];
 var $loading = document.querySelector('.loading-modal');
 var $error = document.querySelector('.error-modal');
 
@@ -26,7 +26,7 @@ function renderCards(object) {
   $pokemonName.className = 'pokemon-name';
 
   $pokeball.setAttribute('src', 'images/pokeball-blur.webp');
-  $pokemonImg.setAttribute('src', 'images/kanto/' + id + '.png');
+  $pokemonImg.setAttribute('src', 'images/art/' + id + '.png');
   $pokemonNumber.textContent = displayId(id);
   $pokemonName.textContent = capitalize(name);
   $pokemonCard.setAttribute('id', id);
@@ -41,13 +41,13 @@ function renderCards(object) {
 }
 
 function generatePokemonCards() {
-  httpReq('https://pokeapi.co/api/v2/pokedex/kanto', appendCards);
+  httpReq('https://pokeapi.co/api/v2/pokedex/1', appendCards);
 }
 
 function appendCards(response) {
-  kanto = response.pokemon_entries;
-  for (var i = 0; i < kanto.length; i++) {
-    $cardRow.appendChild(renderCards(kanto[i]));
+  nationalDex = response.pokemon_entries;
+  for (var i = 0; i < 155; i++) {
+    $cardRow.appendChild(renderCards(nationalDex[i]));
   }
   for (var j = 0; j < data.pokemon.length; j++) {
     $favCardsRow.appendChild(renderCards(data.pokemon[j]));
@@ -102,7 +102,7 @@ function displayDetails() {
 }
 
 function detailedInfo(response) {
-  $detailImg.setAttribute('src', 'images/kanto/' + response.id + '.png');
+  $detailImg.setAttribute('src', 'images/art/' + response.id + '.png');
   $detailName.textContent = capitalize(response.name);
   $detailNumber.textContent = displayId(response.id);
 
@@ -187,10 +187,10 @@ function listEvolutions(arr) {
 
 function renderEvolutionImg(arr) {
   for (var p = 0; p < arr.length; p++) {
-    for (var q = 0; q < kanto.length; q++) {
-      if (arr[p] === kanto[q].pokemon_species.name) {
-        var id = kanto[q].entry_number;
-        $evoImg[p].setAttribute('src', 'images/kanto/' + id + '.png');
+    for (var q = 0; q < nationalDex.length; q++) {
+      if (arr[p] === nationalDex[q].pokemon_species.name) {
+        var id = nationalDex[q].entry_number;
+        $evoImg[p].setAttribute('src', 'images/art/' + id + '.png');
         $evoName[p].textContent = capitalize(arr[p]);
       }
     }
@@ -213,11 +213,11 @@ function favourite(event) {
 
   if (event.target.className === 'fa-solid fa-heart heart') {
     event.target.className = 'fa-solid fa-heart heart fav';
-    for (var i = 0; i < kanto.length; i++) {
-      if (id === kanto[i].entry_number) {
+    for (var i = 0; i < nationalDex.length; i++) {
+      if (id === nationalDex[i].entry_number) {
         var fav = {
-          entry_number: kanto[i].entry_number,
-          pokemon_species: kanto[i].pokemon_species,
+          entry_number: nationalDex[i].entry_number,
+          pokemon_species: nationalDex[i].pokemon_species,
           favourite: true
         };
         data.pokemon.push(fav);
