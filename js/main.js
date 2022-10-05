@@ -249,11 +249,18 @@ function favourite(event) {
 }
 
 var $regionLinks = document.querySelector('.region-links');
+var $regionNames = document.querySelectorAll('.region-name');
 $displayFav.addEventListener('click', displayFavs);
 $favCardsRow.addEventListener('click', displayDetails);
 
 $regionLinks.addEventListener('click', function () {
   if (event.target.tagName === 'A') {
+    for (var i = 0; i < $regionNames.length; i++) {
+      $regionNames[i].className = 'region-name';
+      if (event.target === $regionNames[i]) {
+        $regionNames[i].classList.add('selected');
+      }
+    }
     data.view = event.target.getAttribute('data-view');
     displayView();
   }
@@ -261,12 +268,20 @@ $regionLinks.addEventListener('click', function () {
 
 function displayFavs() {
   if (data.view !== 'favourites') {
+    for (var i = 0; i < $regionNames.length; i++) {
+      $regionNames[i].className = 'region-name';
+    }
     data.previousView = data.view;
     data.view = 'favourites';
     $location.textContent = ': ' + capitalize(data.view);
     displayView();
   } else {
     data.view = data.previousView;
+    for (var j = 0; j < $regionNames.length; j++) {
+      if ($regionNames[j].getAttribute('data-view') === data.view) {
+        $regionNames[j].classList.add('selected');
+      }
+    }
     $location.textContent = '';
     displayView();
   }
