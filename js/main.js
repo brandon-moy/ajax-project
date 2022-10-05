@@ -65,7 +65,7 @@ window.addEventListener('DOMContentLoaded', function () {
 });
 
 var $header = document.querySelector('.header');
-var $cardView = document.querySelector('.cards-view');
+var $cardView = document.querySelector('.card-container');
 var $detailBackground = document.querySelector('.detail-background');
 var $detailView = document.querySelector('.detailed-view');
 var $xmark = document.querySelector('.xmark');
