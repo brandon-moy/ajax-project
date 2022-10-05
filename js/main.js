@@ -248,16 +248,25 @@ function favourite(event) {
   }
 }
 
+var $regionLinks = document.querySelector('.region-links');
 $displayFav.addEventListener('click', displayFavs);
 $favCardsRow.addEventListener('click', displayDetails);
 
+$regionLinks.addEventListener('click', function () {
+  if (event.target.tagName === 'A') {
+    data.view = event.target.getAttribute('data-view');
+    displayView();
+  }
+});
+
 function displayFavs() {
   if (data.view !== 'favourites') {
+    data.previousView = data.view;
     data.view = 'favourites';
     $location.textContent = ': ' + capitalize(data.view);
     displayView();
   } else {
-    data.view = 'kanto';
+    data.view = data.previousView;
     $location.textContent = '';
     displayView();
   }
@@ -278,7 +287,7 @@ function displayView() {
       }
     } else {
       $view[i].classList.add('hidden');
-      // $searchResults[i].classList.add('hidden');
+      $searchResults[i].classList.add('hidden');
     }
   }
 }
