@@ -178,13 +178,14 @@
   margin-left: 1rem;
   height: 2rem;
   padding-left: 0.5rem;
+  border-radius: 0.25rem;
+  border: none;
 }
 
 .search-icon {
   font-size: 1.5rem;
   color: white;
   padding-right: 1rem;
-  border-radius: 0.25rem;
 }
 
 .heart,
@@ -264,10 +265,6 @@
     font-size: 1.5rem;
   }
 
-  .detail-name {
-    font-size: 1.75rem;
-  }
-
   .height {
     padding-top: 2rem;
   }
@@ -297,10 +294,6 @@
   .detailed-view {
     padding-left: 4rem;
     padding-right: 4rem;
-  }
-
-  .detail-number {
-    padding-top: 4.25rem;
   }
 
   .detail-name {
@@ -355,14 +348,6 @@
     width: 85%;
   }
 
-  .pokemon-number {
-    font-size: 1.75vw;
-  }
-
-  .pokemon-name {
-    font-size: 2vw;
-  }
-
   .description {
     font-size: 1.5rem;
   }
@@ -382,7 +367,7 @@
   }
 
   .detailed-view {
-    padding-top: 10rem;
+    padding-top: 7.5rem;
     padding-left: 4rem;
     padding-right: 4rem;
   }
