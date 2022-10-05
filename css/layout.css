@@ -46,6 +46,10 @@
   flex-basis: 50%;
 }
 
+.column-eighth {
+  flex-basis: 25%;
+}
+
 .column-45 {
   flex-basis: 45%;
 }
@@ -109,5 +113,9 @@
 
   .column-fifth {
     flex-basis: 20%;
+  }
+
+  .column-eighth {
+    flex-basis: calc(100% / 8);
   }
 }
