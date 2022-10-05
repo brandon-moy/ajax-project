@@ -3,7 +3,8 @@ removeFavCard, addFavCard, checkView, httpReq */
 
 /* exported $loading, $error */
 
-var $cardRow = document.querySelector('.cards-table');
+var $kantoCards = document.querySelector('div.kanto-cards > .cards-table');
+var $johtoCards = document.querySelector('div.johto-cards > .cards-table');
 var nationalDex = [];
 var $loading = document.querySelector('.loading-modal');
 var $error = document.querySelector('.error-modal');
@@ -46,8 +47,12 @@ function generatePokemonCards() {
 
 function appendCards(response) {
   nationalDex = response.pokemon_entries;
-  for (var i = 0; i < 155; i++) {
-    $cardRow.appendChild(renderCards(nationalDex[i]));
+  for (var i = 0; i < 251; i++) {
+    if (i < 151) {
+      $kantoCards.appendChild(renderCards(nationalDex[i]));
+    } else if (i < 251) {
+      $johtoCards.appendChild(renderCards(nationalDex[i]));
+    }
   }
   for (var j = 0; j < data.pokemon.length; j++) {
     $favCardsRow.appendChild(renderCards(data.pokemon[j]));
@@ -59,7 +64,6 @@ window.addEventListener('DOMContentLoaded', function () {
   generatePokemonCards();
 });
 
-var $cards = document.querySelector('.cards-table');
 var $header = document.querySelector('.header');
 var $cardView = document.querySelector('.cards-view');
 var $detailBackground = document.querySelector('.detail-background');
@@ -81,7 +85,8 @@ var $evoImg = document.querySelectorAll('.evolution-image');
 var $evoName = document.querySelectorAll('.evolution-name');
 var maxStats = [250, 134, 180, 154, 154, 140];
 
-$cards.addEventListener('click', displayDetails);
+$kantoCards.addEventListener('click', displayDetails);
+$johtoCards.addEventListener('click', displayDetails);
 
 function displayDetails() {
   if (event.target.className === 'column-fifth') {
@@ -273,7 +278,7 @@ function displayView() {
       }
     } else {
       $view[i].classList.add('hidden');
-      $searchResults[i].classList.add('hidden');
+      // $searchResults[i].classList.add('hidden');
     }
   }
 }
