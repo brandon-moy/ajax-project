@@ -92,7 +92,7 @@ var $flavorText = document.querySelector('.flavor-text');
 var $evoDiv = document.querySelectorAll('.evo-div');
 var $evoImg = document.querySelectorAll('.evolution-image');
 var $evoName = document.querySelectorAll('.evolution-name');
-var maxStats = [250, 134, 180, 154, 154, 140];
+var maxStats = [255, 190, 250, 194, 250, 200];
 
 $kantoCards.addEventListener('click', displayDetails);
 $johtoCards.addEventListener('click', displayDetails);
