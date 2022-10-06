@@ -313,6 +313,17 @@ var $searchBar = document.querySelector('.search-bar');
 
 var $searchHeader = document.querySelector('.search-header');
 $searchBar.addEventListener('input', searchCards);
+$searchBar.addEventListener('change', resetCards);
+
+function resetCards(event) {
+  if (event.target.value === '') {
+    var view = checkView();
+    var $searchArea = view.querySelectorAll('.column-fifth');
+    for (var i = 0; i < $searchArea.length; i++) {
+      $searchArea[i].classList.remove('hidden');
+    }
+  }
+}
 
 function searchCards(event) {
   var search = event.target.value.toLowerCase();
