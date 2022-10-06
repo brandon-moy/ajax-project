@@ -17,7 +17,7 @@
 .pokemon-card {
   border: 2px solid rgb(185, 185, 185);
   border-radius: 0.5rem;
-  background-color: rgb(244, 244, 244);
+  background-color: #f5f5f5;
   width: 90%;
   aspect-ratio: 0.75;
   margin: 2rem auto 0;
@@ -36,19 +36,18 @@
   width: 80%;
 }
 
-.pokemon-number,
 .pokemon-name {
   text-align: center;
   font-family: Fredoka, sans-serif;
   font-weight: 500;
+  font-size: 4vw;
 }
 
 .pokemon-number {
   font-size: 4vw;
-}
-
-.pokemon-name {
-  font-size: 4.5vw;
+  text-align: center;
+  font-weight: 500;
+  color: rgb(85, 85, 85);
 }
 
 .detail-background {
@@ -376,6 +375,10 @@
 
   .pokemon-card {
     width: 85%;
+  }
+
+  .pokemon-number {
+    font-size: 1.5rem;
   }
 
   .description {
