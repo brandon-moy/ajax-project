@@ -10,6 +10,7 @@ var $sinnohCards = document.querySelector('.sinnoh-cards > .cards-table');
 var $unovaCards = document.querySelector('.unova-cards > .cards-table');
 var $kalosCards = document.querySelector('.kalos-cards > .cards-table');
 var $alolaCards = document.querySelector('.alola-cards > .cards-table');
+var $galarCards = document.querySelector('.galar-cards > .cards-table');
 var $loading = document.querySelector('.loading-modal');
 var $error = document.querySelector('.error-modal');
 var nationalDex = [];
@@ -20,8 +21,8 @@ var pokeGenBoundaries = {
   sinnoh: { start: 386, end: 493 },
   unova: { start: 494, end: 648 },
   kalos: { start: 649, end: 720 },
-  alola: { start: 721, end: 806 }
-  // galar: { start: 809, end: 898 }
+  alola: { start: 721, end: 806 },
+  galar: { start: 809, end: 897 }
 };
 
 window.addEventListener('DOMContentLoaded', function () {
@@ -106,11 +107,10 @@ $sinnohCards.addEventListener('click', displayDetails);
 $unovaCards.addEventListener('click', displayDetails);
 $kalosCards.addEventListener('click', displayDetails);
 $alolaCards.addEventListener('click', displayDetails);
+$galarCards.addEventListener('click', displayDetails);
 
 function displayDetails() {
-  if (event.target.className === 'column-fifth') {
-    return;
-  }
+  if (event.target.closest('.pokemon-card') === null) return;
   $searchHeader.classList.add('hidden');
   var id = event.target.closest('.pokemon-card').id;
   httpReq('https://pokeapi.co/api/v2/pokemon/' + id, detailedInfo);
