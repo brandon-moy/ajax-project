@@ -9,6 +9,7 @@ var $hoennCards = document.querySelector('.hoenn-cards > .cards-table');
 var $sinnohCards = document.querySelector('.sinnoh-cards > .cards-table');
 var $unovaCards = document.querySelector('.unova-cards > .cards-table');
 var $kalosCards = document.querySelector('.kalos-cards > .cards-table');
+var $alolaCards = document.querySelector('.alola-cards > .cards-table');
 var $loading = document.querySelector('.loading-modal');
 var $error = document.querySelector('.error-modal');
 var nationalDex = [];
@@ -18,8 +19,8 @@ var pokeGenBoundaries = {
   hoenn: { start: 251, end: 385 },
   sinnoh: { start: 386, end: 493 },
   unova: { start: 494, end: 648 },
-  kalos: { start: 649, end: 720 }
-  // alola: { start: 721, end: 806 },
+  kalos: { start: 649, end: 720 },
+  alola: { start: 721, end: 806 }
   // galar: { start: 809, end: 898 }
 };
 
@@ -104,6 +105,7 @@ $hoennCards.addEventListener('click', displayDetails);
 $sinnohCards.addEventListener('click', displayDetails);
 $unovaCards.addEventListener('click', displayDetails);
 $kalosCards.addEventListener('click', displayDetails);
+$alolaCards.addEventListener('click', displayDetails);
 
 function displayDetails() {
   if (event.target.className === 'column-fifth') {
