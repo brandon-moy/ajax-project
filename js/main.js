@@ -49,14 +49,14 @@ function generatePokemonCards() {
 
 function appendCards(response) {
   nationalDex = response.pokemon_entries;
-  for (var i = 0; i < 493; i++) {
+  for (var i = 0; i < 494; i++) {
     if (i < 151) {
       $kantoCards.appendChild(renderCards(nationalDex[i]));
     } else if (i < 251) {
       $johtoCards.appendChild(renderCards(nationalDex[i]));
     } else if (i < 386) {
       $hoennCards.appendChild(renderCards(nationalDex[i]));
-    } else if (i < 493) {
+    } else if (i < 494) {
       $sinnohCards.appendChild(renderCards(nationalDex[i]));
     }
   }
@@ -323,8 +323,6 @@ var $searchBar = document.querySelector('.search-bar');
 var $searchHeader = document.querySelector('.search-header');
 $searchBar.addEventListener('input', searchCards);
 $searchBar.addEventListener('change', resetCards);
-
-// var $allCards = document.querySelectorAll('.cards-table > .column-fifth');
 
 function resetCards(event) {
   if ($searchBar.value === '') {
