@@ -8,6 +8,7 @@ var $johtoCards = document.querySelector('div.johto-cards > .cards-table');
 var $hoennCards = document.querySelector('div.hoenn-cards > .cards-table');
 var $sinnohCards = document.querySelector('div.sinnoh-cards > .cards-table');
 var $unovaCards = document.querySelector('div.unova-cards > .cards-table');
+var $kalosCards = document.querySelector('div.kalos-cards > .cards-table');
 var nationalDex = [];
 var $loading = document.querySelector('.loading-modal');
 var $error = document.querySelector('.error-modal');
@@ -50,7 +51,7 @@ function generatePokemonCards() {
 
 function appendCards(response) {
   nationalDex = response.pokemon_entries;
-  for (var i = 0; i < 649; i++) {
+  for (var i = 0; i < 721; i++) {
     if (i < 151) {
       $kantoCards.appendChild(renderCards(nationalDex[i]));
     } else if (i < 251) {
@@ -61,6 +62,8 @@ function appendCards(response) {
       $sinnohCards.appendChild(renderCards(nationalDex[i]));
     } else if (i < 649) {
       $unovaCards.appendChild(renderCards(nationalDex[i]));
+    } else if (i < 721) {
+      $kalosCards.appendChild(renderCards(nationalDex[i]));
     }
   }
   for (var j = 0; j < data.pokemon.length; j++) {
@@ -99,6 +102,7 @@ $johtoCards.addEventListener('click', displayDetails);
 $hoennCards.addEventListener('click', displayDetails);
 $sinnohCards.addEventListener('click', displayDetails);
 $unovaCards.addEventListener('click', displayDetails);
+$kalosCards.addEventListener('click', displayDetails);
 
 function displayDetails() {
   if (event.target.className === 'column-fifth') {
