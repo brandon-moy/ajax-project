@@ -92,9 +92,7 @@ function displayDetails() {
   if (event.target.className === 'column-fifth') {
     return;
   }
-  var view = checkView();
-  var search = viewSearch(view);
-  search.classList.add('hidden');
+  $searchHeader.classList.add('hidden');
   var id = event.target.closest('.pokemon-card').id;
   httpReq('https://pokeapi.co/api/v2/pokemon/' + id, detailedInfo);
   httpReq('https://pokeapi.co/api/v2/pokemon-species/' + id, speciesDetail);
@@ -289,6 +287,7 @@ function displayFavs() {
 
 function displayView() {
   $searchBar.value = '';
+  $searchHeader.classList.add('hidden');
   for (var i = 0; i < $view.length; i++) {
     var view = $view[i].getAttribute('data-view');
     if (view === data.view) {
@@ -298,32 +297,26 @@ function displayView() {
       } else {
         $location.textContent = '';
       }
-      var search = $searchResults[i].querySelector('.search-info');
-      if (search.textContent !== '') {
-        $searchResults[i].classList.remove('hidden');
-      }
     } else {
       $view[i].classList.add('hidden');
-      $searchResults[i].classList.add('hidden');
     }
   }
 }
 
 var $searchBar = document.querySelector('.search-bar');
-var $searchResults = document.querySelectorAll('.search-header');
 
+var $searchHeader = document.querySelector('.search-header');
 $searchBar.addEventListener('input', searchCards);
 
 function searchCards(event) {
   var search = event.target.value.toLowerCase();
   var view = checkView();
-  var header = viewSearch(view);
-  var $resultText = header.querySelector('.search-info');
+  var $resultText = document.querySelector('.search-info');
   $resultText.textContent = event.target.value;
   if ($searchBar.value !== '') {
-    header.classList.remove('hidden');
+    $searchHeader.classList.remove('hidden');
   } else {
-    header.classList.add('hidden');
+    $searchHeader.classList.add('hidden');
   }
   var $searchArea = view.querySelectorAll('.column-fifth');
   for (var i = 0; i < $searchArea.length; i++) {
@@ -341,23 +334,14 @@ function searchCards(event) {
       count.push($searchArea[j]);
     }
   }
-  var $searchTitle = header.querySelector('.search-title');
-  var $noResultTitle = header.querySelector('.no-results-title');
+  var $searchTitle = document.querySelector('.search-title');
+  var $noResultTitle = document.querySelector('.no-results-title');
   if (count.length === 0) {
     $searchTitle.classList.add('hidden');
     $noResultTitle.classList.remove('hidden');
   } else {
     $searchTitle.classList.remove('hidden');
     $noResultTitle.classList.add('hidden');
-  }
-}
-
-function viewSearch(element) {
-  for (var i = 0; i < $searchResults.length; i++) {
-    var display = $searchResults[i].getAttribute('data-view');
-    if (element.getAttribute('data-view') === display) {
-      return $searchResults[i];
-    }
   }
 }
 
