@@ -3,15 +3,30 @@ removeFavCard, addFavCard, checkView, httpReq */
 
 /* exported $loading, $error */
 
-var $kantoCards = document.querySelector('div.kanto-cards > .cards-table');
-var $johtoCards = document.querySelector('div.johto-cards > .cards-table');
-var $hoennCards = document.querySelector('div.hoenn-cards > .cards-table');
-var $sinnohCards = document.querySelector('div.sinnoh-cards > .cards-table');
-var $unovaCards = document.querySelector('div.unova-cards > .cards-table');
-var $kalosCards = document.querySelector('div.kalos-cards > .cards-table');
-var nationalDex = [];
+var $kantoCards = document.querySelector('.kanto-cards > .cards-table');
+var $johtoCards = document.querySelector('.johto-cards > .cards-table');
+var $hoennCards = document.querySelector('.hoenn-cards > .cards-table');
+var $sinnohCards = document.querySelector('.sinnoh-cards > .cards-table');
+var $unovaCards = document.querySelector('.unova-cards > .cards-table');
+var $kalosCards = document.querySelector('.kalos-cards > .cards-table');
 var $loading = document.querySelector('.loading-modal');
 var $error = document.querySelector('.error-modal');
+var nationalDex = [];
+var pokeGenBoundaries = {
+  kanto: { start: 0, end: 150 },
+  johto: { start: 151, end: 250 },
+  hoenn: { start: 251, end: 385 },
+  sinnoh: { start: 386, end: 493 },
+  unova: { start: 494, end: 648 },
+  kalos: { start: 649, end: 720 }
+  // alola: { start: 721, end: 806 },
+  // galar: { start: 809, end: 898 }
+};
+
+window.addEventListener('DOMContentLoaded', function () {
+  displayView();
+  generatePokemonCards();
+});
 
 function renderCards(object) {
   var $columnFifth = document.createElement('div');
@@ -51,30 +66,16 @@ function generatePokemonCards() {
 
 function appendCards(response) {
   nationalDex = response.pokemon_entries;
-  for (var i = 0; i < 721; i++) {
-    if (i < 151) {
-      $kantoCards.appendChild(renderCards(nationalDex[i]));
-    } else if (i < 251) {
-      $johtoCards.appendChild(renderCards(nationalDex[i]));
-    } else if (i < 386) {
-      $hoennCards.appendChild(renderCards(nationalDex[i]));
-    } else if (i < 494) {
-      $sinnohCards.appendChild(renderCards(nationalDex[i]));
-    } else if (i < 649) {
-      $unovaCards.appendChild(renderCards(nationalDex[i]));
-    } else if (i < 721) {
-      $kalosCards.appendChild(renderCards(nationalDex[i]));
+  for (var key in pokeGenBoundaries) {
+    var placement = document.querySelector('#' + key);
+    for (var i = pokeGenBoundaries[key].start; i < pokeGenBoundaries[key].end; i++) {
+      placement.appendChild(renderCards(nationalDex[i]));
     }
   }
   for (var j = 0; j < data.pokemon.length; j++) {
     $favCardsRow.appendChild(renderCards(data.pokemon[j]));
   }
 }
-
-window.addEventListener('DOMContentLoaded', function () {
-  displayView();
-  generatePokemonCards();
-});
 
 var $header = document.querySelector('.header');
 var $cardView = document.querySelector('.card-container');
