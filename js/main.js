@@ -301,6 +301,12 @@ function displayView() {
       $view[i].classList.add('hidden');
     }
   }
+  for (var j = 0; j < $regionNames.length; j++) {
+    $regionNames[j].className = 'region-name';
+    if (data.view === $regionNames[j].getAttribute('data-view')) {
+      $regionNames[j].classList.add('selected');
+    }
+  }
 }
 
 var $searchBar = document.querySelector('.search-bar');
