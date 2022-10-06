@@ -315,6 +315,7 @@ function displayView() {
       $regionNames[j].classList.add('selected');
     }
   }
+  resetCards();
 }
 
 var $searchBar = document.querySelector('.search-bar');
@@ -326,7 +327,7 @@ $searchBar.addEventListener('change', resetCards);
 // var $allCards = document.querySelectorAll('.cards-table > .column-fifth');
 
 function resetCards(event) {
-  if (event.target.value === '') {
+  if ($searchBar.value === '') {
     var view = checkView();
     var $searchArea = view.querySelectorAll('.column-fifth');
     for (var i = 0; i < $searchArea.length; i++) {
