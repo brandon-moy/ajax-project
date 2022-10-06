@@ -30,16 +30,46 @@
     <h2 class="error-message">Sorry, there was an error connecting to the network! Please try again later.</h2>
   </div>
   <header>
-    <div class="header-background">
-      <h1 class="title">Pokédex: <span class="area-display">Kanto</span>
-        <i class="fa-solid fa-heart display-fav"></i>
-      </h1>
-      <form class="search-form">
-        <input type="text" class="search-bar" placeholder="Search by Name or #. . ." id="search-bar">
-        <label for="search-bar">
-          <i class="fa-solid fa-magnifying-glass search-icon"></i>
-        </label>
-      </form>
+    <div class="header">
+      <div class="header-background">
+        <h1 class="title">Pokédex<span class="area-display"></span>
+          <i class="fa-solid fa-heart display-fav"></i>
+        </h1>
+        <div class="region-links container flex">
+          <div class="column-eighth">
+            <a class="region-name selected" data-view="kanto">Kanto</a>
+          </div>
+          <div class="column-eighth">
+            <a class="region-name" data-view="johto">Johto</a>
+          </div>
+          <div class="column-eighth">
+            <a class="region-name" data-view="hoenn">Hoenn</a>
+          </div>
+          <div class="column-eighth">
+            <a class="region-name" data-view="sinnoh">Sinnoh</a>
+          </div>
+          <div class="column-eighth">
+            <a class="region-name" data-view="unova">Unova</a>
+          </div>
+          <div class="column-eighth">
+            <a class="region-name" data-view="kalos">Kalos</a>
+          </div>
+          <div class="column-eighth">
+            <a class="region-name" data-view="alola">Alola</a>
+          </div>
+          <div class="column-eighth">
+            <a class="region-name" data-view="galar">Galar</a>
+          </div>
+        </div>
+      </div>
+      <div class="background-white">
+        <form class="search-form">
+          <input type="text" class="search-bar" placeholder="Search by Name or #. . ." id="search-bar">
+          <label for="search-bar">
+            <i class="fa-solid fa-magnifying-glass search-icon"></i>
+          </label>
+        </form>
+      </div>
     </div>
     <div class="detail-background row hidden">
       <div class="column-full detail-top-border">
@@ -63,17 +93,46 @@
         </div>
       </div>
     </div>
-    <h3 class="search-header hidden" data-view="kanto"><span class="search-title">Search results for</span><span class="no-results-title hidden">No results for</span> &ldquo;<span class="search-info"></span>&rdquo;</h3>
-    <h3 class="search-header hidden" data-view="favourites"><span class="search-title">Search results for</span><span class="no-results-title hidden">No results for</span> &ldquo;<span class="search-info"></span>&rdquo;</h3>
+    <h3 class="search-header hidden"><span class="search-title">Search results for</span><span class="no-results-title hidden">No results for</span> &ldquo;<span class="search-info"></span>&rdquo;</h3>
   </header>
   <main>
     <div class="container">
-      <div class="cards-view view" data-view="kanto">
-        <div class="cards-table row">
+      <div class="card-container">
+        <div class="cards-view view kanto-cards hidden" data-view="kanto">
+          <div class="cards-table row" id="kanto">
+          </div>
         </div>
-      </div>
-      <div class="fav-view view hidden" data-view="favourites">
-        <div class="fav-cards-table row">
+        <div class="cards-view view johto-cards hidden" data-view="johto">
+          <div class="cards-table row" id="johto">
+          </div>
+        </div>
+        <div class="cards-view view hoenn-cards hidden" data-view="hoenn">
+          <div class="cards-table row" id="hoenn">
+          </div>
+        </div>
+        <div class="cards-view view sinnoh-cards hidden" data-view="sinnoh">
+          <div class="cards-table row" id="sinnoh">
+          </div>
+        </div>
+        <div class="cards-view view unova-cards hidden" data-view="unova">
+          <div class="cards-table row" id="unova">
+          </div>
+        </div>
+        <div class="cards-view view kalos-cards hidden" data-view="kalos">
+          <div class="cards-table row" id="kalos">
+          </div>
+        </div>
+        <div class="cards-view view alola-cards hidden" data-view="alola">
+          <div class="cards-table row" id="alola">
+          </div>
+        </div>
+        <div class="cards-view view galar-cards hidden" data-view="galar">
+          <div class="cards-table row" id="galar">
+          </div>
+        </div>
+        <div class="fav-view view hidden" data-view="favourites">
+          <div class="fav-cards-table row">
+          </div>
         </div>
       </div>
       <div class="detailed-view hidden">

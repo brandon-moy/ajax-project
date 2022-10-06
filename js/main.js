@@ -3,10 +3,32 @@ removeFavCard, addFavCard, checkView, httpReq */
 
 /* exported $loading, $error */
 
-var $cardRow = document.querySelector('.cards-table');
-var kanto = [];
+var $kantoCards = document.querySelector('.kanto-cards > .cards-table');
+var $johtoCards = document.querySelector('.johto-cards > .cards-table');
+var $hoennCards = document.querySelector('.hoenn-cards > .cards-table');
+var $sinnohCards = document.querySelector('.sinnoh-cards > .cards-table');
+var $unovaCards = document.querySelector('.unova-cards > .cards-table');
+var $kalosCards = document.querySelector('.kalos-cards > .cards-table');
+var $alolaCards = document.querySelector('.alola-cards > .cards-table');
+var $galarCards = document.querySelector('.galar-cards > .cards-table');
 var $loading = document.querySelector('.loading-modal');
 var $error = document.querySelector('.error-modal');
+var nationalDex = [];
+var pokeGenBoundaries = {
+  kanto: { start: 0, end: 151 },
+  johto: { start: 151, end: 251 },
+  hoenn: { start: 251, end: 386 },
+  sinnoh: { start: 386, end: 494 },
+  unova: { start: 494, end: 649 },
+  kalos: { start: 649, end: 721 },
+  alola: { start: 721, end: 807 },
+  galar: { start: 809, end: 898 }
+};
+
+window.addEventListener('DOMContentLoaded', function () {
+  displayView();
+  generatePokemonCards();
+});
 
 function renderCards(object) {
   var $columnFifth = document.createElement('div');
@@ -26,7 +48,7 @@ function renderCards(object) {
   $pokemonName.className = 'pokemon-name';
 
   $pokeball.setAttribute('src', 'images/pokeball-blur.webp');
-  $pokemonImg.setAttribute('src', 'images/kanto/' + id + '.png');
+  $pokemonImg.setAttribute('src', 'images/art/' + id + '.png');
   $pokemonNumber.textContent = displayId(id);
   $pokemonName.textContent = capitalize(name);
   $pokemonCard.setAttribute('id', id);
@@ -41,27 +63,24 @@ function renderCards(object) {
 }
 
 function generatePokemonCards() {
-  httpReq('https://pokeapi.co/api/v2/pokedex/kanto', appendCards);
+  httpReq('https://pokeapi.co/api/v2/pokedex/1', appendCards);
 }
 
 function appendCards(response) {
-  kanto = response.pokemon_entries;
-  for (var i = 0; i < kanto.length; i++) {
-    $cardRow.appendChild(renderCards(kanto[i]));
+  nationalDex = response.pokemon_entries;
+  for (var key in pokeGenBoundaries) {
+    var placement = document.querySelector('#' + key);
+    for (var i = pokeGenBoundaries[key].start; i < pokeGenBoundaries[key].end; i++) {
+      placement.appendChild(renderCards(nationalDex[i]));
+    }
   }
   for (var j = 0; j < data.pokemon.length; j++) {
     $favCardsRow.appendChild(renderCards(data.pokemon[j]));
   }
 }
 
-window.addEventListener('DOMContentLoaded', function () {
-  displayView();
-  generatePokemonCards();
-});
-
-var $cards = document.querySelector('.cards-table');
-var $header = document.querySelector('.header-background');
-var $cardView = document.querySelector('.cards-view');
+var $header = document.querySelector('.header');
+var $cardView = document.querySelector('.card-container');
 var $detailBackground = document.querySelector('.detail-background');
 var $detailView = document.querySelector('.detailed-view');
 var $xmark = document.querySelector('.xmark');
@@ -79,17 +98,20 @@ var $flavorText = document.querySelector('.flavor-text');
 var $evoDiv = document.querySelectorAll('.evo-div');
 var $evoImg = document.querySelectorAll('.evolution-image');
 var $evoName = document.querySelectorAll('.evolution-name');
-var maxStats = [250, 134, 180, 154, 154, 140];
+var maxStats = [255, 190, 250, 194, 250, 200];
 
-$cards.addEventListener('click', displayDetails);
+$kantoCards.addEventListener('click', displayDetails);
+$johtoCards.addEventListener('click', displayDetails);
+$hoennCards.addEventListener('click', displayDetails);
+$sinnohCards.addEventListener('click', displayDetails);
+$unovaCards.addEventListener('click', displayDetails);
+$kalosCards.addEventListener('click', displayDetails);
+$alolaCards.addEventListener('click', displayDetails);
+$galarCards.addEventListener('click', displayDetails);
 
 function displayDetails() {
-  if (event.target.className === 'column-fifth') {
-    return;
-  }
-  var view = checkView();
-  var search = viewSearch(view);
-  search.classList.add('hidden');
+  if (event.target.closest('.pokemon-card') === null) return;
+  $searchHeader.classList.add('hidden');
   var id = event.target.closest('.pokemon-card').id;
   httpReq('https://pokeapi.co/api/v2/pokemon/' + id, detailedInfo);
   httpReq('https://pokeapi.co/api/v2/pokemon-species/' + id, speciesDetail);
@@ -102,7 +124,7 @@ function displayDetails() {
 }
 
 function detailedInfo(response) {
-  $detailImg.setAttribute('src', 'images/kanto/' + response.id + '.png');
+  $detailImg.setAttribute('src', 'images/art/' + response.id + '.png');
   $detailName.textContent = capitalize(response.name);
   $detailNumber.textContent = displayId(response.id);
 
@@ -187,10 +209,10 @@ function listEvolutions(arr) {
 
 function renderEvolutionImg(arr) {
   for (var p = 0; p < arr.length; p++) {
-    for (var q = 0; q < kanto.length; q++) {
-      if (arr[p] === kanto[q].pokemon_species.name) {
-        var id = kanto[q].entry_number;
-        $evoImg[p].setAttribute('src', 'images/kanto/' + id + '.png');
+    for (var q = 0; q < nationalDex.length; q++) {
+      if (arr[p] === nationalDex[q].pokemon_species.name) {
+        var id = nationalDex[q].entry_number;
+        $evoImg[p].setAttribute('src', 'images/art/' + id + '.png');
         $evoName[p].textContent = capitalize(arr[p]);
       }
     }
@@ -213,11 +235,11 @@ function favourite(event) {
 
   if (event.target.className === 'fa-solid fa-heart heart') {
     event.target.className = 'fa-solid fa-heart heart fav';
-    for (var i = 0; i < kanto.length; i++) {
-      if (id === kanto[i].entry_number) {
+    for (var i = 0; i < nationalDex.length; i++) {
+      if (id === nationalDex[i].entry_number) {
         var fav = {
-          entry_number: kanto[i].entry_number,
-          pokemon_species: kanto[i].pokemon_species,
+          entry_number: nationalDex[i].entry_number,
+          pokemon_species: nationalDex[i].pokemon_species,
           favourite: true
         };
         data.pokemon.push(fav);
@@ -243,54 +265,95 @@ function favourite(event) {
   }
 }
 
+var $regionLinks = document.querySelector('.region-links');
+var $regionNames = document.querySelectorAll('.region-name');
 $displayFav.addEventListener('click', displayFavs);
 $favCardsRow.addEventListener('click', displayDetails);
 
+$regionLinks.addEventListener('click', function () {
+  if (event.target.tagName === 'A') {
+    for (var i = 0; i < $regionNames.length; i++) {
+      $regionNames[i].className = 'region-name';
+      if (event.target === $regionNames[i]) {
+        $regionNames[i].classList.add('selected');
+      }
+    }
+    data.view = event.target.getAttribute('data-view');
+    displayView();
+  }
+});
+
 function displayFavs() {
   if (data.view !== 'favourites') {
+    for (var i = 0; i < $regionNames.length; i++) {
+      $regionNames[i].className = 'region-name';
+    }
+    data.previousView = data.view;
     data.view = 'favourites';
-    $location.textContent = capitalize(data.view);
+    $location.textContent = ': ' + capitalize(data.view);
     displayView();
   } else {
-    data.view = 'kanto';
-    $location.textContent = capitalize(data.view);
+    data.view = data.previousView;
+    for (var j = 0; j < $regionNames.length; j++) {
+      if ($regionNames[j].getAttribute('data-view') === data.view) {
+        $regionNames[j].classList.add('selected');
+      }
+    }
+    $location.textContent = '';
     displayView();
   }
 }
 
 function displayView() {
   $searchBar.value = '';
+  $searchHeader.classList.add('hidden');
   for (var i = 0; i < $view.length; i++) {
     var view = $view[i].getAttribute('data-view');
     if (view === data.view) {
       $view[i].classList.remove('hidden');
-      $location.textContent = capitalize(data.view);
-      var search = $searchResults[i].querySelector('.search-info');
-      if (search.textContent !== '') {
-        $searchResults[i].classList.remove('hidden');
+      if (data.view === 'favourites') {
+        $location.textContent = ': ' + capitalize(data.view);
+      } else {
+        $location.textContent = '';
       }
     } else {
       $view[i].classList.add('hidden');
-      $searchResults[i].classList.add('hidden');
+    }
+  }
+  for (var j = 0; j < $regionNames.length; j++) {
+    $regionNames[j].className = 'region-name';
+    if (data.view === $regionNames[j].getAttribute('data-view')) {
+      $regionNames[j].classList.add('selected');
+    }
+  }
+  resetCards();
+}
+
+var $searchBar = document.querySelector('.search-bar');
+
+var $searchHeader = document.querySelector('.search-header');
+$searchBar.addEventListener('input', searchCards);
+$searchBar.addEventListener('change', resetCards);
+
+function resetCards(event) {
+  if ($searchBar.value === '') {
+    var view = checkView();
+    var $searchArea = view.querySelectorAll('.column-fifth');
+    for (var i = 0; i < $searchArea.length; i++) {
+      $searchArea[i].classList.remove('hidden');
     }
   }
 }
 
-var $searchBar = document.querySelector('.search-bar');
-var $searchResults = document.querySelectorAll('.search-header');
-
-$searchBar.addEventListener('input', searchCards);
-
 function searchCards(event) {
   var search = event.target.value.toLowerCase();
   var view = checkView();
-  var header = viewSearch(view);
-  var $resultText = header.querySelector('.search-info');
+  var $resultText = document.querySelector('.search-info');
   $resultText.textContent = event.target.value;
   if ($searchBar.value !== '') {
-    header.classList.remove('hidden');
+    $searchHeader.classList.remove('hidden');
   } else {
-    header.classList.add('hidden');
+    $searchHeader.classList.add('hidden');
   }
   var $searchArea = view.querySelectorAll('.column-fifth');
   for (var i = 0; i < $searchArea.length; i++) {
@@ -308,23 +371,14 @@ function searchCards(event) {
       count.push($searchArea[j]);
     }
   }
-  var $searchTitle = header.querySelector('.search-title');
-  var $noResultTitle = header.querySelector('.no-results-title');
+  var $searchTitle = document.querySelector('.search-title');
+  var $noResultTitle = document.querySelector('.no-results-title');
   if (count.length === 0) {
     $searchTitle.classList.add('hidden');
     $noResultTitle.classList.remove('hidden');
   } else {
     $searchTitle.classList.remove('hidden');
     $noResultTitle.classList.add('hidden');
-  }
-}
-
-function viewSearch(element) {
-  for (var i = 0; i < $searchResults.length; i++) {
-    var display = $searchResults[i].getAttribute('data-view');
-    if (element.getAttribute('data-view') === display) {
-      return $searchResults[i];
-    }
   }
 }
 

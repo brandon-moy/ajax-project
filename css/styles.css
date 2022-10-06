@@ -1,6 +1,9 @@
 .header-background {
   background-color: rgb(130, 0, 0);
-  padding-bottom: 1rem;
+}
+
+.background-white {
+  background-color: white;
 }
 
 .title {
@@ -175,16 +178,18 @@
 
 .search-bar {
   width: 80%;
+  margin-top: 1rem;
   margin-left: 1rem;
   height: 2rem;
   padding-left: 0.5rem;
   border-radius: 0.25rem;
-  border: none;
+  border: 1px solid rgb(130, 0, 0);
 }
 
 .search-icon {
+  padding-top: 1.25rem;
   font-size: 1.5rem;
-  color: white;
+  color: rgb(130, 0, 0);
   padding-right: 1rem;
 }
 
@@ -194,10 +199,26 @@
   float: right;
 }
 
+.region-links {
+  margin-bottom: 0;
+  padding-bottom: 1rem;
+}
+
+.region-name {
+  color: #bababa;
+  font-family: "Fredoka One", sans-serif;
+  letter-spacing: 1px;
+}
+
+.selected {
+  color: white;
+}
+
 .xmark:hover,
 .heart:hover,
 .display-fav:hover,
-.search-icon:hover {
+.search-icon:hover,
+.region-name:hover {
   cursor: pointer;
 }
 
@@ -280,6 +301,10 @@
     padding-top: 1rem;
     padding-left: 1rem;
   }
+
+  .region-name {
+    font-size: 1.5rem;
+  }
 }
 
 @media only screen and (min-width: 768px) {
@@ -336,6 +361,10 @@
 
   .search-header {
     font-size: 1.5rem;
+  }
+
+  .region-name {
+    font-size: 1.75rem;
   }
 }
 
