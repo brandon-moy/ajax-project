@@ -6,6 +6,7 @@ removeFavCard, addFavCard, checkView, httpReq */
 var $kantoCards = document.querySelector('div.kanto-cards > .cards-table');
 var $johtoCards = document.querySelector('div.johto-cards > .cards-table');
 var $hoennCards = document.querySelector('div.hoenn-cards > .cards-table');
+var $sinnohCards = document.querySelector('div.sinnoh-cards > .cards-table');
 var nationalDex = [];
 var $loading = document.querySelector('.loading-modal');
 var $error = document.querySelector('.error-modal');
@@ -48,13 +49,15 @@ function generatePokemonCards() {
 
 function appendCards(response) {
   nationalDex = response.pokemon_entries;
-  for (var i = 0; i < 386; i++) {
+  for (var i = 0; i < 493; i++) {
     if (i < 151) {
       $kantoCards.appendChild(renderCards(nationalDex[i]));
     } else if (i < 251) {
       $johtoCards.appendChild(renderCards(nationalDex[i]));
     } else if (i < 386) {
       $hoennCards.appendChild(renderCards(nationalDex[i]));
+    } else if (i < 493) {
+      $sinnohCards.appendChild(renderCards(nationalDex[i]));
     }
   }
   for (var j = 0; j < data.pokemon.length; j++) {
@@ -91,6 +94,7 @@ var maxStats = [250, 134, 180, 154, 154, 140];
 $kantoCards.addEventListener('click', displayDetails);
 $johtoCards.addEventListener('click', displayDetails);
 $hoennCards.addEventListener('click', displayDetails);
+$sinnohCards.addEventListener('click', displayDetails);
 
 function displayDetails() {
   if (event.target.className === 'column-fifth') {
@@ -318,6 +322,8 @@ var $searchBar = document.querySelector('.search-bar');
 var $searchHeader = document.querySelector('.search-header');
 $searchBar.addEventListener('input', searchCards);
 $searchBar.addEventListener('change', resetCards);
+
+// var $allCards = document.querySelectorAll('.cards-table > .column-fifth');
 
 function resetCards(event) {
   if (event.target.value === '') {
