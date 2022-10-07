@@ -18,7 +18,6 @@ var $cardView = document.querySelector('.card-container');
 var $detailBackground = document.querySelector('.detail-background');
 var $detailView = document.querySelector('.detailed-view');
 var $xmark = document.querySelector('.xmark');
-var $stats = document.querySelectorAll('.item-header + p');
 var $statsDisplay = document.querySelectorAll('.stats-display');
 var $detailName = document.querySelector('.detail-name');
 var $detailNumber = document.querySelector('.detail-number');
@@ -45,7 +44,6 @@ var $searchHeader = document.querySelector('.search-header');
 var $resultText = document.querySelector('.search-info');
 var $searchTitle = document.querySelector('.search-title');
 var $noResultTitle = document.querySelector('.no-results-title');
-var maxStats = [255, 190, 250, 194, 250, 200];
 
 var pokeGenBoundaries = {
   kanto: { start: 0, end: 151 },
@@ -220,14 +218,13 @@ function detailedInfo(pokemon) {
   $abilities.textContent = abilities;
 
   for (var j = 0; j < pokemon.stats.length; j++) {
-    for (var l = 0; l < $stats.length; l++) {
-      if (pokemon.stats[j].stat.name === $stats[l].className) {
-        $stats[l].textContent = pokemon.stats[j].base_stat;
-        var statCalc = Math.floor((pokemon.stats[j].base_stat / maxStats[j]) * 100);
-        $statsDisplay[j].classList.add(type1);
-        $statsDisplay[j].style.width = statCalc + '%';
-      }
-    }
+    var statNumber = document.querySelector('.' + pokemon.stats[j].stat.name);
+    var statBar = document.querySelector('#' + pokemon.stats[j].stat.name);
+    var maxStat = data.maxStats[pokemon.stats[j].stat.name];
+    statNumber.textContent = pokemon.stats[j].base_stat;
+    var calcStat = Math.floor((pokemon.stats[j].base_stat / maxStat) * 100);
+    statBar.classList.add(type1);
+    statBar.style.width = calcStat + '%';
   }
 }
 

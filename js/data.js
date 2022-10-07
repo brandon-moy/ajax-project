@@ -3,7 +3,14 @@
 var data = {
   nationalDex: [],
   favPokemon: [],
-  stats: [255, 190, 250, 194, 250, 200],
+  maxStats: {
+    hp: 255,
+    attack: 190,
+    defense: 250,
+    'special-attack': 194,
+    'special-defense': 250,
+    speed: 200
+  },
   view: 'kanto',
   previousView: ''
 };
