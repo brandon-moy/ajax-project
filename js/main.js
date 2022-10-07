@@ -57,7 +57,7 @@ var pokeGenBoundaries = {
 };
 
 window.addEventListener('DOMContentLoaded', function () {
-  displayView();
+  displayView(data.view);
   generatePokemonCards();
 });
 
@@ -81,7 +81,7 @@ $xmark.addEventListener('click', function () {
   $cardView.classList.remove('hidden');
   $detailBackground.classList.add('hidden');
   $detailView.classList.add('hidden');
-  displayView();
+  displayView(data.view);
   for (var r = 0; r < $evoDiv.length; r++) {
     $evoDiv[r].classList.add('hidden');
   }
@@ -97,7 +97,7 @@ $favCardsRow.addEventListener('click', displayDetails);
 $titleLink.addEventListener('click', function () {
   if (data.view !== 'favourites') return;
   data.view = data.previousView;
-  displayView();
+  displayView(data.view);
   $regionLinks.classList.remove('hidden');
 });
 
@@ -110,7 +110,7 @@ $regionLinks.addEventListener('click', function () {
       }
     }
     data.view = event.target.getAttribute('data-view');
-    displayView();
+    displayView(data.view);
   }
 });
 
@@ -318,7 +318,7 @@ function displayFavs() {
     $displayFav.className = 'fa-solid fa-heart display-fav';
     data.previousView = data.view;
     data.view = 'favourites';
-    displayView();
+    displayView(data.view);
   } else {
     $regionLinks.classList.remove('hidden');
     $displayFav.className = 'fa-regular fa-heart display-fav';
@@ -328,16 +328,16 @@ function displayFavs() {
         $regionNames[j].classList.add('selected');
       }
     }
-    displayView();
+    displayView(data.view);
   }
 }
 
-function displayView() {
+function displayView(view) {
   $searchBar.value = '';
   $searchHeader.classList.add('hidden');
   for (var i = 0; i < $view.length; i++) {
-    var view = $view[i].getAttribute('data-view');
-    if (view === data.view) {
+    var checkView = $view[i].getAttribute('data-view');
+    if (checkView === view) {
       $view[i].classList.remove('hidden');
     } else {
       $view[i].classList.add('hidden');
