@@ -36,6 +36,7 @@ var $searchHeader = document.querySelector('.search-header');
 var $resultText = document.querySelector('.search-info');
 var $searchTitle = document.querySelector('.search-title');
 var $noResultTitle = document.querySelector('.no-results-title');
+// var $evolutionsContainer = document.querySelector('.evolutions-container');
 var pokeGenBoundaries = {
   kanto: { start: 0, end: 151 },
   johto: { start: 151, end: 251 },
@@ -65,6 +66,7 @@ $xmark.addEventListener('click', function () {
   displayView(data.view);
   for (var r = 0; r < $evoDiv.length; r++) {
     $evoDiv[r].classList.add('hidden');
+    $evoDiv[r].setAttribute('id', '');
   }
   for (var n = 0; n < $statsDisplay.length; n++) {
     $statsDisplay[n].className = 'stats-display';
@@ -251,6 +253,7 @@ function renderEvolutionImg(arr) {
       }
     }
     $evoDiv[p].classList.remove('hidden');
+    $evoDiv[p].setAttribute('id', arr[p]);
     $evoName[p].textContent = capitalize(arr[p]);
   }
 }
