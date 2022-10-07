@@ -1,5 +1,5 @@
 /* global capitalize, displayId, calcHeight, calcWeight, flavorText, resetPlaceholder,
-removeFavCard, addFavCard, checkView, httpReq */
+removeFavCard, addFavCard, httpReq */
 
 /* exported $loading, $error */
 
@@ -357,7 +357,7 @@ function displayView() {
 
 function resetCards(event) {
   if ($searchBar.value === '') {
-    var view = checkView();
+    var view = document.querySelector('#' + data.view);
     var $searchArea = view.querySelectorAll('.column-fifth');
     for (var i = 0; i < $searchArea.length; i++) {
       $searchArea[i].classList.remove('hidden');
@@ -367,7 +367,7 @@ function resetCards(event) {
 
 function searchCards(event) {
   var search = event.target.value.toLowerCase();
-  var view = checkView();
+  var view = document.querySelector('#' + data.view);
 
   $resultText.textContent = event.target.value;
   if ($searchBar.value !== '') {

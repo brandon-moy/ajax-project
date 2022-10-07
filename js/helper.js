@@ -1,7 +1,7 @@
 /* exported capitalize, displayId, calcWeight, calcHeight, statsDisplay, flavorText,
 resetPlaceholder, removeFavCard, addFavCard, checkView, httpReq */
 
-/* global $favCardsRow, $view, data, $loading, $error */
+/* global $favCardsRow, $loading, $error */
 
 function capitalize(string) {
   var capitalized = '';
@@ -68,15 +68,6 @@ function addFavCard(DOM, position) {
   var nodes = document.querySelector('.fav-cards-table').childNodes;
   var addDom = nodes[position];
   addDom.after(DOM);
-}
-
-function checkView() {
-  for (var i = 0; i < $view.length; i++) {
-    var view = $view[i].getAttribute('data-view');
-    if (view === data.view) {
-      return $view[i];
-    }
-  }
 }
 
 function httpReq(url, action) {
