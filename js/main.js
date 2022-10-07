@@ -36,7 +36,7 @@ var $searchHeader = document.querySelector('.search-header');
 var $resultText = document.querySelector('.search-info');
 var $searchTitle = document.querySelector('.search-title');
 var $noResultTitle = document.querySelector('.no-results-title');
-// var $evolutionsContainer = document.querySelector('.evolutions-container');
+var $evolutionsContainer = document.querySelector('.evolutions-container');
 var pokeGenBoundaries = {
   kanto: { start: 0, end: 151 },
   johto: { start: 151, end: 251 },
@@ -77,6 +77,7 @@ $xmark.addEventListener('click', function () {
 
 $displayFav.addEventListener('click', displayFavs);
 $favCardsRow.addEventListener('click', displayDetails);
+$evolutionsContainer.addEventListener('click', displayEvolution);
 $titleLink.addEventListener('click', function () {
   if (data.view !== 'favourites') return;
   data.view = data.previousView;
@@ -146,6 +147,18 @@ function appendCards(pokedex) {
   }
 }
 
+function displayEvolution(event) {
+  if (event.target.closest('.evo-div') === null) return;
+  for (var i = 0; i < data.nationalDex.length; i++) {
+    if (event.target.closest('.evo-div').id === data.nationalDex[i].pokemon_species.name) {
+      var id = data.nationalDex[i].entry_number;
+      break;
+    }
+  }
+  httpReq('https://pokeapi.co/api/v2/pokemon/' + id, detailedInfo);
+  httpReq('https://pokeapi.co/api/v2/pokemon-species/' + id, speciesDetail);
+}
+
 function displayDetails() {
   if (event.target.closest('.pokemon-card') === null) return;
   $searchHeader.classList.add('hidden');
@@ -206,7 +219,7 @@ function detailedInfo(pokemon) {
     var maxStat = data.maxStats[pokemon.stats[j].stat.name];
     statNumber.textContent = pokemon.stats[j].base_stat;
     var calcStat = Math.floor((pokemon.stats[j].base_stat / maxStat) * 100);
-    statBar.classList.add(type1);
+    statBar.className = 'stats-display ' + type1;
     statBar.style.width = calcStat + '%';
   }
 }
