@@ -7,19 +7,19 @@
   margin-bottom: 2rem;
 }
 
-.row {
+.flex {
   display: flex;
   flex-wrap: wrap;
   align-items: center;
   justify-content: center;
 }
 
-.flex {
+.row {
   display: flex;
   flex-wrap: wrap;
 }
 
-.column {
+.flex-column {
   display: flex;
   flex-direction: column;
 }
@@ -56,6 +56,10 @@
 
 .column-55 {
   flex-basis: 55%;
+}
+
+.column-fluid {
+  flex-basis: 25%;
 }
 
 .no-margin {
@@ -117,5 +121,11 @@
 
   .column-eighth {
     flex-basis: calc(100% / 8);
+  }
+
+  .column-fluid {
+    flex-basis: auto;
+    padding-left: 0.25rem;
+    padding-right: 0.25rem;
   }
 }

@@ -17,7 +17,7 @@
 .pokemon-card {
   border: 2px solid rgb(185, 185, 185);
   border-radius: 0.5rem;
-  background-color: rgb(244, 244, 244);
+  background-color: #f5f5f5;
   width: 90%;
   aspect-ratio: 0.75;
   margin: 2rem auto 0;
@@ -36,19 +36,18 @@
   width: 80%;
 }
 
-.pokemon-number,
 .pokemon-name {
   text-align: center;
   font-family: Fredoka, sans-serif;
   font-weight: 500;
+  font-size: 4vw;
 }
 
 .pokemon-number {
   font-size: 4vw;
-}
-
-.pokemon-name {
-  font-size: 4.5vw;
+  text-align: center;
+  font-weight: 500;
+  color: rgb(85, 85, 85);
 }
 
 .detail-background {
@@ -88,6 +87,8 @@
   font-size: 1.75rem;
   font-weight: 500;
   padding-left: 0.25rem;
+  padding-bottom: 0.25rem;
+  padding-top: 0.25rem;
 }
 
 .type-1,
@@ -120,6 +121,8 @@
 .flavor-text {
   line-height: 1.25rem;
   padding-bottom: 1.5rem;
+  width: 90%;
+  margin: 0;
 }
 
 .abilities {
@@ -154,7 +157,7 @@
   padding-top: 1.25rem;
 }
 
-.evolutions {
+.evolutions-header {
   padding-top: 1.25rem;
 }
 
@@ -177,25 +180,21 @@
 }
 
 .search-bar {
-  width: 80%;
-  margin-top: 1rem;
-  margin-left: 1rem;
+  width: 90%;
   height: 2rem;
+  margin-top: 1rem;
   padding-left: 0.5rem;
   border-radius: 0.25rem;
   border: 1px solid rgb(130, 0, 0);
 }
 
-.search-icon {
-  padding-top: 1.25rem;
-  font-size: 1.5rem;
-  color: rgb(130, 0, 0);
-  padding-right: 1rem;
+.search-bar:focus {
+  outline: none;
+  border: 2px solid rgb(130, 0, 0);
 }
 
 .heart,
-.display-fav,
-.search-icon {
+.display-fav {
   float: right;
 }
 
@@ -217,8 +216,8 @@
 .xmark:hover,
 .heart:hover,
 .display-fav:hover,
-.search-icon:hover,
-.region-name:hover {
+.region-name:hover,
+.title-link:hover {
   cursor: pointer;
 }
 
@@ -246,9 +245,10 @@
 
 .loading-modal,
 .error-modal {
-  position: fixed;
+  position: absolute;
   width: 100%;
-  height: 100%;
+  top: 0;
+  bottom: 0;
   background-color: rgba(0, 0, 0, 0.5);
   display: flex;
   justify-content: center;
@@ -346,11 +346,6 @@
     line-height: 1.5rem;
   }
 
-  .search-icon {
-    font-size: 2.5rem;
-    padding-right: 1.25rem;
-  }
-
   .evolution-image {
     width: 75%;
   }
@@ -375,6 +370,10 @@
 
   .pokemon-card {
     width: 85%;
+  }
+
+  .pokemon-number {
+    font-size: 1.5rem;
   }
 
   .description {
@@ -429,11 +428,6 @@
 
   .flavor-text {
     line-height: 1.5rem;
-  }
-
-  .search-icon {
-    font-size: 2.5rem;
-    padding-right: 1.25rem;
   }
 
   .evolution-image {
