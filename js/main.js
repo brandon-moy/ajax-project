@@ -113,7 +113,7 @@ $regionLinks.addEventListener('click', function () {
   }
 });
 
-function renderCards(object) {
+function renderCard(object) {
   var $columnFifth = document.createElement('div');
   var $pokemonCard = document.createElement('div');
   var $pokeball = document.createElement('div');
@@ -149,16 +149,16 @@ function generatePokemonCards() {
   httpReq('https://pokeapi.co/api/v2/pokedex/1', appendCards);
 }
 
-function appendCards(response) {
-  data.nationalDex = response.pokemon_entries;
+function appendCards(pokedex) {
+  data.nationalDex = pokedex.pokemon_entries;
   for (var key in pokeGenBoundaries) {
     var placement = document.querySelector('#' + key);
     for (var i = pokeGenBoundaries[key].start; i < pokeGenBoundaries[key].end; i++) {
-      placement.appendChild(renderCards(data.nationalDex[i]));
+      placement.appendChild(renderCard(data.nationalDex[i]));
     }
   }
   for (var j = 0; j < data.favPokemon.length; j++) {
-    $favCardsRow.appendChild(renderCards(data.favPokemon[j]));
+    $favCardsRow.appendChild(renderCard(data.favPokemon[j]));
   }
 }
 
@@ -176,51 +176,51 @@ function displayDetails() {
   window.scrollTo(0, 0);
 }
 
-function detailedInfo(response) {
-  $detailImg.setAttribute('src', 'images/art/' + response.id + '.png');
-  $detailName.textContent = capitalize(response.name);
-  $detailNumber.textContent = displayId(response.id);
+function detailedInfo(pokemon) {
+  $detailImg.setAttribute('src', 'images/art/' + pokemon.id + '.png');
+  $detailName.textContent = capitalize(pokemon.name);
+  $detailNumber.textContent = displayId(pokemon.id);
 
   for (var i = 0; i < data.favPokemon.length; i++) {
-    if (response.id === data.favPokemon[i].entry_number) {
+    if (pokemon.id === data.favPokemon[i].entry_number) {
       if (data.favPokemon[i].favourite === true) {
         $heart.className = 'fa-solid fa-heart heart fav';
       }
     }
   }
 
-  if (response.types.length > 1) {
-    var type2 = response.types[1].type.name;
+  if (pokemon.types.length > 1) {
+    var type2 = pokemon.types[1].type.name;
     $type2.textContent = capitalize(type2);
     $type2.className = 'type-2 ' + type2;
   } else {
     $type2.className = 'type-2 hidden';
   }
 
-  var type1 = response.types[0].type.name;
+  var type1 = pokemon.types[0].type.name;
   $type1.textContent = capitalize(type1);
   $type1.className = 'type-1 ' + type1;
   $detailBackground.className = 'detail-background row ' + type1;
 
-  $height.textContent = calcHeight(response.height);
-  $weight.textContent = calcWeight(response.weight);
+  $height.textContent = calcHeight(pokemon.height);
+  $weight.textContent = calcWeight(pokemon.weight);
   var abilities = '';
 
-  for (var k = 0; k < response.abilities.length; k++) {
+  for (var k = 0; k < pokemon.abilities.length; k++) {
     if (k === 0) {
-      abilities = capitalize(response.abilities[k].ability.name);
+      abilities = capitalize(pokemon.abilities[k].ability.name);
     } else {
-      abilities = abilities + ', ' + capitalize(response.abilities[k].ability.name);
+      abilities = abilities + ', ' + capitalize(pokemon.abilities[k].ability.name);
     }
   }
 
   $abilities.textContent = abilities;
 
-  for (var j = 0; j < response.stats.length; j++) {
+  for (var j = 0; j < pokemon.stats.length; j++) {
     for (var l = 0; l < $stats.length; l++) {
-      if (response.stats[j].stat.name === $stats[l].className) {
-        $stats[l].textContent = response.stats[j].base_stat;
-        var statCalc = Math.floor((response.stats[j].base_stat / maxStats[j]) * 100);
+      if (pokemon.stats[j].stat.name === $stats[l].className) {
+        $stats[l].textContent = pokemon.stats[j].base_stat;
+        var statCalc = Math.floor((pokemon.stats[j].base_stat / maxStats[j]) * 100);
         $statsDisplay[j].classList.add(type1);
         $statsDisplay[j].style.width = statCalc + '%';
       }
@@ -228,8 +228,8 @@ function detailedInfo(response) {
   }
 }
 
-function speciesDetail(response) {
-  var entries = response.flavor_text_entries;
+function speciesDetail(pokemon) {
+  var entries = pokemon.flavor_text_entries;
   var flavor = '';
   for (var m = 0; m < entries.length; m++) {
     if (entries[m].language.name === 'en') {
@@ -239,11 +239,11 @@ function speciesDetail(response) {
   }
   $flavorText.textContent = flavor;
 
-  httpReq(response.evolution_chain.url, getEvolutions);
+  httpReq(pokemon.evolution_chain.url, getEvolutions);
 }
 
-function getEvolutions(response) {
-  var currentPokemon = response.chain;
+function getEvolutions(pokemon) {
+  var currentPokemon = pokemon.chain;
   var allEvolutions = listEvolutions(currentPokemon.evolves_to);
   allEvolutions.unshift(currentPokemon.species.name);
   renderEvolutionImg(allEvolutions);
@@ -288,7 +288,7 @@ function favourite(event) {
         };
         data.favPokemon.push(fav);
         data.favPokemon.sort((a, b) => (Number(a.entry_number > Number(b.entry_number)) ? 1 : -1));
-        var card = renderCards(fav);
+        var card = renderCard(fav);
         var position = 0;
         for (var k = 0; k < data.favPokemon.length; k++) {
           if (fav === data.favPokemon[k]) {
