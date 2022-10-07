@@ -53,11 +53,8 @@ window.addEventListener('DOMContentLoaded', function () {
 });
 
 $cardView.addEventListener('click', displayDetails);
-
 $heart.addEventListener('click', favourite);
-
 $searchBar.addEventListener('input', searchCards);
-$searchBar.addEventListener('change', resetCards);
 
 $xmark.addEventListener('click', function () {
   $searchBar.value = '';
@@ -336,7 +333,7 @@ function displayView(view) {
   resetCards();
 }
 
-function resetCards(event) {
+function resetCards() {
   if ($searchBar.value === '') {
     var view = document.querySelector('#' + data.view);
     var $searchArea = view.querySelectorAll('.column-fifth');
