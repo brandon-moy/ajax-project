@@ -217,7 +217,9 @@
 .heart:hover,
 .display-fav:hover,
 .region-name:hover,
-.title-link:hover {
+.title-link:hover,
+.evolution-image:hover,
+.evolution-name:hover {
   cursor: pointer;
 }
 
