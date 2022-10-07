@@ -13,7 +13,6 @@ var $alolaCards = document.querySelector('.alola-cards > .cards-table');
 var $galarCards = document.querySelector('.galar-cards > .cards-table');
 var $loading = document.querySelector('.loading-modal');
 var $error = document.querySelector('.error-modal');
-var nationalDex = [];
 var pokeGenBoundaries = {
   kanto: { start: 0, end: 151 },
   johto: { start: 151, end: 251 },
@@ -67,15 +66,15 @@ function generatePokemonCards() {
 }
 
 function appendCards(response) {
-  nationalDex = response.pokemon_entries;
+  data.nationalDex = response.pokemon_entries;
   for (var key in pokeGenBoundaries) {
     var placement = document.querySelector('#' + key);
     for (var i = pokeGenBoundaries[key].start; i < pokeGenBoundaries[key].end; i++) {
-      placement.appendChild(renderCards(nationalDex[i]));
+      placement.appendChild(renderCards(data.nationalDex[i]));
     }
   }
-  for (var j = 0; j < data.pokemon.length; j++) {
-    $favCardsRow.appendChild(renderCards(data.pokemon[j]));
+  for (var j = 0; j < data.favPokemon.length; j++) {
+    $favCardsRow.appendChild(renderCards(data.favPokemon[j]));
   }
 }
 
@@ -128,9 +127,9 @@ function detailedInfo(response) {
   $detailName.textContent = capitalize(response.name);
   $detailNumber.textContent = displayId(response.id);
 
-  for (var i = 0; i < data.pokemon.length; i++) {
-    if (response.id === data.pokemon[i].entry_number) {
-      if (data.pokemon[i].favourite === true) {
+  for (var i = 0; i < data.favPokemon.length; i++) {
+    if (response.id === data.favPokemon[i].entry_number) {
+      if (data.favPokemon[i].favourite === true) {
         $heart.className = 'fa-solid fa-heart heart fav';
       }
     }
@@ -209,9 +208,9 @@ function listEvolutions(arr) {
 
 function renderEvolutionImg(arr) {
   for (var p = 0; p < arr.length; p++) {
-    for (var q = 0; q < nationalDex.length; q++) {
-      if (arr[p] === nationalDex[q].pokemon_species.name) {
-        var id = nationalDex[q].entry_number;
+    for (var q = 0; q < data.nationalDex.length; q++) {
+      if (arr[p] === data.nationalDex[q].pokemon_species.name) {
+        var id = data.nationalDex[q].entry_number;
         $evoImg[p].setAttribute('src', 'images/art/' + id + '.png');
         $evoName[p].textContent = capitalize(arr[p]);
       }
@@ -234,19 +233,19 @@ function favourite(event) {
 
   if (event.target.className === 'fa-solid fa-heart heart') {
     event.target.className = 'fa-solid fa-heart heart fav';
-    for (var i = 0; i < nationalDex.length; i++) {
-      if (id === nationalDex[i].entry_number) {
+    for (var i = 0; i < data.nationalDex.length; i++) {
+      if (id === data.nationalDex[i].entry_number) {
         var fav = {
-          entry_number: nationalDex[i].entry_number,
-          pokemon_species: nationalDex[i].pokemon_species,
+          entry_number: data.nationalDex[i].entry_number,
+          pokemon_species: data.nationalDex[i].pokemon_species,
           favourite: true
         };
-        data.pokemon.push(fav);
-        data.pokemon.sort((a, b) => (Number(a.entry_number > Number(b.entry_number)) ? 1 : -1));
+        data.favPokemon.push(fav);
+        data.favPokemon.sort((a, b) => (Number(a.entry_number > Number(b.entry_number)) ? 1 : -1));
         var card = renderCards(fav);
         var position = 0;
-        for (var k = 0; k < data.pokemon.length; k++) {
-          if (fav === data.pokemon[k]) {
+        for (var k = 0; k < data.favPokemon.length; k++) {
+          if (fav === data.favPokemon[k]) {
             position = k;
           }
         }
@@ -255,9 +254,9 @@ function favourite(event) {
     }
   } else {
     event.target.className = 'fa-solid fa-heart heart';
-    for (var j = 0; j < data.pokemon.length; j++) {
-      if (id === data.pokemon[j].entry_number) {
-        data.pokemon.splice(j, 1);
+    for (var j = 0; j < data.favPokemon.length; j++) {
+      if (id === data.favPokemon[j].entry_number) {
+        data.favPokemon.splice(j, 1);
         removeFavCard(j);
       }
     }
