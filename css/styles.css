@@ -176,25 +176,16 @@
 }
 
 .search-bar {
-  width: 80%;
-  margin-top: 1rem;
-  margin-left: 1rem;
+  width: 90%;
   height: 2rem;
+  margin-top: 1rem;
   padding-left: 0.5rem;
   border-radius: 0.25rem;
   border: 1px solid rgb(130, 0, 0);
 }
 
-.search-icon {
-  padding-top: 1.25rem;
-  font-size: 1.5rem;
-  color: rgb(130, 0, 0);
-  padding-right: 1rem;
-}
-
 .heart,
-.display-fav,
-.search-icon {
+.display-fav {
   float: right;
 }
 
@@ -216,7 +207,6 @@
 .xmark:hover,
 .heart:hover,
 .display-fav:hover,
-.search-icon:hover,
 .region-name:hover,
 .title-link:hover {
   cursor: pointer;
@@ -347,11 +337,6 @@
     line-height: 1.5rem;
   }
 
-  .search-icon {
-    font-size: 2.5rem;
-    padding-right: 1.25rem;
-  }
-
   .evolution-image {
     width: 75%;
   }
@@ -434,11 +419,6 @@
 
   .flavor-text {
     line-height: 1.5rem;
-  }
-
-  .search-icon {
-    font-size: 2.5rem;
-    padding-right: 1.25rem;
   }
 
   .evolution-image {
