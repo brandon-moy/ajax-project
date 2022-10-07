@@ -42,6 +42,9 @@ var $regionNames = document.querySelectorAll('.region-name');
 var $titleLink = document.querySelector('.title-link');
 var $searchBar = document.querySelector('.search-bar');
 var $searchHeader = document.querySelector('.search-header');
+var $resultText = document.querySelector('.search-info');
+var $searchTitle = document.querySelector('.search-title');
+var $noResultTitle = document.querySelector('.no-results-title');
 var maxStats = [255, 190, 250, 194, 250, 200];
 
 var pokeGenBoundaries = {
@@ -365,7 +368,7 @@ function resetCards(event) {
 function searchCards(event) {
   var search = event.target.value.toLowerCase();
   var view = checkView();
-  var $resultText = document.querySelector('.search-info');
+
   $resultText.textContent = event.target.value;
   if ($searchBar.value !== '') {
     $searchHeader.classList.remove('hidden');
@@ -373,23 +376,18 @@ function searchCards(event) {
     $searchHeader.classList.add('hidden');
   }
   var $searchArea = view.querySelectorAll('.column-fifth');
+  var count = 0;
   for (var i = 0; i < $searchArea.length; i++) {
     var $name = $searchArea[i].querySelector('h4').textContent.toLowerCase();
     var $number = $searchArea[i].querySelector('h5').textContent;
     if ($name.includes(search) || $number.includes(search)) {
       $searchArea[i].classList.remove('hidden');
+      count++;
     } else {
       $searchArea[i].classList.add('hidden');
     }
   }
-  var count = [];
-  for (var j = 0; j < $searchArea.length; j++) {
-    if (!$searchArea[j].classList.contains('hidden')) {
-      count.push($searchArea[j]);
-    }
-  }
-  var $searchTitle = document.querySelector('.search-title');
-  var $noResultTitle = document.querySelector('.no-results-title');
+
   if (count.length === 0) {
     $searchTitle.classList.add('hidden');
     $noResultTitle.classList.remove('hidden');
