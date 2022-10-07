@@ -87,6 +87,7 @@
   font-size: 1.75rem;
   font-weight: 500;
   padding-left: 0.25rem;
+  padding-bottom: 0.25rem;
 }
 
 .type-1,
@@ -119,6 +120,8 @@
 .flavor-text {
   line-height: 1.25rem;
   padding-bottom: 1.5rem;
+  width: 90%;
+  margin: 0;
 }
 
 .abilities {
