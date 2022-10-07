@@ -159,7 +159,7 @@ function displayEvolution(event) {
   httpReq('https://pokeapi.co/api/v2/pokemon-species/' + id, speciesDetail);
 }
 
-function displayDetails() {
+function displayDetails(event) {
   if (event.target.closest('.pokemon-card') === null) return;
   $searchHeader.classList.add('hidden');
   var id = event.target.closest('.pokemon-card').id;
@@ -177,6 +177,7 @@ function detailedInfo(pokemon) {
   $detailImg.setAttribute('src', 'images/art/' + pokemon.id + '.png');
   $detailName.textContent = capitalize(pokemon.name);
   $detailNumber.textContent = displayId(pokemon.id);
+  $heart.className = 'fa-solid fa-heart heart';
 
   for (var i = 0; i < data.favPokemon.length; i++) {
     if (pokemon.id === data.favPokemon[i].entry_number) {
