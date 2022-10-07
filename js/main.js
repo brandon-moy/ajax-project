@@ -3,14 +3,6 @@ removeFavCard, addFavCard, httpReq */
 
 /* exported $loading, $error */
 
-var $kantoCards = document.querySelector('.kanto-cards > .cards-table');
-var $johtoCards = document.querySelector('.johto-cards > .cards-table');
-var $hoennCards = document.querySelector('.hoenn-cards > .cards-table');
-var $sinnohCards = document.querySelector('.sinnoh-cards > .cards-table');
-var $unovaCards = document.querySelector('.unova-cards > .cards-table');
-var $kalosCards = document.querySelector('.kalos-cards > .cards-table');
-var $alolaCards = document.querySelector('.alola-cards > .cards-table');
-var $galarCards = document.querySelector('.galar-cards > .cards-table');
 var $loading = document.querySelector('.loading-modal');
 var $error = document.querySelector('.error-modal');
 var $header = document.querySelector('.header');
@@ -44,7 +36,6 @@ var $searchHeader = document.querySelector('.search-header');
 var $resultText = document.querySelector('.search-info');
 var $searchTitle = document.querySelector('.search-title');
 var $noResultTitle = document.querySelector('.no-results-title');
-
 var pokeGenBoundaries = {
   kanto: { start: 0, end: 151 },
   johto: { start: 151, end: 251 },
@@ -61,14 +52,7 @@ window.addEventListener('DOMContentLoaded', function () {
   generatePokemonCards();
 });
 
-$kantoCards.addEventListener('click', displayDetails);
-$johtoCards.addEventListener('click', displayDetails);
-$hoennCards.addEventListener('click', displayDetails);
-$sinnohCards.addEventListener('click', displayDetails);
-$unovaCards.addEventListener('click', displayDetails);
-$kalosCards.addEventListener('click', displayDetails);
-$alolaCards.addEventListener('click', displayDetails);
-$galarCards.addEventListener('click', displayDetails);
+$cardView.addEventListener('click', displayDetails);
 
 $heart.addEventListener('click', favourite);
 
