@@ -3,6 +3,7 @@
 var data = {
   nationalDex: [],
   favPokemon: [],
+  stats: [255, 190, 250, 194, 250, 200],
   view: 'kanto',
   previousView: ''
 };

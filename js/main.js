@@ -13,6 +13,37 @@ var $alolaCards = document.querySelector('.alola-cards > .cards-table');
 var $galarCards = document.querySelector('.galar-cards > .cards-table');
 var $loading = document.querySelector('.loading-modal');
 var $error = document.querySelector('.error-modal');
+var $header = document.querySelector('.header');
+var $cardView = document.querySelector('.card-container');
+var $detailBackground = document.querySelector('.detail-background');
+var $detailView = document.querySelector('.detailed-view');
+var $xmark = document.querySelector('.xmark');
+var $stats = document.querySelectorAll('.item-header + p');
+var $statsDisplay = document.querySelectorAll('.stats-display');
+var $detailName = document.querySelector('.detail-name');
+var $detailNumber = document.querySelector('.detail-number');
+var $detailImg = document.querySelector('.detail-img');
+var $type1 = document.querySelector('.type-1');
+var $type2 = document.querySelector('.type-2');
+var $height = document.querySelector('.pokemon-height');
+var $weight = document.querySelector('.pokemon-weight');
+var $abilities = document.querySelector('.pokemon-abilities');
+var $flavorText = document.querySelector('.flavor-text');
+var $evoDiv = document.querySelectorAll('.evo-div');
+var $evoImg = document.querySelectorAll('.evolution-image');
+var $evoName = document.querySelectorAll('.evolution-name');
+var $heart = document.querySelector('.heart');
+var $displayFav = document.querySelector('.display-fav');
+var $favView = document.querySelector('.fav-view');
+var $favCardsRow = document.querySelector('.fav-cards-table');
+var $view = document.querySelectorAll('.view');
+var $regionLinks = document.querySelector('.region-links');
+var $regionNames = document.querySelectorAll('.region-name');
+var $titleLink = document.querySelector('.title-link');
+var $searchBar = document.querySelector('.search-bar');
+var $searchHeader = document.querySelector('.search-header');
+var maxStats = [255, 190, 250, 194, 250, 200];
+
 var pokeGenBoundaries = {
   kanto: { start: 0, end: 151 },
   johto: { start: 151, end: 251 },
@@ -27,6 +58,59 @@ var pokeGenBoundaries = {
 window.addEventListener('DOMContentLoaded', function () {
   displayView();
   generatePokemonCards();
+});
+
+$kantoCards.addEventListener('click', displayDetails);
+$johtoCards.addEventListener('click', displayDetails);
+$hoennCards.addEventListener('click', displayDetails);
+$sinnohCards.addEventListener('click', displayDetails);
+$unovaCards.addEventListener('click', displayDetails);
+$kalosCards.addEventListener('click', displayDetails);
+$alolaCards.addEventListener('click', displayDetails);
+$galarCards.addEventListener('click', displayDetails);
+
+$heart.addEventListener('click', favourite);
+
+$searchBar.addEventListener('input', searchCards);
+$searchBar.addEventListener('change', resetCards);
+
+$xmark.addEventListener('click', function () {
+  $searchBar.value = '';
+  $header.classList.remove('hidden');
+  $cardView.classList.remove('hidden');
+  $detailBackground.classList.add('hidden');
+  $detailView.classList.add('hidden');
+  displayView();
+  for (var r = 0; r < $evoDiv.length; r++) {
+    $evoDiv[r].classList.add('hidden');
+  }
+  for (var n = 0; n < $statsDisplay.length; n++) {
+    $statsDisplay[n].className = 'stats-display';
+  }
+  resetPlaceholder($evoImg);
+  $heart.className = 'fa-solid fa-heart heart';
+});
+
+$displayFav.addEventListener('click', displayFavs);
+$favCardsRow.addEventListener('click', displayDetails);
+$titleLink.addEventListener('click', function () {
+  if (data.view !== 'favourites') return;
+  data.view = data.previousView;
+  displayView();
+  $regionLinks.classList.remove('hidden');
+});
+
+$regionLinks.addEventListener('click', function () {
+  if (event.target.tagName === 'A') {
+    for (var i = 0; i < $regionNames.length; i++) {
+      $regionNames[i].className = 'region-name';
+      if (event.target === $regionNames[i]) {
+        $regionNames[i].classList.add('selected');
+      }
+    }
+    data.view = event.target.getAttribute('data-view');
+    displayView();
+  }
 });
 
 function renderCards(object) {
@@ -77,36 +161,6 @@ function appendCards(response) {
     $favCardsRow.appendChild(renderCards(data.favPokemon[j]));
   }
 }
-
-var $header = document.querySelector('.header');
-var $cardView = document.querySelector('.card-container');
-var $detailBackground = document.querySelector('.detail-background');
-var $detailView = document.querySelector('.detailed-view');
-var $xmark = document.querySelector('.xmark');
-var $stats = document.querySelectorAll('.item-header + p');
-var $statsDisplay = document.querySelectorAll('.stats-display');
-var $detailName = document.querySelector('.detail-name');
-var $detailNumber = document.querySelector('.detail-number');
-var $detailImg = document.querySelector('.detail-img');
-var $type1 = document.querySelector('.type-1');
-var $type2 = document.querySelector('.type-2');
-var $height = document.querySelector('.pokemon-height');
-var $weight = document.querySelector('.pokemon-weight');
-var $abilities = document.querySelector('.pokemon-abilities');
-var $flavorText = document.querySelector('.flavor-text');
-var $evoDiv = document.querySelectorAll('.evo-div');
-var $evoImg = document.querySelectorAll('.evolution-image');
-var $evoName = document.querySelectorAll('.evolution-name');
-var maxStats = [255, 190, 250, 194, 250, 200];
-
-$kantoCards.addEventListener('click', displayDetails);
-$johtoCards.addEventListener('click', displayDetails);
-$hoennCards.addEventListener('click', displayDetails);
-$sinnohCards.addEventListener('click', displayDetails);
-$unovaCards.addEventListener('click', displayDetails);
-$kalosCards.addEventListener('click', displayDetails);
-$alolaCards.addEventListener('click', displayDetails);
-$galarCards.addEventListener('click', displayDetails);
 
 function displayDetails() {
   if (event.target.closest('.pokemon-card') === null) return;
@@ -220,14 +274,6 @@ function renderEvolutionImg(arr) {
   }
 }
 
-var $heart = document.querySelector('.heart');
-var $displayFav = document.querySelector('.display-fav');
-var $favView = document.querySelector('.fav-view');
-var $favCardsRow = document.querySelector('.fav-cards-table');
-var $view = document.querySelectorAll('.view');
-
-$heart.addEventListener('click', favourite);
-
 function favourite(event) {
   var id = Number($detailNumber.textContent);
 
@@ -262,31 +308,6 @@ function favourite(event) {
     }
   }
 }
-
-var $regionLinks = document.querySelector('.region-links');
-var $regionNames = document.querySelectorAll('.region-name');
-var $titleLink = document.querySelector('.title-link');
-$displayFav.addEventListener('click', displayFavs);
-$favCardsRow.addEventListener('click', displayDetails);
-$titleLink.addEventListener('click', function () {
-  if (data.view !== 'favourites') return;
-  data.view = data.previousView;
-  displayView();
-  $regionLinks.classList.remove('hidden');
-});
-
-$regionLinks.addEventListener('click', function () {
-  if (event.target.tagName === 'A') {
-    for (var i = 0; i < $regionNames.length; i++) {
-      $regionNames[i].className = 'region-name';
-      if (event.target === $regionNames[i]) {
-        $regionNames[i].classList.add('selected');
-      }
-    }
-    data.view = event.target.getAttribute('data-view');
-    displayView();
-  }
-});
 
 function displayFavs() {
   if (data.view !== 'favourites') {
@@ -330,12 +351,6 @@ function displayView() {
   }
   resetCards();
 }
-
-var $searchBar = document.querySelector('.search-bar');
-
-var $searchHeader = document.querySelector('.search-header');
-$searchBar.addEventListener('input', searchCards);
-$searchBar.addEventListener('change', resetCards);
 
 function resetCards(event) {
   if ($searchBar.value === '') {
@@ -383,20 +398,3 @@ function searchCards(event) {
     $noResultTitle.classList.add('hidden');
   }
 }
-
-$xmark.addEventListener('click', function () {
-  $searchBar.value = '';
-  $header.classList.remove('hidden');
-  $cardView.classList.remove('hidden');
-  $detailBackground.classList.add('hidden');
-  $detailView.classList.add('hidden');
-  displayView();
-  for (var r = 0; r < $evoDiv.length; r++) {
-    $evoDiv[r].classList.add('hidden');
-  }
-  for (var n = 0; n < $statsDisplay.length; n++) {
-    $statsDisplay[n].className = 'stats-display';
-  }
-  resetPlaceholder($evoImg);
-  $heart.className = 'fa-solid fa-heart heart';
-});
