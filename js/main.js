@@ -226,7 +226,6 @@ var $displayFav = document.querySelector('.display-fav');
 var $favView = document.querySelector('.fav-view');
 var $favCardsRow = document.querySelector('.fav-cards-table');
 var $view = document.querySelectorAll('.view');
-var $location = document.querySelector('.area-display');
 
 $heart.addEventListener('click', favourite);
 
@@ -267,8 +266,15 @@ function favourite(event) {
 
 var $regionLinks = document.querySelector('.region-links');
 var $regionNames = document.querySelectorAll('.region-name');
+var $titleLink = document.querySelector('.title-link');
 $displayFav.addEventListener('click', displayFavs);
 $favCardsRow.addEventListener('click', displayDetails);
+$titleLink.addEventListener('click', function () {
+  if (data.view !== 'favourites') return;
+  data.view = data.previousView;
+  displayView();
+  $regionLinks.classList.remove('hidden');
+});
 
 $regionLinks.addEventListener('click', function () {
   if (event.target.tagName === 'A') {
@@ -288,18 +294,20 @@ function displayFavs() {
     for (var i = 0; i < $regionNames.length; i++) {
       $regionNames[i].className = 'region-name';
     }
+    $regionLinks.classList.add('hidden');
+    $displayFav.className = 'fa-solid fa-heart display-fav';
     data.previousView = data.view;
     data.view = 'favourites';
-    $location.textContent = ': ' + capitalize(data.view);
     displayView();
   } else {
+    $regionLinks.classList.remove('hidden');
+    $displayFav.className = 'fa-regular fa-heart display-fav';
     data.view = data.previousView;
     for (var j = 0; j < $regionNames.length; j++) {
       if ($regionNames[j].getAttribute('data-view') === data.view) {
         $regionNames[j].classList.add('selected');
       }
     }
-    $location.textContent = '';
     displayView();
   }
 }
@@ -311,11 +319,6 @@ function displayView() {
     var view = $view[i].getAttribute('data-view');
     if (view === data.view) {
       $view[i].classList.remove('hidden');
-      if (data.view === 'favourites') {
-        $location.textContent = ': ' + capitalize(data.view);
-      } else {
-        $location.textContent = '';
-      }
     } else {
       $view[i].classList.add('hidden');
     }

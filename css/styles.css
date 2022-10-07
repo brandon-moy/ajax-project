@@ -217,7 +217,8 @@
 .heart:hover,
 .display-fav:hover,
 .search-icon:hover,
-.region-name:hover {
+.region-name:hover,
+.title-link:hover {
   cursor: pointer;
 }
 
